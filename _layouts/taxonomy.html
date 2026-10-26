@@ -1,0 +1,91 @@
+
+---
+layout: default
+---
+
+<div class="container">
+  <div class="row justify-content-center">
+
+    <main class="col-md-8">
+
+      <nav class="mb-3" aria-label="Breadcrumb">
+        <a href="{{ '/' | relative_url }}">Blog</a> /
+        <a href="{{ page.taxonomy_type | prepend: '/' | append: '/' | relative_url }}">
+          {{ page.taxonomy_type | capitalize }}
+        </a>
+      </nav>
+
+      <h1 class="font-weight-bold spanborder">
+        <span>{{ page.taxonomy_name | escape }}</span>
+      </h1>
+
+      <p>{{ page.description }}</p>
+
+      <p class="text-muted small">
+        {{ page.taxonomy_count }} articles
+      </p>
+
+      {% for post in page.taxonomy_posts %}
+      <article class="py-4 border-bottom" data-pagefind-ignore>
+
+        <h2 class="h5">
+          <a href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h2>
+
+        <p class="small text-muted">
+          {{ post.date | date: "%d %B %Y" }}
+        </p>
+
+        {% if post.description %}
+        <p>{{ post.description | escape }}</p>
+        {% elsif post.excerpt %}
+        <p>
+          {{ post.excerpt | strip_html | truncatewords: 30 }}
+        </p>
+        {% endif %}
+
+      </article>
+      {% endfor %}
+
+      {% if page.total_pages > 1 %}
+      <nav class="my-4" aria-label="Topic pagination">
+
+        {% if page.page_number > 1 %}
+          {% assign previous = page.page_number | minus: 1 %}
+          {% if previous == 1 %}
+            {% assign previous_path = page.taxonomy_root %}
+          {% else %}
+            {% assign previous_path = page.taxonomy_root | append: 'page/' | append: previous | append: '/' %}
+          {% endif %}
+
+          <a href="{{ previous_path | relative_url }}">
+            Previous
+          </a>
+        {% endif %}
+
+        <span class="mx-3">
+          Page {{ page.page_number }} of {{ page.total_pages }}
+        </span>
+
+        {% if page.page_number < page.total_pages %}
+          {% assign next = page.page_number | plus: 1 %}
+          {% assign next_path = page.taxonomy_root | append: 'page/' | append: next | append: '/' %}
+
+          <a href="{{ next_path | relative_url }}">
+            Next
+          </a>
+        {% endif %}
+
+      </nav>
+      {% endif %}
+
+    </main>
+
+    <aside class="col-md-4">
+      {% include sidebar-featured.html %}
+    </aside>
+
+  </div>
+</div>
