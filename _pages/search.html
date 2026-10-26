@@ -1,32 +1,54 @@
 ---
-title: "Search"
-layout: search
-pagination:
-    enabled: true
-permalink: "/search"
+title: "Search Articles"
+layout: default
+permalink: "/search/"
+description: "Search technical articles about AI engineering, AI security, cybersecurity, RAG, LLMs and related technologies."
 ---
 
-<form action="/search.html" method="get">
-  <label for="search-box">Search</label>
-  <input type="text" id="search-box" name="query" class=""form-control mb-3">
-  <input type="submit" value="search">
-</form>
+<div class="container">
 
-<ul id="search-results"></ul>
+    <div class="row justify-content-center">
+
+        <main class="col-md-8">
+
+            <h1 class="font-weight-bold spanborder">
+                <span>Search Articles</span>
+            </h1>
+
+            <p class="text-muted mb-4">
+                Search articles, tutorials and technical insights
+                across Victor Johnson's Blog.
+            </p>
+
+            <div id="search"></div>
+
+        </main>
+
+        <aside class="col-md-4">
+            {% include sidebar-featured.html %}
+        </aside>
+
+    </div>
+
+</div>
+
+<link
+    href="{{ '/pagefind/pagefind-ui.css' | relative_url }}"
+    rel="stylesheet">
+
+<script
+    src="{{ '/pagefind/pagefind-ui.js' | relative_url }}">
+</script>
 
 <script>
-  window.store = {
-    {% for post in site.posts %}
-      "{{ post.url | slugify }}": {
-        "title": "{{ post.title | xml_escape }}",
-        "author": "{{ post.author | xml_escape }}",
-        "category": "{{ post.category | xml_escape }}",
-        "content": {{ post.content | strip_html | strip_newlines | jsonify }},
-        "url": "{{ post.url | xml_escape }}"
-      }
-      {% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  };
+window.addEventListener("DOMContentLoaded", function () {
+
+    new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+        bundlePath: "{{ '/pagefind/' | relative_url }}"
+    });
+
+});
 </script>
-<script src="{{site.baseurl}}/assets/js/lunr.js"></script>
-<script src="{{site.baseurl}}/assets/js/search.js"></script>
