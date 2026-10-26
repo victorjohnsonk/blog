@@ -9,7 +9,7 @@ description: "Explore articles by tag on Victor Johnson's Blog, covering AI engi
 
     <div class="row justify-content-center">
 
-        <div class="col-md-8">
+        <main class="col-md-8">
 
             <h1 class="font-weight-bold spanborder">
                 <span>Explore Tags</span>
@@ -44,9 +44,12 @@ description: "Explore articles by tag on Victor Johnson's Blog, covering AI engi
                 {% assign tag_name = tag[0] %}
                 {% assign tag_posts = tag[1] %}
                 {% assign tag_slug = tag_name | slugify %}
+                {% assign tag_url = tag_slug | prepend: '/tags/' | append: '/' | relative_url %}
+                {% assign sorted_posts = tag_posts | sort: "date" | reverse %}
 
-                <div class="col-12 mb-3 tag-item"
-                     data-tag="{{ tag_name | downcase | escape }}">
+                <div
+                    class="col-12 mb-3 tag-item"
+                    data-tag="{{ tag_name | downcase | escape }}">
 
                     <div class="card shadow-sm">
 
@@ -75,13 +78,14 @@ description: "Explore articles by tag on Victor Johnson's Blog, covering AI engi
 
                                     <ul class="list-unstyled mb-0">
 
-                                        {% for post in tag_posts %}
+                                        {% for post in sorted_posts limit: 5 %}
 
                                         <li class="py-3 border-top">
 
-                                            <a class="font-weight-bold"
-                                               href="{{ post.url | relative_url }}">
-                                                {{ post.title }}
+                                            <a
+                                                class="font-weight-bold"
+                                                href="{{ post.url | relative_url }}">
+                                                {{ post.title | escape }}
                                             </a>
 
                                             <div class="small text-muted mt-1">
@@ -108,9 +112,35 @@ description: "Explore articles by tag on Victor Johnson's Blog, covering AI engi
 
                                     </ul>
 
+                                    {% if tag_posts.size > 5 %}
+
+                                    <p class="small text-muted mt-3 mb-0">
+                                        Showing the 5 most recent articles.
+                                    </p>
+
+                                    {% endif %}
+
                                 </div>
 
                             </details>
+
+                            <div class="tag-footer mt-3 pt-3 border-top">
+
+                                <a
+                                    class="tag-link font-weight-bold"
+                                    href="{{ tag_url }}"
+                                    aria-label="View all articles tagged {{ tag_name | escape }}">
+
+                                    View all {{ tag_name | replace: '-', ' ' }} articles
+
+                                    <i
+                                        class="fas fa-arrow-right ml-1"
+                                        aria-hidden="true">
+                                    </i>
+
+                                </a>
+
+                            </div>
 
                         </div>
 
@@ -122,18 +152,19 @@ description: "Explore articles by tag on Victor Johnson's Blog, covering AI engi
 
             </div>
 
-            <p id="noTags"
-               class="text-muted text-center py-4"
-               role="status"
-               style="display: none;">
+            <p
+                id="noTags"
+                class="text-muted text-center py-4"
+                role="status"
+                style="display: none;">
                 No matching tags found.
             </p>
 
-        </div>
+        </main>
 
-        <div class="col-md-4">
+        <aside class="col-md-4">
             {% include sidebar-featured.html %}
-        </div>
+        </aside>
 
     </div>
 
@@ -183,6 +214,38 @@ details[open] > .tag-summary::after {
 .tag-summary:focus-visible {
     outline: 2px solid #007bff;
     outline-offset: 4px;
+}
+
+.tag-footer {
+    text-align: right;
+}
+
+.tag-link {
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.tag-link:hover {
+    text-decoration: underline;
+}
+
+.tag-link i {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.tag-link:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 576px) {
+    .tag-footer {
+        text-align: left;
+    }
+
+    .tag-heading {
+        font-size: 16px;
+    }
 }
 </style>
 
