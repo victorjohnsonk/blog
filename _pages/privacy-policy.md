@@ -1,43 +1,108 @@
+
 ---
 title: "Privacy Policy"
-permalink: "/privacy-policy"
+permalink: "/privacy-policy/"
+description: "Read the Privacy Policy for Victor Johnson's Blog, including information about personal data, cookies, third-party services and privacy rights."
 ---
 
-"{{site.name}}" takes your privacy seriously. To better protect your privacy we provide this privacy policy notice explaining the way your personal information is collected and used.
+## Introduction
 
+Victor Johnson's Blog ("the Blog"), available at [victorjohnson.online/blog/](https://victorjohnson.online/blog/), respects the privacy of its visitors.
 
-#### Collection of Routine Information
+This Privacy Policy explains how personal information may be collected, used, stored and protected when visitors browse the Blog, follow external links or contact its author.
 
-This website track basic information about their visitors. This information includes, but is not limited to, IP addresses, browser details, timestamps and referring pages. None of this information can personally identify specific visitor to this website. The information is tracked for routine administration and maintenance purposes.
+The Blog is a personal technical publication focused on AI engineering, AI security, cybersecurity and related technologies.
 
+## Information Collected
 
-#### Cookies
+The Blog does not require visitors to create an account or provide personal information simply to read its articles.
 
-Where necessary, this website uses cookies to store information about a visitor’s preferences and history in order to better serve the visitor and/or present the visitor with customized content.
+However, certain information may be processed when visitors access the website, including:
 
+- IP addresses and approximate location derived from them.
+- Browser type, operating system and device information.
+- Pages requested, referring websites and access timestamps.
+- Information voluntarily submitted through email or contact methods.
 
-#### Advertisement and Other Third Parties
+Some technical information may be processed automatically by the website's hosting provider for security, service delivery and operational purposes.
 
-Advertising partners and other third parties may use cookies, scripts and/or web beacons to track visitor activities on this website in order to display advertisements and other useful information. Such tracking is done directly by the third parties through their own servers and is subject to their own privacy policies. This website has no access or control over these cookies, scripts and/or web beacons that may be used by third parties. Learn how to [opt out of Google’s cookie usage](http://www.google.com/privacy_ads.html).
+## Website Hosting
 
+The Blog is hosted using GitHub Pages, a service provided by GitHub.
 
-#### Links to Third Party Websites
+When visitors access the Blog, GitHub may process technical information necessary to deliver website content, maintain its infrastructure and protect its services.
 
-We have included links on this website for your use and reference. We are not responsible for the privacy policies on these websites. You should be aware that the privacy policies of these websites may differ from our own.
+For more information, visitors can review the [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
 
+## Cookies and Similar Technologies
 
-#### Security
+The Blog may use cookies or similar technologies where required by its functionality or by third-party services included on its pages.
 
-The security of your personal information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
+Cookies are small files that websites may store on a visitor's device. They can support website functionality, remember preferences or enable certain external features.
 
+Visitors can manage or block cookies through their browser settings. Disabling certain cookies may affect features that depend on them.
 
-#### Changes To This Privacy Policy
+## Analytics and Website Performance
 
-This Privacy Policy is effective and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.
+If website analytics are enabled, the Blog may use an analytics service to understand general visitor activity, such as popular articles, traffic sources and device categories.
 
-We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website.
+Such services may process information about website visits and use cookies or similar technologies, depending on their configuration.
 
+Details of any analytics provider and associated privacy controls should be provided here before that service is activated.
 
-#### Contact Information
+## Third-Party Services and Embedded Content
 
-For any questions or concerns regarding the privacy policy, please [contact us here]({{site.baseurl}}/contact).
+Articles may contain links to external websites or embedded content, including code repositories, videos, technical documentation and other online resources.
+
+Embedded content may behave as though visitors have accessed the third-party website directly. Those providers may collect information or use cookies according to their own privacy policies.
+
+The Blog does not control the privacy practices of external websites or services. Visitors are encouraged to review the relevant privacy notices before sharing personal information.
+
+## Advertising and Affiliate Links
+
+The Blog does not necessarily display advertisements or participate in affiliate programmes.
+
+If advertising or affiliate services are introduced, this Privacy Policy will be updated to explain the relevant providers, tracking technologies and any additional data processing.
+
+## How Personal Information Is Used
+
+Information voluntarily provided through correspondence may be used to:
+
+- Respond to questions, feedback and enquiries.
+- Discuss technical topics or collaboration opportunities.
+- Investigate reported website problems or content corrections.
+- Maintain the security and operation of the Blog.
+
+Personal information is not sold to advertisers.
+
+## Data Retention
+
+Personal information received through direct correspondence may be retained for as long as reasonably necessary to respond to the enquiry, maintain relevant records or meet applicable legal obligations.
+
+Technical information processed by hosting providers or other third-party services may be retained according to their respective policies.
+
+## Data Protection and Security
+
+Reasonable precautions are taken to protect personal information handled in connection with the Blog.
+
+However, no internet transmission or electronic storage system can be guaranteed to be completely secure.
+
+Visitors should avoid submitting passwords, confidential credentials or other sensitive information through ordinary email or public comment systems.
+
+## Your Privacy Rights
+
+Depending on the visitor's location and applicable data protection laws, individuals may have rights relating to their personal information.
+
+These may include the right to request access, correction or deletion of personal data, or to object to certain processing activities.
+
+Visitors may contact the Blog's author to raise privacy-related questions or submit requests concerning personal information under the author's control.
+
+## Changes to This Privacy Policy
+
+This Privacy Policy may be updated to reflect changes in website functionality, third-party services or applicable legal requirements.
+
+Any revised version will be published on this page. Visitors are encouraged to review it periodically.
+
+## Contact Information
+
+For questions about this Privacy Policy, personal information or data protection matters, please visit the [Contact page]({{ '/contact/' | relative_url }}) or email [hello@victorjohnson.online](mailto:hello@victorjohnson.online).
