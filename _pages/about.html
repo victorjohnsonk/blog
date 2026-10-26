@@ -1,39 +1,158 @@
+
 ---
-title: "About"
+title: "About Victor Johnson's Blog"
 layout: default
-permalink: "/about"
+permalink: "/about/"
+description: "Discover Victor Johnson's Blog, featuring practical insights into AI engineering, AI security, cybersecurity, LLMs, RAG and secure AI development."
 ---
 
 <div class="container">
-<h4 class="font-weight-bold spanborder"><span>{{page.title}}</span></h4>	
+
+    <h4 class="font-weight-bold spanborder">
+        <span>About Victor Johnson's Blog</span>
+    </h4>
+
     <div class="row gap-y listrecent listrecent listauthor">
-	    <div class="col-lg-6 mb-4">
-	    <p>The Open Data Blog is a technology blog hosting data related articles. 
-		The blog covers articles on statistics, case studies, open source coding, datasets etc.
-		The blog is run for a good cause and to spread knowledge. 
-		For any queries, guest posts, content removal or for any other information please contact us <b><a href="/contact">here</a></b></p>
-	    </div>
-    {% for author in site.authors %}
+
+        <div class="col-lg-6 mb-4">
+
+            <h5>Where AI Engineering Meets Cybersecurity</h5>
+
+            <p>
+                Victor Johnson's Blog explores the intersection of artificial
+                intelligence, software engineering and cybersecurity. From
+                building intelligent applications to understanding the risks
+                they introduce, the blog focuses on the technologies, challenges
+                and engineering decisions shaping modern AI systems.
+            </p>
+
+            <p>
+                Topics range from generative AI and large language models (LLMs)
+                to retrieval-augmented generation (RAG), AI agents, prompt
+                injection, AI security testing and secure application design.
+                The focus extends beyond how AI technologies work to examine
+                how they can be developed responsibly, evaluated effectively
+                and protected against emerging threats.
+            </p>
+
+            <h5>Practical Learning, Experiments and Insights</h5>
+
+            <p>
+                This blog is a space for sharing technical knowledge through
+                hands-on tutorials, engineering walkthroughs, practical
+                experiments and security-focused discussions. Articles aim to
+                connect technical concepts with real implementation challenges,
+                helping readers understand both the possibilities and
+                limitations of modern AI technologies.
+            </p>
+
+            <p>
+                Readers can expect explorations of AI architectures, coding
+                techniques, security considerations, development tools and
+                lessons learned along the way. As the fields of AI engineering
+                and cybersecurity evolve, the blog will continue to document
+                new ideas, technical discoveries and approaches to building
+                more reliable and secure AI applications.
+            </p>
+
+            <h5>The Person Behind the Blog</h5>
+
+            <p>
+                Victor Johnson is an AI Engineer working in the cybersecurity
+                industry, with a professional focus on building AI-powered
+                applications and systems. His interests include generative AI,
+                agentic workflows, RAG architectures, AI security and the
+                practical challenges of developing trustworthy AI solutions.
+            </p>
+
+            <p>
+                The blog reflects an ongoing journey of engineering, learning
+                and exploring the security of AI systems. For more information
+                about his professional background, technical projects and
+                experience, visit
+                <a href="https://victorjohnson.online/">
+                    <strong>Victor Johnson's Portfolio</strong>
+                </a>.
+            </p>
+
+            <h5>Questions, Feedback and Collaboration</h5>
+
+            <p>
+                Technical discussions, constructive feedback, collaboration
+                opportunities and suggestions for future articles are welcome.
+                For enquiries, corrections or other blog-related matters,
+                please use the
+                <a href="{{ '/contact/' | relative_url }}">
+                    <strong>Contact page</strong>
+                </a>.
+            </p>
+
+        </div>
+
+        {% for author in site.authors %}
+
         <div class="col-lg-6 mb-4">
             <div class="p-4 border rounded">
-            <div class="row">
-            <div class="col-md-3 mb-4 mb-md-0"><img alt="{{ author[1].name }}" src="{{site.baseurl}}/{{ author[1].avatar }}" class="rounded-circle" height="80" width="80"></div>
-            <div class="col-md-9">
-            <a href="{{site.baseurl}}/author-{{ author[1].slugname | slugify }}">
-            <h4 class="text-dark mb-0"> {{ author[1].name }} </h4>
-            <small class="d-inline-block mt-1 mb-3 font-weight-normal">(View Posts)</small>
-            <div class="excerpt">{{ author[1].bio }}</div>
-            </a>
-            <div class="icon-block mt-3 d-flex justify-content-between">  
-            <div>
-            <a target="_blank" href="{{ author[1].twitter }}"><i class="fab fa-twitter text-muted" aria-hidden="true"></i></a>  &nbsp;
-            <a target="_blank" href="{{ author[1].site }}"><i class="fa fa-globe text-muted" aria-hidden="true"></i></a> &nbsp;
-            </div>
-            </div>
-            </div>
-            </div>
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-4 mb-md-0">
+                        <img
+                            alt="{{ author[1].name }}"
+                            src="{{ author[1].avatar | relative_url }}"
+                            class="rounded-circle"
+                            height="80"
+                            width="80">
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <a href="{{ '/author-' | append: author[1].slugname | slugify | relative_url }}">
+                            <h4 class="text-dark mb-0">
+                                {{ author[1].name }}
+                            </h4>
+
+                            <small class="d-inline-block mt-1 mb-3 font-weight-normal">
+                                View Articles
+                            </small>
+
+                            <div class="excerpt">
+                                {{ author[1].bio }}
+                            </div>
+                        </a>
+
+                        <div class="icon-block mt-3 d-flex justify-content-between">
+                            <div>
+
+                                {% if author[1].twitter and author[1].twitter != "" %}
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="{{ author[1].twitter }}">
+                                    <i class="fab fa-twitter text-muted" aria-hidden="true"></i>
+                                </a>
+                                &nbsp;
+                                {% endif %}
+
+                                {% if author[1].site and author[1].site != "" %}
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="{{ author[1].site }}">
+                                    <i class="fa fa-globe text-muted" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
-    {% endfor %}
+
+        {% endfor %}
+
     </div>
 </div>
