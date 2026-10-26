@@ -1,136 +1,226 @@
+
 ---
 title: "Categories"
 layout: default
-pagination:
-    enabled: true
-permalink: "/categories"
+permalink: "/categories/"
+description: "Browse articles by topic on Victor Johnson's Blog, including AI engineering, AI security, cybersecurity, LLMs, RAG and agentic AI."
 ---
 
-<div class="container" id="default-content" style="display: none;">
-	<div class="row justify-content-center">
-		 <div class="col-md-8">
-    <h4 class="font-weight-bold spanborder"><span>{{ page.title }}</span></h4>
-			 <div class="row">
-  <div class="col-md-auto mb-2 mb-md-0 p-2">
-    <h6 class="mr-md-2">Search for a category </h6>
-  </div>
-  <div class="col">
-    <input type="text" id="filterInput" class="form-control mb-3" >
-  </div>
-</div>
-			 <hr>
-			  <div class="row">
-        {% for category in site.categories %}
-        <div class="col-sm-4 p-1 item" id="{{ category[0] | downcase }}">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ category[0] | upcase | replace: '-', ' '  }}</h5>
-			<h6>{{ site.categories[category] | size | upcase | replace: '-', ' '  }} posts <a href="{{ site.baseurl }}/categories?id={{ category[0] | downcase }}"><i class="fas fa-external-link-square-alt"></i></a></h6>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-				  </div>
-  
-			  <div id="noResultsMessage" style="display: none;"><h6>No matching items found.</h6></div>
-		 </div>
-	<div class="col-md-4">
-        {% include sidebar-featured.html %}    
-    </div>
-</div>
-</div>
-
-
-<div class="container" id="conditional-content" style="display: ;">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-        <h1 class="font-weight-bold title h6 text-uppercase mb-4">Categories</h1>
-        <div id="no-category-found-message"></div>
-        {% for category in site.categories %} 
-        <h4 class="font-weight-bold spanborder text-capitalize" id="{{ category[0] | downcase }}" data-category="{{ category[0] | downcase }}"><span>{{ category[0] | upcase | replace: '-', ' ' }}</span></h4>
-            
-        {% assign pages_list = category[1] %}
-        {% for post in pages_list %}
-        {% if post.title != null %}
-          {% if group == null or group == post.group %}
-         
-	  {% include main-loop-card.html %}
-            
-          {% endif %}
-        {% endif %}
-        {% endfor %}
-        {% assign pages_list = nil %}
-        {% assign group = nil %}
 
-{% endfor %}
+        <div class="col-md-8">
+
+            <h1 class="font-weight-bold spanborder">
+                <span>Explore Topics</span>
+            </h1>
+
+            <p class="text-muted mb-4">
+                Discover technical articles, tutorials and experiments
+                covering AI engineering, AI security, cybersecurity
+                and emerging technologies.
+            </p>
+
+            <div class="mb-4">
+                <label for="categorySearch" class="font-weight-bold">
+                    Find a topic
+                </label>
+                <input
+                    type="search"
+                    id="categorySearch"
+                    class="form-control"
+                    placeholder="Search categories..."
+                    autocomplete="off"
+                    aria-controls="categoryList">
+            </div>
+
+            {% assign sorted_categories = site.categories | sort %}
+
+            <div class="row" id="categoryList">
+
+                {% for category in sorted_categories %}
+
+                {% assign category_name = category[0] %}
+                {% assign category_posts = category[1] %}
+                {% assign category_slug = category_name | slugify %}
+
+                <div class="col-12 mb-3 category-item"
+                     data-category="{{ category_name | downcase | escape }}">
+
+                    <div class="card shadow-sm">
+
+                        <div class="card-body">
+
+                            <details id="category-{{ category_slug }}">
+
+                                <summary class="category-summary">
+
+                                    <span class="category-heading">
+                                        {{ category_name | replace: '-', ' ' | capitalize }}
+                                    </span>
+
+                                    <span class="badge badge-light ml-2">
+                                        {{ category_posts.size }}
+                                        {% if category_posts.size == 1 %}
+                                            article
+                                        {% else %}
+                                            articles
+                                        {% endif %}
+                                    </span>
+
+                                </summary>
+
+                                <div class="mt-3">
+
+                                    <ul class="list-unstyled mb-0">
+
+                                        {% for post in category_posts %}
+
+                                        <li class="py-3 border-top">
+
+                                            <a class="font-weight-bold"
+                                               href="{{ post.url | relative_url }}">
+                                                {{ post.title }}
+                                            </a>
+
+                                            <div class="small text-muted mt-1">
+                                                {{ post.date | date: "%d %B %Y" }}
+                                            </div>
+
+                                            {% if post.description %}
+                                            <p class="text-muted small mt-2 mb-0">
+                                                {{ post.description | strip_html | truncatewords: 25 }}
+                                            </p>
+                                            {% elsif post.excerpt %}
+                                            <p class="text-muted small mt-2 mb-0">
+                                                {{ post.excerpt | strip_html | truncatewords: 25 }}
+                                            </p>
+                                            {% endif %}
+
+                                        </li>
+
+                                        {% endfor %}
+
+                                    </ul>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <p id="noCategories"
+               class="text-muted text-center py-4"
+               role="status"
+               style="display: none;">
+                No matching categories found.
+            </p>
 
         </div>
-        
-            <div class="col-md-4">
-        {% include sidebar-featured.html %}    
-    </div>
-        
+
+        <div class="col-md-4">
+            {% include sidebar-featured.html %}
+        </div>
+
     </div>
 </div>
 
+<style>
+.category-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.category-summary::-webkit-details-marker {
+    display: none;
+}
+
+.category-summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 22px;
+    font-weight: 400;
+    color: #666;
+}
+
+details[open] > .category-summary::after {
+    content: "−";
+}
+
+.category-heading {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+}
+
+.category-item .card {
+    border-radius: 8px;
+    transition: box-shadow 0.2s ease;
+}
+
+.category-item .card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.category-summary:focus-visible {
+    outline: 2px solid #007bff;
+    outline-offset: 4px;
+}
+</style>
 
 <script>
-window.addEventListener("DOMContentLoaded", function() {
-    var queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    var categoryValue = urlParams.get('id');
-    if (categoryValue) {
-        var elements = document.querySelectorAll('[data-category]:not([data-category="' + categoryValue + '"])');
-	let capitalizedString = categoryValue.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        if (elements.length > 0) {
-	    document.title = capitalizedString;
-            elements.forEach(function(element) {
-                element.remove();
-            });
-        } else {
-            // Display message in the predefined paragraph
-            var messageParagraph = document.getElementById('no-category-found-message');
-            if (messageParagraph) {
-                messageParagraph.innerHTML = '<p>No elements found for category: ' + categoryValue + '</p>';
-            }
-		var defaultContent = document.getElementById('default-content');
-		if (defaultContent) {
-            	defaultContent.style.display = 'block';
-        }
-        }
-    } else {
-    // Display the same message if no categoryValue is provided
-    var defaultContent = document.getElementById('default-content');
-    var conditionalContent = document.getElementById('conditional-content');
-        if (defaultContent) {
-            defaultContent.style.display = 'block';
-        }
-	if (conditionalContent) {
-            conditionalContent.style.display = 'none';
-        }
-    }
-});
+document.addEventListener("DOMContentLoaded", function () {
 
- document.getElementById('filterInput').addEventListener('input', function() {
-        var filterValue = this.value.toLowerCase();
-        var items = document.querySelectorAll('.item');
-        var noResultsMessage = document.getElementById('noResultsMessage');
-        
-        var found = false;
-        items.forEach(function(item) {
-            if (item.id.toLowerCase().indexOf(filterValue) > -1) {
-                item.style.display = 'block';
-                found = true;
-            } else {
-                item.style.display = 'none';
+    const searchInput = document.getElementById("categorySearch");
+    const categoryItems = document.querySelectorAll(".category-item");
+    const noCategories = document.getElementById("noCategories");
+
+    searchInput.addEventListener("input", function () {
+
+        const query = this.value.trim().toLowerCase();
+        let matches = 0;
+
+        categoryItems.forEach(function (item) {
+
+            const categoryName = item.dataset.category || "";
+            const isMatch = categoryName.includes(query);
+
+            item.style.display = isMatch ? "" : "none";
+
+            if (isMatch) {
+                matches++;
             }
+
         });
 
-        if (!found) {
-            noResultsMessage.style.display = 'block';
-        } else {
-            noResultsMessage.style.display = 'none';
-        }
+        noCategories.style.display = matches === 0 ? "block" : "none";
+
     });
-	
+
+    const hash = window.location.hash;
+
+    if (hash && hash.startsWith("#category-")) {
+
+        const target = document.getElementById(hash.substring(1));
+
+        if (target && target.tagName === "DETAILS") {
+            target.open = true;
+            target.scrollIntoView();
+        }
+
+    }
+
+});
 </script>
