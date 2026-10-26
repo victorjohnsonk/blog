@@ -1,124 +1,233 @@
+
 ---
 title: "Tags"
 layout: default
-permalink: "/tags"
+permalink: "/tags/"
+description: "Explore articles by tag on Victor Johnson's Blog, covering AI engineering, AI security, cybersecurity, RAG, LLMs and agentic AI."
 ---
 
-<div class="container" id="default-content" style="display: none;">
-	<div class="row justify-content-center">
-		 <div class="col-md-8">
-    <h4 class="font-weight-bold spanborder"><span>{{ page.title }}</span></h4>
-			 <div class="row">
-  <div class="col-md-auto mb-2 mb-md-0 p-2">
-    <h6 class="mr-md-2">Search for a tag </h6>
-  </div>
-  <div class="col">
-    <input type="text" id="filterInput" class="form-control mb-3" >
-  </div>
-</div>
-			 <hr>
-    <div class="row">
-        {% for tag in site.tags %}
-	<div class="border p-3 bg-lightblue" style="margin: 5px;" id="{{ tag[0] | upcase | replace: '-', ' '   }}">
-    	<div><a class="text-capitalize" href="{{ site.baseurl }}/tags?id={{ tag[0] | downcase }}">{{ tag[0] | upcase | replace: '-', ' '  }}</a>
-    </div>
-</div>
-        {% endfor %}
-    </div>
-			  <div id="noResultsMessage" style="display: none;"><h6>No matching items found.</h6></div>
-		 </div>
-	<div class="col-md-4">
-        {% include sidebar-featured.html %}    
-    </div>
-</div>
-</div>
+<div class="container">
 
-
-
-<div class="container" id="conditional-content" style="display: ;">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-        <h1 class="font-weight-bold title h6 text-uppercase mb-4">Tags</h1>
-         <div id="no-tag-found-message"></div>
-        {% for tag in site.tags %} 
-        <h4 class="font-weight-bold spanborder text-capitalize" id="{{ tag[0] | downcase }}" data-tag="{% if tag[0] %}{{ tag[0] | downcase }}{% else %}{{ "main-card-tag" }}{% endif %}"><span>{{ tag[0] | upcase | replace: '-', ' ' }}</span></h4>
-            
-        {% assign pages_list = tag[1] %}
-        {% for post in pages_list %}
-        {% if post.title != null %}
-          {% if group == null or group == post.group %}
-         
-            {% include main-loop-card.html %}
-          {% endif %}
-        {% endif %}
-        {% endfor %}
-        {% assign pages_list = nil %}
-        {% assign group = nil %}
 
-        {% endfor %}
+        <div class="col-md-8">
+
+            <h1 class="font-weight-bold spanborder">
+                <span>Explore Tags</span>
+            </h1>
+
+            <p class="text-muted mb-4">
+                Find technical articles, tutorials and research by topic.
+                Browse tags covering AI engineering, AI security,
+                cybersecurity and related technologies.
+            </p>
+
+            <div class="mb-4">
+                <label for="tagSearch" class="font-weight-bold">
+                    Search tags
+                </label>
+
+                <input
+                    type="search"
+                    id="tagSearch"
+                    class="form-control"
+                    placeholder="Search tags..."
+                    autocomplete="off"
+                    aria-controls="tagList">
+            </div>
+
+            {% assign sorted_tags = site.tags | sort %}
+
+            <div id="tagList" class="row">
+
+                {% for tag in sorted_tags %}
+
+                {% assign tag_name = tag[0] %}
+                {% assign tag_posts = tag[1] %}
+                {% assign tag_slug = tag_name | slugify %}
+
+                <div class="col-12 mb-3 tag-item"
+                     data-tag="{{ tag_name | downcase | escape }}">
+
+                    <div class="card shadow-sm">
+
+                        <div class="card-body">
+
+                            <details id="tag-{{ tag_slug }}">
+
+                                <summary class="tag-summary">
+
+                                    <span class="tag-heading">
+                                        {{ tag_name | replace: '-', ' ' }}
+                                    </span>
+
+                                    <span class="badge badge-light ml-2">
+                                        {{ tag_posts.size }}
+                                        {% if tag_posts.size == 1 %}
+                                            article
+                                        {% else %}
+                                            articles
+                                        {% endif %}
+                                    </span>
+
+                                </summary>
+
+                                <div class="mt-3">
+
+                                    <ul class="list-unstyled mb-0">
+
+                                        {% for post in tag_posts %}
+
+                                        <li class="py-3 border-top">
+
+                                            <a class="font-weight-bold"
+                                               href="{{ post.url | relative_url }}">
+                                                {{ post.title }}
+                                            </a>
+
+                                            <div class="small text-muted mt-1">
+                                                {{ post.date | date: "%d %B %Y" }}
+                                            </div>
+
+                                            {% if post.description %}
+
+                                            <p class="text-muted small mt-2 mb-0">
+                                                {{ post.description | strip_html | truncatewords: 25 }}
+                                            </p>
+
+                                            {% elsif post.excerpt %}
+
+                                            <p class="text-muted small mt-2 mb-0">
+                                                {{ post.excerpt | strip_html | truncatewords: 25 }}
+                                            </p>
+
+                                            {% endif %}
+
+                                        </li>
+
+                                        {% endfor %}
+
+                                    </ul>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <p id="noTags"
+               class="text-muted text-center py-4"
+               role="status"
+               style="display: none;">
+                No matching tags found.
+            </p>
 
         </div>
-        
-            <div class="col-md-4">
-        {% include sidebar-featured.html %}    
+
+        <div class="col-md-4">
+            {% include sidebar-featured.html %}
+        </div>
+
     </div>
-        
-    </div>
+
 </div>
 
+<style>
+.tag-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.tag-summary::-webkit-details-marker {
+    display: none;
+}
+
+.tag-summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 22px;
+    font-weight: 400;
+    color: #666;
+}
+
+details[open] > .tag-summary::after {
+    content: "−";
+}
+
+.tag-heading {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+}
+
+.tag-item .card {
+    border-radius: 8px;
+    transition: box-shadow 0.2s ease;
+}
+
+.tag-item .card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.tag-summary:focus-visible {
+    outline: 2px solid #007bff;
+    outline-offset: 4px;
+}
+</style>
+
 <script>
-window.addEventListener("DOMContentLoaded", function() {
-    var queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    var tagValue = urlParams.get('id');
-    if (tagValue) {
-        var elements = document.querySelectorAll('[data-tag]:not([data-tag="' + tagValue + '"])');
-	let capitalizedString = tagValue.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        if (elements.length > 0) {
-            document.title = capitalizedString;
-            elements.forEach(function(element) {
-                element.remove();
-            });
-        } else {
-            // Display message in the predefined paragraph
-            var messageParagraph = document.getElementById('no-tag-found-message');
-            if (messageParagraph) {
-                messageParagraph.innerHTML = '<p>No elements found for tag: ' + tagValue + '</p>';
-            }
-        }
-    } else {
-       // Display the same message if no categoryValue is provided
-    var defaultContent = document.getElementById('default-content');
-    var conditionalContent = document.getElementById('conditional-content');
-        if (defaultContent) {
-            defaultContent.style.display = 'block';
-        }
-	if (conditionalContent) {
-            conditionalContent.style.display = 'none';
-        }
-    }
-});
+document.addEventListener("DOMContentLoaded", function () {
 
+    const searchInput = document.getElementById("tagSearch");
+    const tagItems = document.querySelectorAll(".tag-item");
+    const noTags = document.getElementById("noTags");
 
-	 document.getElementById('filterInput').addEventListener('input', function() {
-        var filterValue = this.value.toLowerCase();
-        var items = document.querySelectorAll('.item');
-        var noResultsMessage = document.getElementById('noResultsMessage');
-        
-        var found = false;
-        items.forEach(function(item) {
-            if (item.id.toLowerCase().indexOf(filterValue) > -1) {
-                item.style.display = 'block';
-                found = true;
-            } else {
-                item.style.display = 'none';
+    searchInput.addEventListener("input", function () {
+
+        const query = this.value.trim().toLowerCase();
+        let matches = 0;
+
+        tagItems.forEach(function (item) {
+
+            const tagName = item.dataset.tag || "";
+            const isMatch = tagName.includes(query);
+
+            item.style.display = isMatch ? "" : "none";
+
+            if (isMatch) {
+                matches++;
             }
+
         });
 
-        if (!found) {
-            noResultsMessage.style.display = 'block';
-        } else {
-            noResultsMessage.style.display = 'none';
-        }
+        noTags.style.display = matches === 0 ? "block" : "none";
+
     });
+
+    const hash = window.location.hash;
+
+    if (hash && hash.startsWith("#tag-")) {
+
+        const target = document.getElementById(hash.substring(1));
+
+        if (target && target.tagName === "DETAILS") {
+            target.open = true;
+            target.scrollIntoView();
+        }
+
+    }
+
+});
 </script>
