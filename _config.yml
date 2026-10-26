@@ -1,82 +1,96 @@
+
 # Site
-site: 'Victor Johnson - Blog'
-sitename-primary: 'Victor Johnson'
-sitename-secondary: 'Blog'
-name: 'Victor Johnson - Blog'
-title: 'A technology blog by Victor Johnson'
-keywords: 'opendata,open data,open,data,opendatablog,open data blog, datablog,data blog,dataset, open dataset'
-description: 'Open Data Blog | A blog on open data, datasets, data science, statistcs, artificial intelligence and trends in technology. This blog is completely open source and built on top of open source technologies.'
-favicon: 'assets/images/core/favicon.ico'
-baseurl: '/blog'
-lang: 'en-UK'
-timezone:  'Europe/London'
-repo: 'https://github.com/opendatablog/opendatablog.github.io' # site repo [optional]
-google_verify: QBMeWjI8s7WMKram8emRetfOXiP9PfRtE3pxKoEocFg # Put your Google Verification here
-google_analytics: G-2Z3TH1QNPJ # Put your Google Analytics code
-google_adsense: ca-pub-8547389836635390  # Put your Google Adsense code
-disqus: 'open-data-blog'
-email: 'mail.opendatablog@gmail.com'
-feedburner-list: 'https://api.follow.it/subscription-form/ZkUwV3dHUnNYQ3Vqa29mcDBwajVId0dkbGtsUTlxcUJ4Z3FHdHRoanhxOEtkRlZQS1VNcGE2VGdveWNoZHhmbzlFa1UwM2pPWEdVWUQySENzSDRydmZ0N0ltaXhCRUtqVk1SVE4waXUwczRvZWRTSkVkdUpCR2RnK1JJSHc5Uit8UXpYZTVkUENZaUNoYmczSXAvZzBUOGszOFBqTklFZUlVZ2FxYWhLekpUMD0=/8'
-follow-it-verification-code: WcEVB5jrF99dNEx3yusG
+site: "Victor Johnson's Blog"
+sitename-primary: "Victor Johnson's"
+sitename-secondary: "Blog"
+name: "Victor Johnson's Blog"
+title: "Victor Johnson's Blog | AI Engineering, AI Security & Cybersecurity"
+keywords: "AI Engineering, AI Security, Cybersecurity, Generative AI, LLM Security, Agentic AI, RAG Security, Secure AI Systems, AI Agents, Prompt Injection, Machine Learning Security, Azure AI, Victor Johnson"
+description: "Technical articles by Victor Johnson, an AI Engineer in cybersecurity, exploring AI security, secure LLMs, agentic AI and real-world engineering."
 
+# Site URL and localisation
+url: "https://victorjohnson.online"
+baseurl: "/blog"
+lang: "en-GB"
+timezone: "Europe/London"
+
+# Branding
+favicon: "assets/images/core/favicon.ico"
+
+# Repository
+repo: "https://github.com/victorjohnsonk/blog"
+
+# Optional integrations - add personal values when configured
+google_verify: ""
+google_analytics: ""
+google_adsense: ""
+disqus: ""
+email: "hello@victorjohnson.online"
+feedburner-list: ""
+follow-it-verification-code: ""
+
+# Pages and permalinks
 include: ["_pages"]
-permalink: /:title/
-# permalink: /:year/:month/:day/:title/
-# relative_permalinks: false
+permalink: "/:title/"
 
+# Collections
 collections:
   posts:
     output: true
 
 # Plugins
-plugins: 
+plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-last-modified-at
-  
+
+# Authors
 authors:
-    admin:
-      name: Victor Johnson
-      slugname : admin
-      site: https://www.victorjohnson.online
-      avatar: assets/images/core/avatar1.jpg
-      bio: "Hi, I am Victor, the author of Open Data Blog, the blog you're currently reading. I hope you like it!"
-      email: hello@victorjohnson.online
-      github: opendatablog # github username
-      twitter: opendata_blog
-      facebook: # facebook username
-      instagram: opendata_blog
-      youtube:  # youtube username
-      linkedin: # linkedin username
- 
+  admin:
+    name: "Victor Johnson"
+    slugname: "admin"
+    site: "https://victorjohnson.online"
+    avatar: "assets/images/core/avatar1.jpg"
+    bio: "AI Engineer working in cybersecurity, writing about AI engineering, AI security, secure LLMs, agentic AI, and practical approaches to building secure AI systems."
+    email: "hello@victorjohnson.online"
+    github: "victorjohnsonk"
+    twitter: ""
+    facebook: ""
+    instagram: ""
+    youtube: ""
+    linkedin: ""
+
 # Defaults
 defaults:
-
-  # all posts
+  # All posts
   - scope:
       path: "_posts"
     values:
-      layout: post
-      author: admin
-      avatar: /assets/images/avatar1.jpg
-      
-  # all pages
+      layout: "post"
+      author: "admin"
+      avatar: "/assets/images/avatar1.jpg"
+
+  # All pages
   - scope:
       path: "_pages"
     values:
-      layout: page
-      
-# Syntax
-markdown: kramdown
-highlighter: rouge
+      layout: "page"
 
-# Paginate
+# Markdown and syntax highlighting
+markdown: "kramdown"
+highlighter: "rouge"
+
+# Pagination
 paginate: 15
 paginate_path: "/page/:num"
 
-
-
-# Exclude metadata and development time dependencies (like Grunt plugins)
-exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]
+# Exclusions
+exclude:
+  - "README.markdown"
+  - "package.json"
+  - "grunt.js"
+  - "Gruntfile.js"
+  - "Gruntfile.coffee"
+  - "node_modules"
