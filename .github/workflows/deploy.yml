@@ -23,12 +23,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+    
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
+          bundler-cache: false
+      
+      - name: Install Ruby dependencies
+        run: |
+          bundle config set --local frozen false
+          bundle install
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
