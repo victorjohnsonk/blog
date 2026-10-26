@@ -27,13 +27,14 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3"
+          ruby-version: "2.7"
           bundler-cache: false
       
       - name: Install Ruby dependencies
         run: |
-          bundle config set --local frozen false
-          bundle install
+          gem install bundler -v 2.4.22
+          bundle _2.4.22_ config set --local frozen false
+          bundle _2.4.22_ install
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
