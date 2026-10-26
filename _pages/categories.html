@@ -8,7 +8,7 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
 <div class="container">
     <div class="row justify-content-center">
 
-        <div class="col-md-8">
+        <main class="col-md-8">
 
             <h1 class="font-weight-bold spanborder">
                 <span>Explore Topics</span>
@@ -24,6 +24,7 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
                 <label for="categorySearch" class="font-weight-bold">
                     Find a topic
                 </label>
+
                 <input
                     type="search"
                     id="categorySearch"
@@ -42,9 +43,11 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
                 {% assign category_name = category[0] %}
                 {% assign category_posts = category[1] %}
                 {% assign category_slug = category_name | slugify %}
+                {% assign category_url = category_slug | prepend: '/categories/' | append: '/' | relative_url %}
 
-                <div class="col-12 mb-3 category-item"
-                     data-category="{{ category_name | downcase | escape }}">
+                <div
+                    class="col-12 mb-3 category-item"
+                    data-category="{{ category_name | downcase | escape }}">
 
                     <div class="card shadow-sm">
 
@@ -73,13 +76,16 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
 
                                     <ul class="list-unstyled mb-0">
 
-                                        {% for post in category_posts %}
+                                        {% assign sorted_posts = category_posts | sort: "date" | reverse %}
+
+                                        {% for post in sorted_posts limit: 5 %}
 
                                         <li class="py-3 border-top">
 
-                                            <a class="font-weight-bold"
-                                               href="{{ post.url | relative_url }}">
-                                                {{ post.title }}
+                                            <a
+                                                class="font-weight-bold"
+                                                href="{{ post.url | relative_url }}">
+                                                {{ post.title | escape }}
                                             </a>
 
                                             <div class="small text-muted mt-1">
@@ -87,13 +93,17 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
                                             </div>
 
                                             {% if post.description %}
+
                                             <p class="text-muted small mt-2 mb-0">
                                                 {{ post.description | strip_html | truncatewords: 25 }}
                                             </p>
+
                                             {% elsif post.excerpt %}
+
                                             <p class="text-muted small mt-2 mb-0">
                                                 {{ post.excerpt | strip_html | truncatewords: 25 }}
                                             </p>
+
                                             {% endif %}
 
                                         </li>
@@ -102,9 +112,35 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
 
                                     </ul>
 
+                                    {% if category_posts.size > 5 %}
+
+                                    <p class="small text-muted mt-3 mb-0">
+                                        Showing the 5 most recent articles.
+                                    </p>
+
+                                    {% endif %}
+
                                 </div>
 
                             </details>
+
+                            <div class="category-footer mt-3 pt-3 border-top">
+
+                                <a
+                                    class="category-link font-weight-bold"
+                                    href="{{ category_url }}"
+                                    aria-label="View all articles in {{ category_name | escape }}">
+
+                                    View all {{ category_name | replace: '-', ' ' }} articles
+
+                                    <i
+                                        class="fas fa-arrow-right ml-1"
+                                        aria-hidden="true">
+                                    </i>
+
+                                </a>
+
+                            </div>
 
                         </div>
 
@@ -116,18 +152,19 @@ description: "Browse articles by topic on Victor Johnson's Blog, including AI en
 
             </div>
 
-            <p id="noCategories"
-               class="text-muted text-center py-4"
-               role="status"
-               style="display: none;">
+            <p
+                id="noCategories"
+                class="text-muted text-center py-4"
+                role="status"
+                style="display: none;">
                 No matching categories found.
             </p>
 
-        </div>
+        </main>
 
-        <div class="col-md-4">
+        <aside class="col-md-4">
             {% include sidebar-featured.html %}
-        </div>
+        </aside>
 
     </div>
 </div>
@@ -176,6 +213,38 @@ details[open] > .category-summary::after {
 .category-summary:focus-visible {
     outline: 2px solid #007bff;
     outline-offset: 4px;
+}
+
+.category-footer {
+    text-align: right;
+}
+
+.category-link {
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.category-link:hover {
+    text-decoration: underline;
+}
+
+.category-link i {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.category-link:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 576px) {
+    .category-footer {
+        text-align: left;
+    }
+
+    .category-heading {
+        font-size: 16px;
+    }
 }
 </style>
 
