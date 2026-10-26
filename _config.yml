@@ -1,0 +1,82 @@
+# Site
+site: 'OpenData.Blog'
+sitename-primary: 'OpenData'
+sitename-secondary: 'Blog'
+name: 'Open Data Blog'
+title: 'Open Data Blog - A technology blog backed by open data'
+keywords: 'opendata,open data,open,data,opendatablog,open data blog, datablog,data blog,dataset, open dataset'
+description: 'Open Data Blog | A blog on open data, datasets, data science, statistcs, artificial intelligence and trends in technology. This blog is completely open source and built on top of open source technologies.'
+favicon: 'assets/images/core/favicon.ico'
+baseurl: '/'
+lang: 'en-UK'
+timezone:  'Europe/London'
+repo: 'https://github.com/opendatablog/opendatablog.github.io' # site repo [optional]
+google_verify: QBMeWjI8s7WMKram8emRetfOXiP9PfRtE3pxKoEocFg # Put your Google Verification here
+google_analytics: G-2Z3TH1QNPJ # Put your Google Analytics code
+google_adsense: ca-pub-8547389836635390  # Put your Google Adsense code
+disqus: 'open-data-blog'
+email: 'mail.opendatablog@gmail.com'
+feedburner-list: 'https://api.follow.it/subscription-form/ZkUwV3dHUnNYQ3Vqa29mcDBwajVId0dkbGtsUTlxcUJ4Z3FHdHRoanhxOEtkRlZQS1VNcGE2VGdveWNoZHhmbzlFa1UwM2pPWEdVWUQySENzSDRydmZ0N0ltaXhCRUtqVk1SVE4waXUwczRvZWRTSkVkdUpCR2RnK1JJSHc5Uit8UXpYZTVkUENZaUNoYmczSXAvZzBUOGszOFBqTklFZUlVZ2FxYWhLekpUMD0=/8'
+follow-it-verification-code: WcEVB5jrF99dNEx3yusG
+
+include: ["_pages"]
+permalink: /:title/
+# permalink: /:year/:month/:day/:title/
+# relative_permalinks: false
+
+collections:
+  posts:
+    output: true
+
+# Plugins
+plugins: 
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-last-modified-at
+  
+authors:
+    admin:
+      name: Victor Johnson
+      slugname : admin
+      site: https://www.victorjohnson.online
+      avatar: assets/images/core/avatar1.jpg
+      bio: "Hi, I am Victor, the author of Open Data Blog, the blog you're currently reading. I hope you like it!"
+      email: mail.opendatablog@gmail.com
+      github: opendatablog # github username
+      twitter: opendata_blog
+      facebook: # facebook username
+      instagram: opendata_blog
+      youtube:  # youtube username
+      linkedin: # linkedin username
+ 
+# Defaults
+defaults:
+
+  # all posts
+  - scope:
+      path: "_posts"
+    values:
+      layout: post
+      author: admin
+      avatar: /assets/images/avatar1.jpg
+      
+  # all pages
+  - scope:
+      path: "_pages"
+    values:
+      layout: page
+      
+# Syntax
+markdown: kramdown
+highlighter: rouge
+
+# Paginate
+paginate: 15
+paginate_path: "/page/:num"
+
+
+
+# Exclude metadata and development time dependencies (like Grunt plugins)
+exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]

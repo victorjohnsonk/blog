@@ -1,0 +1,48 @@
+<!-- _includes/random-related-article.html -->
+
+{% assign current_article_tags = page.tags %}
+{% assign current_article_categories = page.categories %}
+{% assign current_article_permalink = page.permalink %}
+
+{% comment %}
+  Filter out the current article
+{% endcomment %}
+{% assign other_articles = site.posts | where_exp: "post", "post.permalink != current_article_permalink" %}
+
+{% comment %}
+  Initialize an empty array to hold related articles
+{% endcomment %}
+{% assign related_articles = "" | split: "" %}
+
+{% comment %}
+  Loop through other articles to find related ones
+{% endcomment %}
+{% for post in other_articles %}
+  {% assign post_related = false %}
+  {% for tag in post.tags %}
+    {% if current_article_tags contains tag %}
+      {% assign post_related = true %}
+    {% endif %}
+  {% endfor %}
+  {% for category in post.categories %}
+    {% if current_article_categories contains category %}
+      {% assign post_related = true %}
+    {% endif %}
+  {% endfor %}
+  {% if post_related %}
+    {% assign related_articles = related_articles | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}
+  Pick a random article from the related articles if any are found
+{% endcomment %}
+{% if related_articles.size > 0 %}
+  {% assign random_article = related_articles | sample %}
+  
+<div class="border p-3 bg-lightblue" style="margin-bottom: 20px;">
+    <div >
+    Also Read : <a href="{{ random_article.url }}">{{ random_article.title }}</a>
+    </div>
+</div>
+{% endif %}
