@@ -1,0 +1,13 @@
+categories:
+  ai:
+    description: "Explore artificial intelligence articles covering engineering, applications, research and practical implementation."
+    index: true
+
+  uk:
+    description: "Explore articles examining artificial intelligence, technology and digital developments in the United Kingdom."
+    index: true
+
+tags:
+  ai:
+    description: "Read technical articles on artificial intelligence, including AI systems, emerging developments and practical applications."
+    index: true
