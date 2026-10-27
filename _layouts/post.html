@@ -139,16 +139,11 @@ layout: default
 
 <style>
 
-/* =========================================
-   AI ASSISTANCE & EDITORIAL TRANSPARENCY
-========================================= */
+     
+/* Editorial transparency box */
 
 .editorial-transparency {
-    margin: 45px 0 35px;
-    padding: 24px 28px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-left: 4px solid #2563eb;
+    margin: 40px 0 30px;
     border-radius: 8px;
 }
 
@@ -156,9 +151,10 @@ layout: default
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
+/* Green tick */
 .editorial-transparency-icon {
     display: inline-flex;
     align-items: center;
@@ -167,14 +163,14 @@ layout: default
     height: 30px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: #e8f0fe;
-    color: #2563eb;
-    font-size: 17px;
+    background-color: #dcfce7;
+    color: #15803d;
+    font-size: 18px;
     font-weight: 700;
 }
 
 .editorial-transparency h2 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
     margin: 0;
@@ -182,27 +178,14 @@ layout: default
 }
 
 .editorial-transparency p {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.8;
     color: #475569;
-    margin: 0 0 12px;
+    margin: 0;
 }
 
-.editorial-transparency-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-top: 13px;
-    margin-top: 15px;
-    border-top: 1px solid #e2e8f0;
-    font-size: 12px;
-    color: #64748b;
-}
 
-.editorial-dot {
-    color: #94a3b8;
-}
-
+     
 @media (max-width: 767px) {
     .editorial-transparency {
         padding: 18px;
@@ -385,42 +368,34 @@ layout: default
 
             </article>
 
-     {% if page.ai_assisted == true %}
+     
+{% if page.ai_assisted == true %}
 
-<aside class="editorial-transparency"
+<aside class="editorial-transparency border p-3 bg-lightblue"
        aria-labelledby="editorial-transparency-title">
 
     <div class="editorial-transparency-heading">
-        <span class="editorial-transparency-icon" aria-hidden="true">
+
+        <span class="editorial-transparency-icon"
+              aria-hidden="true">
             &#10003;
         </span>
 
         <h2 id="editorial-transparency-title">
             Editorial Transparency &amp; AI Assistance
         </h2>
+
     </div>
 
     <p>
         Artificial intelligence (AI) tools assisted with
-        researching, organising, drafting or structuring
-        this article. The author remains responsible for
-        the published content, including its accuracy,
-        relevance and clarity.
+        the research organisation, drafting and structure
+        of this article. The author is responsible for
+        the final published content, including its
+        accuracy, clarity and relevance. Technical
+        explanations and references are reviewed
+        before publication.
     </p>
-
-    <p>
-        Technical explanations, examples and references
-        are reviewed before publication to help readers
-        access useful and reliable information.
-    </p>
-
-    <div class="editorial-transparency-footer">
-        <span>AI-assisted content</span>
-        <span class="editorial-dot">&bull;</span>
-        <span>Editorial responsibility</span>
-        <span class="editorial-dot">&bull;</span>
-        <span>Content transparency</span>
-    </div>
 
 </aside>
 
