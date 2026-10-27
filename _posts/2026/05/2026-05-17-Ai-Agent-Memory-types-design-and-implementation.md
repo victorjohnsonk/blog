@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Understanding AI Agent Memory: From Conversations to Experiences, Knowledge and Decisions"
-description: "Explore how AI agent memory differs from chat history, including working, episodic, semantic, procedural and other memory types, when to use them, and how to implement them."
-permalink: /understanding-ai-agent-memory-types-design-and-implementation
+title: "AI Agent Memory: types, design and implementation"
+description: "Explore how AI agent memory differs from chat history, including working, episodic, semantic, procedural and other memory types, when to use them, and how to implement them in an agentic ai system"
+permalink: /ai-agent-memory-types-design-and-implementation
 author: admin
 categories: [ ai, technology, agents ]
 image: assets/images/posts/2026/10/image1.jpg
