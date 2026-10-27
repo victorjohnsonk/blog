@@ -305,6 +305,47 @@ layout: default
 
             </article>
 
+     {% if page.ai_assisted == true %}
+
+<aside class="editorial-transparency"
+       aria-labelledby="editorial-transparency-title">
+
+    <div class="editorial-transparency-heading">
+        <span class="editorial-transparency-icon" aria-hidden="true">
+            &#10003;
+        </span>
+
+        <h2 id="editorial-transparency-title">
+            Editorial Transparency &amp; AI Assistance
+        </h2>
+    </div>
+
+    <p>
+        Artificial intelligence (AI) tools assisted with
+        researching, organising, drafting or structuring
+        this article. The author remains responsible for
+        the published content, including its accuracy,
+        relevance and clarity.
+    </p>
+
+    <p>
+        Technical explanations, examples and references
+        are reviewed before publication to help readers
+        access useful and reliable information.
+    </p>
+
+    <div class="editorial-transparency-footer">
+        <span>AI-assisted content</span>
+        <span class="editorial-dot">&bull;</span>
+        <span>Editorial responsibility</span>
+        <span class="editorial-dot">&bull;</span>
+        <span>Content transparency</span>
+    </div>
+
+</aside>
+
+{% endif %}
+
 
             <!-- =================================================
                  TAGS
