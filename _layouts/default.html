@@ -62,10 +62,60 @@ crossorigin="anonymous"></script>
     </div>
     </nav>
 
-    <!-- Search Results -->
-    <div id="lunrsearchresults">
-        <ul class="mb-0"></ul>
+   
+<!-- Pagefind Search Results Modal -->
+<div
+    id="pagefind-search-overlay"
+    role="presentation"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog shadow-lg"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pagefind-search-title"
+    >
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5
+                    class="modal-title"
+                    id="pagefind-search-title"
+                >
+                    Search articles
+                </h5>
+
+                <button
+                    type="button"
+                    class="close"
+                    id="pagefind-search-close"
+                    aria-label="Close search results"
+                >
+                    &times;
+                </button>
+            </div>
+
+            <div
+                class="modal-body"
+                id="pagefind-search-results"
+                aria-live="polite"
+            >
+            </div>
+
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary btn-sm"
+                    onclick="document.getElementById('pagefind-search-close').click()"
+                >
+                    Close
+                </button>
+            </div>
+
+        </div>
     </div>
+</div>
+
 
     <!-- Content -->
     <main role="main" class="site-content">
