@@ -134,44 +134,28 @@ layout: default
 
 <!-- =====================================================
      ARTICLE LAYOUT CSS
+     Preserves original drop-cap styling
 ===================================================== -->
 
 <style>
 
-/* Article container matches header container */
+/* Match article body container with header */
 .article-body-container {
     position: relative;
 }
 
-/* Main article row */
+/* Position share sidebar independently */
 .post-content-layout {
     position: relative;
 }
 
-/* Article occupies available width */
+/* Allow article to use its full Bootstrap column width */
 .post-article-column {
     min-width: 0;
 }
 
-/* Prevent unwanted left indentation */
-.post-article-column .article-post {
-    margin-left: 0;
-    padding-left: 0;
-}
-
-/* Drop cap alignment */
-.post-article-column .article-post > p:first-of-type {
-    margin-left: 0;
-    padding-left: 0;
-}
-
-.post-article-column .article-post > p:first-of-type::first-letter {
-    margin-left: 0;
-}
-
 /* =====================================================
    LARGE DESKTOP
-   Share buttons further left of article
 ===================================================== */
 
 @media (min-width: 1400px) {
@@ -309,6 +293,7 @@ layout: default
 
         <!-- =================================================
              ARTICLE CONTENT
+             Original drop-cap CSS remains untouched
         ================================================= -->
 
         <div class="post-article-column {% if page.image %}col-12{% else %}col-12 col-md-8{% endif %}">
