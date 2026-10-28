@@ -139,167 +139,167 @@ layout: default
 
 <style>
 
-     
-/* Editorial transparency box */
+  
+/* =====================================================
+   RESPONSIVE ARTICLE TYPOGRAPHY
+   Only affects blog article content
+   ===================================================== */
 
-.editorial-transparency {
-    margin: 40px 0 30px;
-    border-radius: 8px;
+/* Main article text */
+.article-post {
+    font-size: 17px;
+    line-height: 1.75;
+    font-weight: 400;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
-.editorial-transparency-heading {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+/* Paragraphs */
+.article-post p {
+    font-size: inherit;
+    line-height: 1.75;
+    margin-bottom: 1.35rem;
 }
 
-/* Green tick */
-.editorial-transparency-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background-color: #dcfce7;
-    color: #15803d;
-    font-size: 18px;
+/* Headings inside article only */
+.article-post h2 {
+    font-size: 27px;
+    line-height: 1.35;
     font-weight: 700;
+    margin-top: 2.2rem;
+    margin-bottom: 1rem;
 }
 
-.editorial-transparency h2 {
-    font-size: 18px;
-    font-weight: 700;
+.article-post h3 {
+    font-size: 22px;
     line-height: 1.4;
-    margin: 0;
-    color: #1e293b;
+    font-weight: 700;
+    margin-top: 1.8rem;
+    margin-bottom: 0.85rem;
 }
 
-.editorial-transparency p {
+.article-post h4 {
+    font-size: 19px;
+    line-height: 1.45;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Lists */
+.article-post ul,
+.article-post ol {
+    font-size: inherit;
+    line-height: 1.75;
+    margin-bottom: 1.35rem;
+    padding-left: 1.5rem;
+}
+
+.article-post li {
+    font-size: inherit;
+    line-height: 1.75;
+    margin-bottom: 0.4rem;
+}
+
+/* Quotes */
+.article-post blockquote {
+    font-size: 1em;
+    line-height: 1.7;
+}
+
+/* Code blocks */
+.article-post pre {
     font-size: 14px;
-    line-height: 1.8;
-    color: #475569;
-    margin: 0;
+    line-height: 1.6;
+    overflow-x: auto;
 }
 
-
-     
-@media (max-width: 767px) {
-    .editorial-transparency {
-        padding: 18px;
-        margin-top: 30px;
-    }
-
-    .editorial-transparency h2 {
-        font-size: 17px;
-    }
-
-    .editorial-transparency p {
-        font-size: 14px;
-    }
+.article-post pre code {
+    font-size: inherit;
 }
 
-
-/* Match article body container with header */
-.article-body-container {
-    position: relative;
+.article-post :not(pre) > code {
+    font-size: 0.88em;
 }
 
-/* Position share sidebar independently */
-.post-content-layout {
-    position: relative;
+/* Tables */
+.article-post table {
+    font-size: 0.92em;
+    line-height: 1.55;
 }
 
-/* Allow article to use its full Bootstrap column width */
-.post-article-column {
-    min-width: 0;
+/* Preserve the large first letter */
+.article-post > p:first-of-type::first-letter {
+    float: left;
+    font-size: 3.5em;
+    line-height: 0.85;
+    padding-top: 0.08em;
+    padding-right: 0.12em;
+    font-weight: 700;
 }
 
 /* =====================================================
-   LARGE DESKTOP
-===================================================== */
+   TABLET
+   ===================================================== */
 
-@media (min-width: 1400px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
 
-    .post-share-sidebar {
-        position: absolute;
-        top: 0;
-        left: -145px;
-        width: 110px;
-        height: 100%;
-        margin: 0;
-        z-index: 2;
+    .article-post {
+        font-size: 16.5px;
     }
 
-    .post-share-sidebar .sticky-top {
-        text-align: center !important;
+    .article-post h2 {
+        font-size: 25px;
     }
 
-    .post-share-sidebar .a2a_kit {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .article-post h3 {
+        font-size: 21px;
     }
 
+    .article-post h4 {
+        font-size: 18px;
+    }
 }
 
 /* =====================================================
-   STANDARD DESKTOP
-===================================================== */
+   MOBILE
+   ===================================================== */
 
-@media (min-width: 992px) and (max-width: 1399.98px) {
+@media (max-width: 767.98px) {
 
-    .post-share-sidebar {
-        position: absolute;
-        top: 0;
-        left: -80px;
-        width: 65px;
-        height: 100%;
-        margin: 0;
-        z-index: 2;
+    .article-post {
+        font-size: 16px;
+        line-height: 1.7;
     }
 
-    .post-share-sidebar .sticky-top {
-        text-align: center !important;
+    .article-post p,
+    .article-post li {
+        line-height: 1.7;
     }
 
-    .post-share-sidebar .a2a_kit {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .article-post h2 {
+        font-size: 23px;
+        line-height: 1.35;
+        margin-top: 1.9rem;
     }
 
-    .post-share-sidebar .text-muted {
+    .article-post h3 {
+        font-size: 20px;
+        line-height: 1.4;
+        margin-top: 1.5rem;
+    }
+
+    .article-post h4 {
+        font-size: 18px;
+    }
+
+    .article-post pre {
         font-size: 13px;
     }
 
-}
-
-/* =====================================================
-   MOBILE AND TABLET
-===================================================== */
-
-@media (max-width: 991.98px) {
-
-    .post-share-sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        margin-bottom: 1.5rem;
-        padding-left: 15px;
+    .article-post > p:first-of-type::first-letter {
+        font-size: 3.2em;
     }
-
-    .post-share-sidebar .sticky-top {
-        position: static !important;
-        text-align: left !important;
-    }
-
-    .post-share-sidebar .a2a_kit {
-        display: inline-block;
-    }
-
 }
 
 </style>
