@@ -1,17 +1,34 @@
-<!--  Replace menu links here -->
 
 <li class="nav-item">
-<a class="nav-link" href="{{site.baseurl}}/">Home</a>
+    <a class="nav-link" href="{{ site.baseurl }}/">Home</a>
 </li>
+
 <li class="nav-item">
-<a class="nav-link" href="{{site.baseurl}}/about">About</a>
+    <a class="nav-link" href="{{ site.baseurl }}/about">About the Blog</a>
 </li>
+
 <li class="nav-item">
-<a class="nav-link" href="{{site.baseurl}}/categories">Categories</a>
+    <a class="nav-link" href="https://victorjohnsononline.com" target="_blank" rel="noopener noreferrer">
+        My Portfolio
+    </a>
 </li>
-<li class="nav-item">
-<a class="nav-link" href="{{site.baseurl}}/tags">Tags</a>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="topicsDropdown"
+       role="button" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+        Topics
+    </a>
+    <div class="dropdown-menu" aria-labelledby="topicsDropdown">
+        <a class="dropdown-item" href="{{ site.baseurl }}/categories">
+            Categories
+        </a>
+        <a class="dropdown-item" href="{{ site.baseurl }}/tags">
+            Tags
+        </a>
+    </div>
 </li>
+
 <li class="nav-item">
-<a class="nav-link" href="{{site.baseurl}}/contact">Contact</a>
+    <a class="nav-link" href="{{ site.baseurl }}/contact">Contact</a>
 </li>
