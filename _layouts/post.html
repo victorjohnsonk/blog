@@ -1,3 +1,4 @@
+
 ---
 layout: default
 ---
@@ -214,7 +215,7 @@ layout: default
         font-size: 14px;
     }
 }
-     
+
 /* =====================================================
    RESPONSIVE ARTICLE TYPOGRAPHY
    Balanced sizes for desktop, tablet and mobile
@@ -382,7 +383,7 @@ layout: default
     }
 }
 
-     
+
 /* =====================================================
    SHARE SIDEBAR LAYOUT FIX
    Desktop: left of article
@@ -462,6 +463,75 @@ layout: default
     }
 }
 
+/* =====================================================
+   BACK TO TOP BUTTON
+   ===================================================== */
+
+.back-to-top {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: #222222;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(12px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+    background: #444444;
+    transform: translateY(-3px);
+}
+
+.back-to-top:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+}
+
+@media (max-width: 767.98px) {
+    .back-to-top {
+        right: 18px;
+        bottom: 18px;
+        width: 42px;
+        height: 42px;
+        font-size: 23px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+        transition: none;
+    }
+}
+
 </style>
 
 
@@ -528,7 +598,7 @@ layout: default
 
             </article>
 
-     
+
 {% if page.ai_assisted == true %}
 
 <aside class="editorial-transparency border p-3 bg-lightblue"
@@ -765,3 +835,65 @@ layout: default
     </div>
 
 </div>
+
+<!-- =====================================================
+     BACK TO TOP BUTTON
+===================================================== -->
+
+<button
+    type="button"
+    class="back-to-top"
+    id="back-to-top"
+    aria-label="Back to top"
+    title="Back to top">
+    <span aria-hidden="true">&#8593;</span>
+</button>
+
+<script>
+(function () {
+    "use strict";
+
+    function initialiseBackToTop() {
+        var button = document.getElementById("back-to-top");
+
+        if (!button) return;
+
+        function updateVisibility() {
+            button.classList.toggle(
+                "is-visible",
+                window.scrollY > 350
+            );
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateVisibility,
+            { passive: true }
+        );
+
+        updateVisibility();
+
+        button.addEventListener("click", function () {
+            var reducedMotion =
+                window.matchMedia &&
+                window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+
+            window.scrollTo({
+                top: 0,
+                behavior: reducedMotion ? "auto" : "smooth"
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialiseBackToTop
+        );
+    } else {
+        initialiseBackToTop();
+    }
+})();
+</script>
