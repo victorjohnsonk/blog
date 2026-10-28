@@ -1,9 +1,8 @@
 <span class="reading-time">
   {% assign words = content | number_of_words %}
-  {% if words < 360 %}
-    1 min read
-  {% else %}
-    {{ words | divided_by:180 }} mins read
+  {% assign reading_minutes = words | plus: 199 | divided_by: 200 %}
+  {% if reading_minutes < 1 %}
+    {% assign reading_minutes = 1 %}
   {% endif %}
-</span>
-    
+  {{ reading_minutes }} min{% if reading_minutes != 1 %}s{% endif %} read
+</span>    
