@@ -11,10 +11,8 @@ layout: default
 <div class="container">
     <div class="jumbotron jumbotron-fluid mb-3 pl-0 pt-0 pb-0 bg-white position-relative">
         <div class="h-100 tofront">
-
             <div class="row {% if page.image %}justify-content-between{% else %}justify-content-center{% endif %}">
 
-                <!-- Title and Author -->
                 <div class="{% if page.image %}col-md-6{% else %}col-md-8{% endif %} pr-0 pr-md-4 pt-4 pb-4 align-self-center">
 
                     {% if page.categories.size > 0 %}
@@ -22,15 +20,12 @@ layout: default
                         <span class="catlist">
                             {% for category in page.categories %}
                             {% assign category_url = category | slugify | prepend: '/categories/' | append: '/' | relative_url %}
-
                             <a class="sscroll text-danger" href="{{ category_url }}">
                                 {{ category | replace: '-', ' ' }}
                             </a>
-
                             {% unless forloop.last %}
                             <span class="sep">. </span>
                             {% endunless %}
-
                             {% endfor %}
                         </span>
                     </p>
@@ -41,7 +36,6 @@ layout: default
                     </h1>
 
                     <div class="d-flex align-items-center">
-
                         {% if author.avatar %}
                         <img
                             class="rounded-circle"
@@ -51,7 +45,6 @@ layout: default
                         {% endif %}
 
                         <small class="ml-3">
-
                             {{ author.name }}
 
                             {% if author.site %}
@@ -67,28 +60,17 @@ layout: default
                             {% endif %}
 
                             <span class="text-muted d-block mt-1">
-
-                                Published:
-                                {{ page.date | date: '%b %d, %Y' }}
-
+                                Published: {{ page.date | date: '%b %d, %Y' }}
                                 {% if page.last_modified_at %}
-                                · Updated:
-                                {{ page.last_modified_at | date: '%b %d, %Y' }}
+                                · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
                                 {% endif %}
-
                                 · {% include meta-read-time.html %}
-
                             </span>
-
                         </small>
-
                     </div>
-
                 </div>
 
-                <!-- Featured Image -->
                 {% if page.image %}
-
                 <div class="col-md-6 pr-0 align-self-center">
 
                     {% if page.image contains "://" %}
@@ -105,19 +87,14 @@ layout: default
                     {% if page.title-image %}
                     <small>
                         <span class="text-muted d-block mt-1">
-
                             {{ page.title-image }}
-
                             {% if page.title-image-source %}
                             - Source: {{ page.title-image-source }}
                             {% endif %}
-
                         </span>
                     </small>
                     {% endif %}
-
                 </div>
-
                 {% endif %}
 
             </div>
@@ -127,7 +104,7 @@ layout: default
 
 
 <!-- =====================================================
-     ARTICLE CSS
+     ARTICLE STYLES
 ===================================================== -->
 
 <style>
@@ -140,9 +117,9 @@ layout: default
     font-size: 16px;
     line-height: 1.7;
     font-weight: 400;
+    min-width: 0;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    min-width: 0;
 }
 
 .article-post p {
@@ -164,7 +141,7 @@ layout: default
     line-height: 1.4;
     font-weight: 700;
     margin-top: 1.8rem;
-    margin-bottom: 0.85rem;
+    margin-bottom: .85rem;
 }
 
 .article-post h4 {
@@ -172,7 +149,7 @@ layout: default
     line-height: 1.45;
     font-weight: 600;
     margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: .75rem;
 }
 
 .article-post ul,
@@ -186,7 +163,7 @@ layout: default
 .article-post li {
     font-size: inherit;
     line-height: 1.7;
-    margin-bottom: 0.4rem;
+    margin-bottom: .4rem;
 }
 
 .article-post pre {
@@ -201,7 +178,7 @@ layout: default
 }
 
 .article-post :not(pre) > code {
-    font-size: 0.88em;
+    font-size: .88em;
 }
 
 .article-post img,
@@ -210,63 +187,36 @@ layout: default
     height: auto;
 }
 
-/* Original drop cap */
+/* Preserve original drop cap */
 .article-post > p:first-of-type::first-letter {
     float: left;
     font-size: 3.5em;
-    line-height: 0.85;
-    padding-top: 0.08em;
-    padding-right: 0.12em;
+    line-height: .85;
+    padding-top: .08em;
+    padding-right: .12em;
     font-weight: 700;
 }
 
-/* Tablet */
 @media (min-width: 768px) and (max-width: 991.98px) {
-    .article-post {
-        font-size: 16px;
-    }
-
-    .article-post h2 {
-        font-size: 23px;
-    }
-
-    .article-post h3 {
-        font-size: 19px;
-    }
-
-    .article-post h4 {
-        font-size: 18px;
-    }
-
-    .article-post pre {
-        font-size: 13px;
-    }
+    .article-post { font-size: 16px; }
+    .article-post h2 { font-size: 23px; }
+    .article-post h3 { font-size: 19px; }
+    .article-post h4 { font-size: 18px; }
+    .article-post pre { font-size: 13px; }
 }
 
-/* Mobile */
 @media (max-width: 767.98px) {
-    .article-post {
-        font-size: 15px;
-    }
-
+    .article-post { font-size: 15px; }
     .article-post h2 {
         font-size: 22px;
         margin-top: 1.9rem;
     }
-
     .article-post h3 {
         font-size: 18px;
         margin-top: 1.5rem;
     }
-
-    .article-post h4 {
-        font-size: 17px;
-    }
-
-    .article-post pre {
-        font-size: 13px;
-    }
-
+    .article-post h4 { font-size: 17px; }
+    .article-post pre { font-size: 13px; }
     .article-post > p:first-of-type::first-letter {
         font-size: 3.2em;
     }
@@ -306,7 +256,7 @@ layout: default
 }
 
 .article-post blockquote p + p {
-    margin-top: 0.8rem;
+    margin-top: .8rem;
 }
 
 @media (max-width: 767.98px) {
@@ -330,7 +280,7 @@ layout: default
     border-spacing: 0;
     font-size: 14px;
     line-height: 1.6;
-    background: #ffffff;
+    background: #fff;
     overflow-x: auto;
 }
 
@@ -368,10 +318,7 @@ layout: default
 }
 
 @media (max-width: 767.98px) {
-    .article-post table {
-        font-size: 13px;
-    }
-
+    .article-post table { font-size: 13px; }
     .article-post table th,
     .article-post table td {
         padding: 9px 10px;
@@ -449,41 +396,27 @@ layout: default
         padding: 18px;
         margin-top: 30px;
     }
-
-    .editorial-transparency h2 {
-        font-size: 17px;
-    }
-
-    .editorial-transparency p {
-        font-size: 14px;
-    }
+    .editorial-transparency h2 { font-size: 17px; }
+    .editorial-transparency p { font-size: 14px; }
 }
 
 
 /* =====================================================
-   MAIN ARTICLE LAYOUT
-   Desktop: Share | Article | TOC
-   Mobile: Share / TOC / Article
+   MAIN LAYOUT
+   DESKTOP: SHARE | ARTICLE | DOCUMENTATION SIDEBAR
 ===================================================== */
 
-.article-body-container {
-    min-width: 0;
-}
-
-.post-content-layout {
-    min-width: 0;
-}
-
+.article-body-container,
+.post-content-layout,
 .post-article-column {
     min-width: 0;
 }
 
-/* Wide desktop */
 @media (min-width: 1200px) {
 
     .post-content-layout {
         display: grid;
-        grid-template-columns: 60px minmax(0, 1fr) 220px;
+        grid-template-columns: 55px minmax(0, 1fr) 230px;
         column-gap: 25px;
         align-items: start;
         margin-left: 0;
@@ -498,7 +431,6 @@ layout: default
         height: 100%;
         margin: 0;
         padding: 0;
-        min-width: 0;
     }
 
     .post-share-sidebar .sticky-top {
@@ -523,9 +455,8 @@ layout: default
         grid-row: 1;
         width: 100%;
         max-width: none;
-        flex: none;
-        padding: 0;
         min-width: 0;
+        padding: 0;
     }
 
     .article-toc {
@@ -534,13 +465,16 @@ layout: default
         position: sticky;
         top: 90px;
         align-self: start;
-        width: 100%;
         min-width: 0;
-        max-height: calc(100vh - 110px);
+        width: 100%;
     }
 }
 
-/* Smaller desktop, tablet and mobile */
+
+/* =====================================================
+   MOBILE AND TABLET LAYOUT
+===================================================== */
+
 @media (max-width: 1199.98px) {
 
     .post-content-layout {
@@ -578,26 +512,32 @@ layout: default
         position: static;
         width: calc(100% - 30px);
         margin: 0 15px 1.5rem;
-        max-height: none;
     }
 
     .post-article-column {
         width: 100%;
         max-width: 100%;
-        flex: none;
+        min-width: 0;
         padding: 0 15px;
     }
 }
 
 
 /* =====================================================
-   OWASP-STYLE COLLAPSIBLE TABLE OF CONTENTS
+   DOCUMENTATION-STYLE TABLE OF CONTENTS
+
+   Desktop:
+   - Always visible
+   - No card
+   - No border around sidebar
+   - Independent scrolling
+   - Active section highlighting
 ===================================================== */
 
 .article-toc {
     font-size: 13px;
     line-height: 1.5;
-    color: #374151;
+    color: #4b5563;
     z-index: 10;
 }
 
@@ -606,28 +546,20 @@ layout: default
 }
 
 .article-toc details {
-    display: block;
     width: 100%;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    min-width: 0;
 }
 
 .article-toc summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 13px 14px;
-    font-weight: 700;
+    gap: 10px;
+    padding: 0 0 12px;
     font-size: 13px;
-    color: #222222;
-    cursor: pointer;
+    font-weight: 700;
+    color: #222;
     list-style: none;
-    background: #ffffff;
-    user-select: none;
 }
 
 .article-toc summary::-webkit-details-marker {
@@ -638,48 +570,34 @@ layout: default
     content: "";
 }
 
-.article-toc summary:hover {
-    background: #f8f9fa;
-}
-
-.article-toc summary:focus-visible {
-    outline: 2px solid #222222;
-    outline-offset: -3px;
-}
-
 .toc-summary-title {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 8px;
 }
 
 .toc-list-icon {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     flex: none;
 }
 
 .toc-toggle-icon {
     width: 8px;
     height: 8px;
-    margin-right: 3px;
     flex: none;
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
     transform: rotate(45deg);
-    transition: transform 0.2s ease;
+    transition: transform .2s ease;
 }
 
 .article-toc details[open] .toc-toggle-icon {
     transform: rotate(225deg);
 }
 
-/* Scroll only the list, never the panel heading */
 .article-toc .toc-links {
-    max-height: calc(100vh - 175px);
-    min-height: 0;
-    padding: 8px 0;
-    border-top: 1px solid #e5e7eb;
+    min-width: 0;
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
@@ -689,65 +607,124 @@ layout: default
 
 .article-toc .toc-link {
     display: block;
-    padding: 8px 12px;
-    border-left: 3px solid transparent;
-    color: #4b5563;
+    padding: 7px 10px 7px 13px;
+    border-left: 2px solid #e5e7eb;
+    color: #64748b;
     font-size: 13px;
-    line-height: 1.45;
     font-weight: 400;
+    line-height: 1.5;
     text-decoration: none;
     overflow-wrap: anywhere;
-    transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease;
+    transition: color .15s ease, border-color .15s ease;
 }
 
 .article-toc .toc-link.toc-h3 {
-    padding-left: 25px;
+    padding-left: 27px;
     font-size: 12px;
-    color: #6b7280;
 }
 
 .article-toc .toc-link:hover,
 .article-toc .toc-link:focus-visible {
-    color: #111111;
-    background: #f3f4f6;
+    color: #111;
     text-decoration: none;
+    border-left-color: #6b7280;
 }
 
-/* Highlight the current section */
+/* Active heading */
 .article-toc .toc-link.toc-active,
 .article-toc .toc-link.toc-h3.toc-active {
-    color: #111111;
-    background: #f1f3f5;
-    border-left-color: #222222;
+    color: #111;
     font-weight: 700;
+    border-left-color: #222;
 }
 
-/* Space above heading after clicking TOC link */
+/* Parent H2 remains identifiable while H3 is active */
+.article-toc .toc-link.toc-parent-active {
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Anchor offset */
 .article-post h2[id],
 .article-post h3[id] {
     scroll-margin-top: 110px;
 }
 
+
+/* =====================================================
+   DESKTOP TOC
+===================================================== */
+
 @media (min-width: 1200px) {
-    .article-toc details {
+
+    .article-toc {
         max-height: calc(100vh - 110px);
     }
 
+    .article-toc details {
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - 110px);
+    }
+
+    /* Always show navigation on desktop */
+    .article-toc summary {
+        flex-shrink: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .article-toc .toc-toggle-icon {
+        display: none;
+    }
+
     .article-toc .toc-links {
-        max-height: calc(100vh - 170px);
+        display: block !important;
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: calc(100vh - 155px);
+        padding: 0;
     }
 }
 
+
+/* =====================================================
+   MOBILE TOC
+===================================================== */
+
 @media (max-width: 1199.98px) {
+
     .article-toc details {
-        max-height: none;
+        display: block;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .article-toc summary {
+        padding: 13px 14px;
+        cursor: pointer;
+    }
+
+    .article-toc summary:hover {
+        background: #f8f9fa;
+    }
+
+    .article-toc summary:focus-visible {
+        outline: 2px solid #222;
+        outline-offset: -3px;
     }
 
     .article-toc .toc-links {
         max-height: 320px;
+        padding: 8px 0;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .article-toc .toc-link {
+        margin-left: 12px;
+        margin-right: 12px;
     }
 }
 
@@ -772,9 +749,9 @@ layout: default
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
-    color: #222222;
-    border: 5px solid #222222;
+    background: #fff;
+    color: #222;
+    border: 5px solid #222;
     border-radius: 50%;
     padding: 0;
     cursor: pointer;
@@ -784,10 +761,10 @@ layout: default
     pointer-events: none;
     transform: translateY(12px);
     transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease,
-        transform 0.3s ease,
-        background-color 0.3s ease;
+        opacity .3s ease,
+        visibility .3s ease,
+        transform .3s ease,
+        background-color .3s ease;
 }
 
 .back-to-top.is-visible {
@@ -809,7 +786,7 @@ layout: default
 }
 
 .back-to-top:focus-visible {
-    outline: 3px solid #777777;
+    outline: 3px solid #777;
     outline-offset: 3px;
 }
 
@@ -886,9 +863,7 @@ layout: default
 
 
         <!-- =================================================
-             TABLE OF CONTENTS
-             Desktop: Right
-             Mobile: Above article
+             DOCUMENTATION-STYLE TABLE OF CONTENTS
         ================================================= -->
 
         <nav
@@ -951,9 +926,7 @@ layout: default
         <div class="post-article-column">
 
             <article class="article-post" data-pagefind-body>
-
                 {{ content }}
-
             </article>
 
 
@@ -1036,10 +1009,8 @@ layout: default
             ================================================= -->
 
             {% if site.feedburner-list %}
-
                 {% assign home = false %}
                 {% include newsletter.html %}
-
             {% endif %}
 
 
@@ -1054,13 +1025,11 @@ layout: default
                 <div class="col-md-2 align-self-center">
 
                     {% if author.avatar %}
-
                     <img
                         class="rounded-circle"
                         src="{{ author.avatar | relative_url }}"
                         alt="{{ author.name | escape }}"
                         width="90">
-
                     {% endif %}
 
                 </div>
@@ -1072,21 +1041,15 @@ layout: default
                         Written by {{ author.name }}
 
                         {% if author.site %}
-
                         <span>
-
                             <a
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href="{{ author.site }}"
                                 class="btn btn-outline-success btn-sm btn-round ml-2">
-
                                 Follow
-
                             </a>
-
                         </span>
-
                         {% endif %}
 
                     </h5>
@@ -1105,9 +1068,7 @@ layout: default
             ================================================= -->
 
             {% if page.comments != false %}
-
                 {% include comments.html %}
-
             {% endif %}
 
         </div>
@@ -1237,7 +1198,6 @@ layout: default
 
     function initialiseBackToTop() {
         const button = document.getElementById("back-to-top");
-
         if (!button) return;
 
         function updateVisibility() {
@@ -1280,12 +1240,15 @@ layout: default
 
 
 <!-- =====================================================
-     OWASP-STYLE TABLE OF CONTENTS JAVASCRIPT
+     DOCUMENTATION-STYLE TOC JAVASCRIPT
 
-     Automatic H2/H3 detection
-     Scroll-based active heading
-     Independent TOC list scrolling
-     Collapsed by default
+     - Automatic H2/H3 detection
+     - Desktop always expanded
+     - Mobile collapsed
+     - Current section highlighting
+     - Parent H2 highlighting
+     - Independent list scrolling
+     - Smooth heading navigation
 ===================================================== -->
 
 <script>
@@ -1296,12 +1259,10 @@ layout: default
 
         const article = document.querySelector(".article-post");
         const toc = document.getElementById("article-toc");
-        const linksContainer = document.getElementById("article-toc-links");
         const details = document.getElementById("article-toc-details");
+        const list = document.getElementById("article-toc-links");
 
-        if (!article || !toc || !linksContainer || !details) {
-            return;
-        }
+        if (!article || !toc || !details || !list) return;
 
         const headings = Array.from(
             article.querySelectorAll("h2, h3")
@@ -1309,11 +1270,8 @@ layout: default
             return heading.textContent.trim().length > 0;
         });
 
-        if (headings.length === 0) {
-            return;
-        }
+        if (!headings.length) return;
 
-        /* Existing IDs must not be overwritten */
         const usedIds = new Set(
             Array.from(document.querySelectorAll("[id]"))
                 .map(function (element) {
@@ -1322,6 +1280,11 @@ layout: default
         );
 
         const sections = [];
+        let currentParent = null;
+
+        /* =================================================
+           BUILD NAVIGATION
+        ================================================= */
 
         headings.forEach(function (heading, index) {
 
@@ -1349,6 +1312,10 @@ layout: default
                 usedIds.add(candidate);
             }
 
+            if (heading.tagName === "H2") {
+                currentParent = heading;
+            }
+
             const link = document.createElement("a");
 
             link.className =
@@ -1358,113 +1325,147 @@ layout: default
             link.href = "#" + encodeURIComponent(heading.id);
             link.textContent = heading.textContent.trim();
 
-            linksContainer.appendChild(link);
+            list.appendChild(link);
 
             sections.push({
                 heading: heading,
-                link: link
+                link: link,
+                parent: heading.tagName === "H3"
+                    ? currentParent
+                    : null
             });
-
         });
 
         toc.hidden = false;
-        details.open = false;
-
-        let activeHeading = null;
-        let scheduled = false;
-        let navigating = false;
-        let navigationTimeout = null;
 
         /* =================================================
-           KEEP THE ACTIVE LINK INSIDE THE VISIBLE TOC
+           RESPONSIVE EXPANSION
         ================================================= */
 
-        function keepActiveLinkVisible(link) {
+        const desktopQuery = window.matchMedia(
+            "(min-width: 1200px)"
+        );
 
-            if (!details.open || !link) return;
-
-            const containerRect =
-                linksContainer.getBoundingClientRect();
-
-            const linkRect =
-                link.getBoundingClientRect();
-
-            const padding = 25;
-
-            if (linkRect.top < containerRect.top + padding) {
-
-                linksContainer.scrollTop +=
-                    linkRect.top -
-                    containerRect.top -
-                    padding;
-
-            } else if (
-                linkRect.bottom >
-                containerRect.bottom - padding
-            ) {
-
-                linksContainer.scrollTop +=
-                    linkRect.bottom -
-                    containerRect.bottom +
-                    padding;
+        function updateResponsiveToc() {
+            if (desktopQuery.matches) {
+                details.open = true;
+            } else {
+                details.open = false;
             }
         }
 
+        updateResponsiveToc();
+
+        if (desktopQuery.addEventListener) {
+            desktopQuery.addEventListener(
+                "change",
+                updateResponsiveToc
+            );
+        } else {
+            desktopQuery.addListener(updateResponsiveToc);
+        }
+
+        let activeSection = null;
+        let frameRequested = false;
+        let navigating = false;
+        let navigationTimer = null;
 
         /* =================================================
-           SET ACTIVE HEADING
+           KEEP ACTIVE LINK VISIBLE
         ================================================= */
 
-        function setActiveSection(heading) {
+        function keepLinkVisible(link) {
 
-            if (activeHeading === heading) return;
+            if (!details.open || !link) return;
 
-            activeHeading = heading;
+            const container = list.getBoundingClientRect();
+            const target = link.getBoundingClientRect();
+            const padding = 24;
 
-            sections.forEach(function (section) {
+            if (target.top < container.top + padding) {
 
-                const selected =
-                    section.heading === heading;
+                list.scrollTop +=
+                    target.top - container.top - padding;
 
-                section.link.classList.toggle(
+            } else if (
+                target.bottom > container.bottom - padding
+            ) {
+
+                list.scrollTop +=
+                    target.bottom - container.bottom + padding;
+            }
+        }
+
+        /* =================================================
+           HIGHLIGHT ACTIVE AND PARENT HEADINGS
+        ================================================= */
+
+        function setActive(section) {
+
+            if (!section) return;
+
+            const changed = activeSection !== section;
+            activeSection = section;
+
+            sections.forEach(function (item) {
+
+                const isActive = item === section;
+
+                const isParent =
+                    section.parent !== null &&
+                    item.heading === section.parent;
+
+                item.link.classList.toggle(
                     "toc-active",
-                    selected
+                    isActive
                 );
 
-                if (selected) {
+                item.link.classList.toggle(
+                    "toc-parent-active",
+                    isParent && !isActive
+                );
 
-                    section.link.setAttribute(
+                if (isActive) {
+                    item.link.setAttribute(
                         "aria-current",
                         "location"
                     );
-
-                    keepActiveLinkVisible(section.link);
-
                 } else {
-
-                    section.link.removeAttribute(
-                        "aria-current"
-                    );
+                    item.link.removeAttribute("aria-current");
                 }
-
             });
+
+            if (changed) {
+                keepLinkVisible(section.link);
+            }
         }
 
-
         /* =================================================
-           FIND THE CURRENT SECTION
+           DETECT CURRENT HEADING
         ================================================= */
 
-        function updateActiveSection() {
+        function updateActive() {
 
-            scheduled = false;
+            frameRequested = false;
 
             if (navigating) return;
 
             const threshold = 125;
             let active = sections[0];
 
-            /* Last heading should be active at article end */
+            for (const section of sections) {
+
+                const top = section.heading
+                    .getBoundingClientRect().top;
+
+                if (top <= threshold) {
+                    active = section;
+                } else {
+                    break;
+                }
+            }
+
+            /* Select last heading near article end */
             const articleBottom =
                 article.getBoundingClientRect().bottom;
 
@@ -1472,43 +1473,23 @@ layout: default
                 articleBottom <=
                 window.innerHeight - 20
             ) {
-
                 active = sections[sections.length - 1];
-
-            } else {
-
-                for (const section of sections) {
-
-                    if (
-                        section.heading
-                            .getBoundingClientRect()
-                            .top <= threshold
-                    ) {
-                        active = section;
-                    } else {
-                        break;
-                    }
-                }
             }
 
-            setActiveSection(active.heading);
+            setActive(active);
         }
-
 
         function requestUpdate() {
 
-            if (scheduled) return;
+            if (frameRequested) return;
 
-            scheduled = true;
+            frameRequested = true;
 
-            window.requestAnimationFrame(
-                updateActiveSection
-            );
+            window.requestAnimationFrame(updateActive);
         }
 
-
         /* =================================================
-           CLICK TO NAVIGATE
+           LINK NAVIGATION
         ================================================= */
 
         sections.forEach(function (section) {
@@ -1519,20 +1500,17 @@ layout: default
 
                     event.preventDefault();
 
-                    const reducedMotion =
-                        window.matchMedia(
-                            "(prefers-reduced-motion: reduce)"
-                        ).matches;
+                    const reducedMotion = window.matchMedia(
+                        "(prefers-reduced-motion: reduce)"
+                    ).matches;
 
                     navigating = true;
 
-                    if (navigationTimeout) {
-                        window.clearTimeout(
-                            navigationTimeout
-                        );
+                    if (navigationTimer) {
+                        window.clearTimeout(navigationTimer);
                     }
 
-                    setActiveSection(section.heading);
+                    setActive(section);
 
                     section.heading.scrollIntoView({
                         behavior: reducedMotion
@@ -1549,33 +1527,24 @@ layout: default
                         )
                     );
 
-                    /* Mobile: close after choosing */
-                    if (
-                        window.matchMedia(
-                            "(max-width: 1199.98px)"
-                        ).matches
-                    ) {
+                    /* Close only on smaller screens */
+                    if (!desktopQuery.matches) {
                         details.open = false;
                     }
 
-                    navigationTimeout =
-                        window.setTimeout(
-                            function () {
-
-                                navigating = false;
-                                requestUpdate();
-
-                            },
-                            reducedMotion ? 0 : 850
-                        );
+                    navigationTimer = window.setTimeout(
+                        function () {
+                            navigating = false;
+                            requestUpdate();
+                        },
+                        reducedMotion ? 0 : 850
+                    );
                 }
             );
-
         });
 
-
         /* =================================================
-           SCROLL AND RESIZE LISTENERS
+           SCROLL TRACKING
         ================================================= */
 
         window.addEventListener(
@@ -1594,62 +1563,34 @@ layout: default
             requestUpdate
         );
 
-
         /* =================================================
-           WHEN TOC OPENS, SHOW THE ACTIVE LINK
+           WHEN MOBILE TOC OPENS
         ================================================= */
 
-        details.addEventListener(
-            "toggle",
-            function () {
+        details.addEventListener("toggle", function () {
 
-                if (!details.open) return;
+            if (!details.open) return;
 
-                window.requestAnimationFrame(
-                    function () {
+            window.requestAnimationFrame(function () {
 
-                        if (!activeHeading) {
-                            updateActiveSection();
-                        }
+                if (activeSection) {
+                    keepLinkVisible(activeSection.link);
+                } else {
+                    requestUpdate();
+                }
+            });
+        });
 
-                        const active = sections.find(
-                            function (section) {
-                                return section.heading ===
-                                    activeHeading;
-                            }
-                        );
-
-                        if (active) {
-                            keepActiveLinkVisible(
-                                active.link
-                            );
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* Initial selection */
         requestUpdate();
-
     }
 
-
     if (document.readyState === "loading") {
-
         document.addEventListener(
             "DOMContentLoaded",
             initialiseArticleToc
         );
-
     } else {
-
         initialiseArticleToc();
-
     }
-
 })();
 </script>
