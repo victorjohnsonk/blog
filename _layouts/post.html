@@ -681,6 +681,137 @@ layout: default
 }
 
 
+/* =====================================================
+   COLLAPSIBLE ARTICLE TABLE OF CONTENTS
+   ===================================================== */
+
+.article-toc {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #374151;
+    z-index: 50;
+}
+
+.article-toc details {
+    background: #fff;
+    border: 1px solid #dce1e7;
+    border-radius: 9px;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, .07);
+    overflow: hidden;
+}
+
+.article-toc summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    list-style: none;
+    user-select: none;
+}
+
+.article-toc summary::-webkit-details-marker {
+    display: none;
+}
+
+.article-toc summary::marker {
+    content: '';
+}
+
+.article-toc .toc-toggle-icon {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform .2s ease;
+    flex: none;
+    margin-right: 3px;
+}
+
+.article-toc details[open] .toc-toggle-icon {
+    transform: rotate(225deg);
+}
+
+.article-toc .toc-links {
+    border-top: 1px solid #e5e7eb;
+    padding: 8px 0;
+    max-height: min(65vh, 520px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.article-toc .toc-link {
+    display: block;
+    padding: 7px 12px;
+    border-left: 3px solid transparent;
+    color: #5b6472;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    font-weight: 400;
+}
+
+.article-toc .toc-link:hover,
+.article-toc .toc-link:focus-visible {
+    color: #111;
+    background: #f5f6f8;
+    text-decoration: none;
+}
+
+.article-toc .toc-link.is-active {
+    color: #111;
+    background: #f3f4f6;
+    border-left-color: #222;
+    font-weight: 700;
+}
+
+.article-toc .toc-link.toc-h3 {
+    padding-left: 25px;
+    font-size: 12px;
+}
+
+.article-post h2[id],
+.article-post h3[id] {
+    scroll-margin-top: 100px;
+}
+
+/* Desktop: floating on right */
+@media (min-width: 992px) {
+    .article-toc {
+        position: fixed;
+        top: 115px;
+        right: 16px;
+        width: 170px;
+    }
+
+    .article-toc:has(details[open]) {
+        width: 225px;
+    }
+}
+
+/* Tablet and mobile: above article */
+@media (max-width: 991.98px) {
+    .article-toc {
+        position: static;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .article-toc .toc-links {
+        max-height: 320px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .article-toc .toc-toggle-icon {
+        transition: none;
+    }
+}
+
 </style>
 
 
@@ -739,6 +870,38 @@ layout: default
         ================================================= -->
 
         <div class="post-article-column {% if page.image %}col-12{% else %}col-12 col-md-8{% endif %}">
+
+             
+<!-- =====================================================
+     AUTOMATIC TABLE OF CONTENTS
+     Collapsed by default
+===================================================== -->
+
+<nav
+    class="article-toc"
+    id="article-toc"
+    aria-label="Table of contents"
+    hidden>
+
+    <details id="article-toc-details">
+
+        <summary>
+            On this page
+            <span
+                class="toc-toggle-icon"
+                aria-hidden="true">
+            </span>
+        </summary>
+
+        <div
+            class="toc-links"
+            id="article-toc-links">
+        </div>
+
+    </details>
+
+</nav>
+
 
             <!-- Indexed Article Content -->
             <article class="article-post" data-pagefind-body>
@@ -1062,4 +1225,211 @@ layout: default
         initialiseBackToTop();
     }
 })();
+
+     
 </script>
+
+
+<!-- =====================================================
+     AUTOMATIC TABLE OF CONTENTS AND ACTIVE SECTION
+===================================================== -->
+<script>
+(function () {
+    "use strict";
+
+    function initialiseArticleToc() {
+        const article = document.querySelector(".article-post");
+        const toc = document.getElementById("article-toc");
+        const linksContainer = document.getElementById("article-toc-links");
+        const details = document.getElementById("article-toc-details");
+
+        if (!article || !toc || !linksContainer || !details) return;
+
+        const headings = Array.from(
+            article.querySelectorAll("h2, h3")
+        ).filter(heading => heading.textContent.trim().length > 0);
+
+        if (!headings.length) return;
+
+        const usedIds = new Set(
+            Array.from(document.querySelectorAll("[id]"))
+                .map(element => element.id)
+        );
+
+        const entries = [];
+
+        headings.forEach((heading, index) => {
+            if (!heading.id) {
+                const base = heading.textContent
+                    .trim()
+                    .toLowerCase()
+                    .normalize("NFKD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[^a-z0-9\s-]/g, "")
+                    .trim()
+                    .replace(/\s+/g, "-") || "section-" + (index + 1);
+
+                let candidate = base;
+                let suffix = 2;
+
+                while (usedIds.has(candidate)) {
+                    candidate = base + "-" + suffix++;
+                }
+
+                heading.id = candidate;
+                usedIds.add(candidate);
+            }
+
+            const link = document.createElement("a");
+
+            link.className =
+                "toc-link" +
+                (heading.tagName === "H3" ? " toc-h3" : "");
+
+            link.href = "#" + encodeURIComponent(heading.id);
+            link.textContent = heading.textContent.trim();
+
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const reducedMotion = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+
+                heading.scrollIntoView({
+                    behavior: reducedMotion ? "auto" : "smooth",
+                    block: "start"
+                });
+
+                history.replaceState(
+                    null,
+                    "",
+                    "#" + encodeURIComponent(heading.id)
+                );
+
+                setActive(heading);
+
+                if (
+                    window.matchMedia(
+                        "(max-width: 991.98px)"
+                    ).matches
+                ) {
+                    details.open = false;
+                }
+            });
+
+            linksContainer.appendChild(link);
+            entries.push({ heading, link });
+        });
+
+        toc.hidden = false;
+
+        let activeHeading = null;
+
+        function setActive(heading) {
+            if (heading === activeHeading) return;
+
+            activeHeading = heading;
+
+            entries.forEach(entry => {
+                const active = entry.heading === heading;
+
+                entry.link.classList.toggle(
+                    "is-active",
+                    active
+                );
+
+                if (active) {
+                    entry.link.setAttribute(
+                        "aria-current",
+                        "location"
+                    );
+                } else {
+                    entry.link.removeAttribute("aria-current");
+                }
+            });
+
+            if (details.open) {
+                const selected = entries.find(
+                    entry => entry.heading === heading
+                );
+
+                if (selected) {
+                    const box =
+                        linksContainer.getBoundingClientRect();
+
+                    const item =
+                        selected.link.getBoundingClientRect();
+
+                    if (
+                        item.top < box.top ||
+                        item.bottom > box.bottom
+                    ) {
+                        linksContainer.scrollTop +=
+                            item.top -
+                            box.top -
+                            box.height / 2;
+                    }
+                }
+            }
+        }
+
+        let scheduled = false;
+
+        function updateActive() {
+            scheduled = false;
+
+            const cutoff = 155;
+            let current = headings[0];
+
+            for (const heading of headings) {
+                if (
+                    heading.getBoundingClientRect().top <= cutoff
+                ) {
+                    current = heading;
+                } else {
+                    break;
+                }
+            }
+
+            setActive(current);
+        }
+
+        function requestUpdate() {
+            if (!scheduled) {
+                scheduled = true;
+
+                window.requestAnimationFrame(updateActive);
+            }
+        }
+
+        window.addEventListener(
+            "scroll",
+            requestUpdate,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            requestUpdate
+        );
+
+        details.addEventListener(
+            "toggle",
+            requestUpdate
+        );
+
+        requestUpdate();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialiseArticleToc
+        );
+    } else {
+        initialiseArticleToc();
+    }
+})();
+</script>
+
