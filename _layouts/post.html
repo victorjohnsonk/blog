@@ -11,7 +11,6 @@ layout: default
 <div class="container">
   <div class="jumbotron jumbotron-fluid mb-3 pl-0 pt-0 pb-0 bg-white position-relative">
     <div class="h-100 tofront">
-
       <div class="row {% if page.image %}justify-content-between{% else %}justify-content-center{% endif %}">
 
         <div class="{% if page.image %}col-md-6{% else %}col-md-8{% endif %} pr-0 pr-md-4 pt-4 pb-4 align-self-center">
@@ -19,19 +18,13 @@ layout: default
           {% if page.categories.size > 0 %}
           <p class="text-uppercase font-weight-bold">
             <span class="catlist">
-
               {% for category in page.categories %}
                 {% assign category_url = category | slugify | prepend: '/categories/' | append: '/' | relative_url %}
-
                 <a class="sscroll text-danger" href="{{ category_url }}">
                   {{ category | replace: '-', ' ' }}
                 </a>
-
-                {% unless forloop.last %}
-                  <span class="sep">. </span>
-                {% endunless %}
+                {% unless forloop.last %}<span class="sep">. </span>{% endunless %}
               {% endfor %}
-
             </span>
           </p>
           {% endif %}
@@ -41,7 +34,6 @@ layout: default
           </h1>
 
           <div class="d-flex align-items-center">
-
             {% if author.avatar %}
             <img
               class="rounded-circle"
@@ -51,7 +43,6 @@ layout: default
             {% endif %}
 
             <small class="ml-3">
-
               {{ author.name }}
 
               {% if author.site %}
@@ -68,24 +59,18 @@ layout: default
 
               <span class="text-muted d-block mt-1">
                 Published: {{ page.date | date: '%b %d, %Y' }}
-
                 {% if page.last_modified_at %}
-                  · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
+                · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
                 {% endif %}
-
                 · {% include meta-read-time.html %}
               </span>
-
             </small>
-
           </div>
 
         </div>
 
         {% if page.image %}
-
         <div class="col-md-6 pr-0 align-self-center">
-
           {% if page.image contains "://" %}
             {% assign featured_image = page.image %}
           {% else %}
@@ -100,30 +85,24 @@ layout: default
           {% if page.title-image %}
           <small>
             <span class="text-muted d-block mt-1">
-
               {{ page.title-image }}
-
               {% if page.title-image-source %}
-                - Source: {{ page.title-image-source }}
+              - Source: {{ page.title-image-source }}
               {% endif %}
-
             </span>
           </small>
           {% endif %}
-
         </div>
-
         {% endif %}
 
       </div>
-
     </div>
   </div>
 </div>
 
 
 <!-- =====================================================
-     ARTICLE STYLES
+     STYLES
 ===================================================== -->
 
 <style>
@@ -151,24 +130,21 @@ layout: default
   font-size: 25px;
   line-height: 1.35;
   font-weight: 700;
-  margin-top: 2.2rem;
-  margin-bottom: 1rem;
+  margin: 2.2rem 0 1rem;
 }
 
 .article-post h3 {
   font-size: 20px;
   line-height: 1.4;
   font-weight: 700;
-  margin-top: 1.8rem;
-  margin-bottom: .85rem;
+  margin: 1.8rem 0 .85rem;
 }
 
 .article-post h4 {
   font-size: 18px;
   line-height: 1.45;
   font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: .75rem;
+  margin: 1.5rem 0 .75rem;
 }
 
 .article-post ul,
@@ -205,6 +181,8 @@ layout: default
   max-width: 100%;
   height: auto;
 }
+
+/* Drop cap */
 
 .article-post > p:first-of-type::first-letter {
   float: left;
@@ -419,9 +397,8 @@ layout: default
 /* =====================================================
    MAIN LAYOUT
 
-   IMPORTANT:
-   The article column is never reduced to
-   accommodate the share or TOC sidebars.
+   Article width is never reduced by the
+   left share bar or right TOC.
 ===================================================== */
 
 .article-body-container,
@@ -439,86 +416,67 @@ layout: default
 }
 
 /*
-   Wide desktop:
-   Article remains full container width.
-   Share and TOC move into outside margins.
+  The default layout is compact.
+
+  JavaScript enables the wide layout only
+  when BOTH sidebars physically fit.
 */
 
-@media (min-width: 1500px) {
+.post-content-layout {
+  display: flex;
+  flex-direction: column;
+  margin-left: -15px;
+  margin-right: -15px;
+}
 
-  .post-content-layout {
-    display: block;
-    position: relative;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
+.post-article-column {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0 15px;
+}
 
-  .post-article-column {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    min-width: 0;
-  }
+/* =====================================================
+   SHARE BAR - COMPACT DEFAULT
+===================================================== */
 
-  /*
-     SHARE SIDEBAR
+.post-share-sidebar {
+  position: static;
+  width: 100%;
+  height: auto;
+  margin: 0 0 12px;
+  padding: 0 15px;
+}
 
-     Moved to the left page margin,
-     outside the article text and title.
-  */
+.post-share-sidebar .sticky-top {
+  position: static !important;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  text-align: left !important;
+}
 
-  .post-share-sidebar {
-    position: absolute;
-    top: 0;
-    right: calc(100% + 25px);
-    width: 65px;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    z-index: 10;
-  }
+.post-share-sidebar .share-label {
+  display: inline-block;
+  margin: 0;
+  font-size: 13px;
+}
 
-  .post-share-sidebar .sticky-top {
-    position: sticky;
-    top: 100px;
-    text-align: center !important;
-  }
+.post-share-sidebar .share {
+  display: inline-flex !important;
+  align-items: center;
+}
 
-  .post-share-sidebar .a2a_kit {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
+.post-share-sidebar .a2a_kit {
+  display: inline-flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
 
-  .post-share-sidebar .a2a_kit a {
-    float: none !important;
-  }
-
-  .post-share-sidebar .share-label {
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  /*
-     RIGHT TABLE OF CONTENTS
-
-     The sidebar is outside the article.
-     The 45px gap separates it from the
-     main article container.
-  */
-
-  .article-toc {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 45px);
-    width: 205px;
-    height: 100%;
-    margin: 0;
-    z-index: 10;
-  }
+.post-share-sidebar .a2a_kit a {
+  float: none !important;
 }
 
 
@@ -634,14 +592,148 @@ layout: default
 
 
 /* =====================================================
-   WIDE DESKTOP STICKY TOC
+   COMPACT TOC
 
-   Top spacing: 90px
-   Bottom spacing: 30px
+   Used on phones, tablets, smaller desktops,
+   and any screen without enough side space.
 ===================================================== */
 
-@media (min-width: 1500px) {
+.article-toc {
+  position: static;
+  width: calc(100% - 30px);
+  height: auto;
+  margin: 0 15px 20px;
+}
 
+.article-toc details {
+  display: block;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.article-toc summary {
+  padding: 13px 14px;
+  cursor: pointer;
+}
+
+.article-toc summary:hover {
+  background: #f8f9fa;
+}
+
+.article-toc summary:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: -3px;
+}
+
+.article-toc .toc-links {
+  max-height: 320px;
+  padding: 8px 0 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.article-toc .toc-link {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+
+/* =====================================================
+   WIDE LAYOUT
+
+   Enabled by .post-wide-sidebars on the
+   article container after measuring the
+   available viewport space.
+===================================================== */
+
+@media (min-width: 1200px) {
+
+  .article-body-container.post-wide-sidebars
+  .post-content-layout {
+    display: block;
+    position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .article-body-container.post-wide-sidebars
+  .post-article-column {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /*
+    LEFT SHARE BAR
+
+    The original left-side placement is kept.
+  */
+
+  .article-body-container.post-wide-sidebars
+  .post-share-sidebar {
+    position: absolute;
+    top: 0;
+    right: calc(100% + 22px);
+    width: 65px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .article-body-container.post-wide-sidebars
+  .post-share-sidebar .sticky-top {
+    position: sticky !important;
+    top: 100px;
+    display: block;
+    text-align: center !important;
+  }
+
+  .article-body-container.post-wide-sidebars
+  .post-share-sidebar .share-label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .article-body-container.post-wide-sidebars
+  .post-share-sidebar .share {
+    display: block !important;
+  }
+
+  .article-body-container.post-wide-sidebars
+  .post-share-sidebar .a2a_kit {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /*
+    RIGHT TOC
+
+    --toc-width is calculated by JavaScript
+    from the actual available right margin.
+
+    This prevents it from extending beyond
+    the browser's visible area.
+  */
+
+  .article-body-container.post-wide-sidebars
+  .article-toc {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 18px);
+    width: var(--toc-width, 200px);
+    max-width: var(--toc-width, 200px);
+    height: 100%;
+    margin: 0;
+    z-index: 10;
+  }
+
+  .article-body-container.post-wide-sidebars
   .article-toc details {
     position: sticky;
     top: 90px;
@@ -655,6 +747,7 @@ layout: default
     border-radius: 0;
   }
 
+  .article-body-container.post-wide-sidebars
   .article-toc summary {
     position: relative;
     display: flex;
@@ -664,10 +757,12 @@ layout: default
     pointer-events: none;
   }
 
-  .article-toc .toc-toggle-icon {
+  .article-body-container.post-wide-sidebars
+  .toc-toggle-icon {
     display: none;
   }
 
+  .article-body-container.post-wide-sidebars
   .article-toc .toc-links {
     display: block;
     max-height: calc(100vh - 175px);
@@ -676,25 +771,40 @@ layout: default
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0 0 28px;
+    border-top: 0;
     scroll-padding-top: 16px;
     scroll-padding-bottom: 28px;
     overscroll-behavior: contain;
   }
+
+  .article-body-container.post-wide-sidebars
+  .article-toc .toc-link {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
-@media (min-width: 1500px) and (max-height: 650px) {
 
+/* =====================================================
+   SHORT DESKTOP SCREENS
+===================================================== */
+
+@media (min-width: 1200px) and (max-height: 650px) {
+
+  .article-body-container.post-wide-sidebars
   .article-toc details {
     top: 20px;
     max-height: calc(100vh - 50px);
     max-height: calc(100dvh - 50px);
   }
 
+  .article-body-container.post-wide-sidebars
   .article-toc .toc-links {
     max-height: calc(100vh - 105px);
     max-height: calc(100dvh - 105px);
   }
 
+  .article-body-container.post-wide-sidebars
   .post-share-sidebar .sticky-top {
     top: 30px;
   }
@@ -702,108 +812,8 @@ layout: default
 
 
 /* =====================================================
-   SMALL DESKTOP / TABLET / MOBILE
-
-   Share and TOC appear above the article.
-   Article remains full width.
+   MOBILE ADJUSTMENTS
 ===================================================== */
-
-@media (max-width: 1499.98px) {
-
-  .post-content-layout {
-    display: flex;
-    flex-direction: column;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-
-  .post-share-sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    margin: 0 0 12px;
-    padding: 0 15px;
-  }
-
-  .post-share-sidebar .sticky-top {
-    position: static !important;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    text-align: left !important;
-  }
-
-  .post-share-sidebar .share-label {
-    display: inline-block;
-    margin: 0;
-    font-size: 13px;
-  }
-
-  .post-share-sidebar .share {
-    display: inline-flex !important;
-    align-items: center;
-  }
-
-  .post-share-sidebar .a2a_kit {
-    display: inline-flex !important;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .post-share-sidebar .a2a_kit a {
-    float: none !important;
-  }
-
-  .article-toc {
-    position: static;
-    width: calc(100% - 30px);
-    margin: 0 15px 20px;
-  }
-
-  .article-toc details {
-    display: block;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .article-toc summary {
-    padding: 13px 14px;
-    cursor: pointer;
-  }
-
-  .article-toc summary:hover {
-    background: #f8f9fa;
-  }
-
-  .article-toc summary:focus-visible {
-    outline: 2px solid #222;
-    outline-offset: -3px;
-  }
-
-  .article-toc .toc-links {
-    max-height: 320px;
-    padding: 8px 0 20px;
-    border-top: 1px solid #e5e7eb;
-  }
-
-  .article-toc .toc-link {
-    margin-left: 12px;
-    margin-right: 12px;
-  }
-
-  .post-article-column {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    padding: 0 15px;
-  }
-}
-
-/* Mobile spacing */
 
 @media (max-width: 575.98px) {
 
@@ -904,14 +914,13 @@ layout: default
      ARTICLE BODY
 ===================================================== -->
 
-<div class="container pt-4 pb-4 article-body-container">
+<div class="container pt-4 pb-4 article-body-container" id="article-body-container">
 
   <div class="row post-content-layout">
 
     <!-- SHARE SIDEBAR -->
 
     <aside class="post-share-sidebar" aria-label="Share this article">
-
       <div class="sticky-top sticky-top-offset text-center">
 
         <div class="text-muted share-label">
@@ -920,24 +929,16 @@ layout: default
 
         <div class="share d-inline-block">
 
-          <!-- AddToAny BEGIN -->
-
           <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-
             <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
             <a class="a2a_button_facebook"></a>
             <a class="a2a_button_twitter"></a>
-
           </div>
 
           <script async src="https://static.addtoany.com/menu/page.js"></script>
 
-          <!-- AddToAny END -->
-
         </div>
-
       </div>
-
     </aside>
 
 
@@ -952,7 +953,6 @@ layout: default
       <details id="article-toc-details">
 
         <summary>
-
           <span class="toc-summary-title">
 
             <svg
@@ -969,7 +969,6 @@ layout: default
               <line x1="8" y1="6" x2="21" y2="6"></line>
               <line x1="8" y1="12" x2="21" y2="12"></line>
               <line x1="8" y1="18" x2="21" y2="18"></line>
-
               <circle cx="3" cy="6" r="1"></circle>
               <circle cx="3" cy="12" r="1"></circle>
               <circle cx="3" cy="18" r="1"></circle>
@@ -977,20 +976,14 @@ layout: default
             </svg>
 
             On this page
-
           </span>
 
           <span class="toc-toggle-icon" aria-hidden="true"></span>
-
         </summary>
 
-        <div
-          class="toc-links"
-          id="article-toc-links">
-        </div>
+        <div class="toc-links" id="article-toc-links"></div>
 
       </details>
-
     </nav>
 
 
@@ -1013,9 +1006,7 @@ layout: default
 
         <div class="editorial-transparency-heading">
 
-          <span
-            class="editorial-transparency-icon"
-            aria-hidden="true">
+          <span class="editorial-transparency-icon" aria-hidden="true">
             &#10003;
           </span>
 
@@ -1045,13 +1036,9 @@ layout: default
       {% if page.tags.size > 0 %}
 
       <div class="mb-4">
-
-        <span class="font-weight-bold">
-          Tags:
-        </span>
+        <span class="font-weight-bold">Tags:</span>
 
         <span class="taglist">
-
           {% for tag in page.tags %}
 
             {% assign tag_url = tag | slugify | prepend: '/tags/' | append: '/' | relative_url %}
@@ -1059,15 +1046,11 @@ layout: default
             <a
               class="sscroll btn btn-light btn-sm font-weight-bold"
               href="{{ tag_url }}">
-
               {{ tag | upcase | replace: '-', ' ' }}
-
             </a>
 
           {% endfor %}
-
         </span>
-
       </div>
 
       {% endif %}
@@ -1088,29 +1071,22 @@ layout: default
       <div class="row mt-5">
 
         <div class="col-md-2 align-self-center">
-
           {% if author.avatar %}
-
           <img
             class="rounded-circle"
             src="{{ author.avatar | relative_url }}"
             alt="{{ author.name | escape }}"
             width="90">
-
           {% endif %}
-
         </div>
 
         <div class="col-md-10">
-
           <h5 class="font-weight-bold">
 
             Written by {{ author.name }}
 
             {% if author.site %}
-
             <span>
-
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1118,15 +1094,12 @@ layout: default
                 class="btn btn-outline-success btn-sm btn-round ml-2">
                 Follow
               </a>
-
             </span>
-
             {% endif %}
 
           </h5>
 
           {{ author.bio }}
-
         </div>
 
       </div>
@@ -1143,30 +1116,22 @@ layout: default
     </div>
 
   </div>
-
 </div>
 
 
 <!-- =====================================================
-     PREVIOUS / NEXT ARTICLES
+     PREVIOUS / NEXT
 ===================================================== -->
 
 <div class="alertbar">
-
   <div class="container">
-
     <div class="row prevnextlinks small font-weight-bold">
 
       {% if page.previous.url %}
-
       <div class="col-md-6 rightborder pl-0">
-
-        <a
-          class="text-dark"
-          href="{{ page.previous.url | relative_url }}">
+        <a class="text-dark" href="{{ page.previous.url | relative_url }}">
 
           {% if page.previous.image %}
-
             {% if page.previous.image contains "://" %}
               {% assign previous_image = page.previous.image %}
             {% else %}
@@ -1178,30 +1143,20 @@ layout: default
               class="mr-1"
               src="{{ previous_image }}"
               alt="">
-
           {% endif %}
 
           {{ page.previous.title | escape }}
-
         </a>
-
       </div>
-
       {% endif %}
 
-
       {% if page.next.url %}
-
       <div class="col-md-6 text-right pr-0">
-
-        <a
-          class="text-dark"
-          href="{{ page.next.url | relative_url }}">
+        <a class="text-dark" href="{{ page.next.url | relative_url }}">
 
           {{ page.next.title | escape }}
 
           {% if page.next.image %}
-
             {% if page.next.image contains "://" %}
               {% assign next_image = page.next.image %}
             {% else %}
@@ -1213,24 +1168,19 @@ layout: default
               class="ml-1"
               src="{{ next_image }}"
               alt="">
-
           {% endif %}
 
         </a>
-
       </div>
-
       {% endif %}
 
     </div>
-
   </div>
-
 </div>
 
 
 <!-- =====================================================
-     BACK TO TOP BUTTON
+     BACK TO TOP
 ===================================================== -->
 
 <button
@@ -1253,96 +1203,59 @@ layout: default
     <path d="M4 15 L12 7 L20 15"></path>
 
   </svg>
-
 </button>
 
 
 <!-- =====================================================
-     BACK TO TOP JAVASCRIPT
+     JAVASCRIPT
 ===================================================== -->
 
 <script>
 (function () {
   "use strict";
 
-  function initialiseBackToTop() {
+  function initialisePage() {
 
     const button = document.getElementById("back-to-top");
 
-    if (!button) return;
+    if (button) {
 
-    function updateVisibility() {
+      function updateBackToTop() {
+        button.classList.toggle(
+          "is-visible",
+          window.scrollY > 350
+        );
+      }
 
-      button.classList.toggle(
-        "is-visible",
-        window.scrollY > 350
+      window.addEventListener(
+        "scroll",
+        updateBackToTop,
+        { passive: true }
       );
 
+      updateBackToTop();
+
+      button.addEventListener("click", function () {
+
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        window.scrollTo({
+          top: 0,
+          behavior: reducedMotion ? "auto" : "smooth"
+        });
+
+      });
     }
 
-    window.addEventListener(
-      "scroll",
-      updateVisibility,
-      { passive: true }
-    );
-
-    updateVisibility();
-
-    button.addEventListener("click", function () {
-
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
-      window.scrollTo({
-        top: 0,
-        behavior: reducedMotion ? "auto" : "smooth"
-      });
-
-    });
-
-  }
-
-  if (document.readyState === "loading") {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initialiseBackToTop
-    );
-
-  } else {
-
-    initialiseBackToTop();
-
-  }
-
-})();
-</script>
-
-
-<!-- =====================================================
-     TABLE OF CONTENTS JAVASCRIPT
-
-     - Automatic H2 and H3 links
-     - Desktop always expanded
-     - Mobile/tablet collapsible
-     - No automatic scroll tracking
-     - No automatic TOC scrolling
-     - Highlight only clicked links
-===================================================== -->
-
-<script>
-(function () {
-  "use strict";
-
-  function initialiseArticleToc() {
-
     const article = document.querySelector(".article-post");
+    const container = document.getElementById("article-body-container");
     const toc = document.getElementById("article-toc");
     const details = document.getElementById("article-toc-details");
     const list = document.getElementById("article-toc-links");
 
-    if (!article || !toc || !details || !list) {
+    if (!article || !container || !toc || !details || !list) {
       return;
     }
 
@@ -1355,6 +1268,10 @@ layout: default
     if (!headings.length) {
       return;
     }
+
+    /*
+      Generate heading links.
+    */
 
     const usedIds = new Set(
       Array.from(document.querySelectorAll("[id]"))
@@ -1412,49 +1329,106 @@ layout: default
     toc.hidden = false;
 
     /*
-      Match the CSS desktop breakpoint.
+      Responsive sidebar sizing.
+
+      Measure the real container position,
+      not just the viewport width.
+
+      The right TOC gets:
+      - 18px gap from the article
+      - 30px gap from the browser edge
+      - width between 165px and 220px
+
+      If that cannot fit, use the compact TOC.
     */
 
-    const desktopQuery = window.matchMedia(
-      "(min-width: 1500px)"
-    );
+    function updateSidebarLayout() {
 
-    function updateResponsiveToc() {
+      const viewportWidth = document.documentElement.clientWidth;
+      const rect = container.getBoundingClientRect();
 
-      details.open = desktopQuery.matches;
+      const rightSpace = viewportWidth - rect.right;
+      const leftSpace = rect.left;
 
-    }
+      const rightGap = 18;
+      const rightEdgePadding = 30;
+      const leftRequiredSpace = 105;
 
-    updateResponsiveToc();
+      const availableTocWidth =
+        rightSpace - rightGap - rightEdgePadding;
 
-    if (desktopQuery.addEventListener) {
+      const canUseWideLayout =
+        viewportWidth >= 1200 &&
+        leftSpace >= leftRequiredSpace &&
+        availableTocWidth >= 165;
 
-      desktopQuery.addEventListener(
-        "change",
-        updateResponsiveToc
+      container.classList.toggle(
+        "post-wide-sidebars",
+        canUseWideLayout
       );
 
-    } else {
+      if (canUseWideLayout) {
 
-      desktopQuery.addListener(updateResponsiveToc);
+        const tocWidth = Math.min(
+          220,
+          Math.floor(availableTocWidth)
+        );
+
+        container.style.setProperty(
+          "--toc-width",
+          tocWidth + "px"
+        );
+
+        details.open = true;
+
+      } else {
+
+        container.style.removeProperty("--toc-width");
+        details.open = false;
+
+      }
 
     }
 
+    updateSidebarLayout();
+
     /*
-      Desktop TOC must stay expanded.
+      Recalculate on window resizing.
+    */
+
+    let resizeFrame = null;
+
+    window.addEventListener("resize", function () {
+
+      if (resizeFrame !== null) {
+        cancelAnimationFrame(resizeFrame);
+      }
+
+      resizeFrame = requestAnimationFrame(function () {
+        updateSidebarLayout();
+        resizeFrame = null;
+      });
+
+    }, { passive: true });
+
+    /*
+      Prevent desktop collapse.
     */
 
     details.addEventListener("toggle", function () {
 
-      if (desktopQuery.matches && !details.open) {
+      if (
+        container.classList.contains("post-wide-sidebars") &&
+        !details.open
+      ) {
         details.open = true;
       }
 
     });
 
     /*
-      Highlight only clicked links.
-      Article scrolling never changes selection.
+      Select only clicked TOC links.
+      No article scroll tracking.
     */
 
     function selectLink(selectedLink) {
@@ -1469,16 +1443,12 @@ layout: default
         );
 
         if (selected) {
-
           item.link.setAttribute(
             "aria-current",
             "location"
           );
-
         } else {
-
           item.link.removeAttribute("aria-current");
-
         }
 
       });
@@ -1486,8 +1456,8 @@ layout: default
     }
 
     /*
-      Clicking a link navigates to its heading.
-      The TOC list itself never auto-scrolls.
+      Navigate to a heading without moving
+      the TOC list automatically.
     */
 
     links.forEach(function (item) {
@@ -1513,11 +1483,7 @@ layout: default
           "#" + encodeURIComponent(item.heading.id)
         );
 
-        /*
-          Close only on smaller screens.
-        */
-
-        if (!desktopQuery.matches) {
+        if (!container.classList.contains("post-wide-sidebars")) {
           details.open = false;
         }
 
@@ -1528,16 +1494,12 @@ layout: default
   }
 
   if (document.readyState === "loading") {
-
     document.addEventListener(
       "DOMContentLoaded",
-      initialiseArticleToc
+      initialisePage
     );
-
   } else {
-
-    initialiseArticleToc();
-
+    initialisePage();
   }
 
 })();
