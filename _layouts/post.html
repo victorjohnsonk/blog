@@ -4,10 +4,14 @@ layout: default
 
 {% assign author = site.authors[page.author] %}
 
-<!-- ARTICLE HEADER -->
+<!-- ==================================================
+     ARTICLE HEADER
+================================================== -->
+
 <div class="container">
   <div class="jumbotron jumbotron-fluid mb-3 pl-0 pt-0 pb-0 bg-white position-relative">
     <div class="h-100 tofront">
+
       <div class="row {% if page.image %}justify-content-between{% else %}justify-content-center{% endif %}">
 
         <div class="{% if page.image %}col-md-6{% else %}col-md-8{% endif %} pr-0 pr-md-4 pt-4 pb-4 align-self-center">
@@ -17,8 +21,12 @@ layout: default
             <span class="catlist">
               {% for category in page.categories %}
                 {% assign category_url = category | slugify | prepend: '/categories/' | append: '/' | relative_url %}
-                <a class="sscroll text-danger" href="{{ category_url }}">{{ category | replace: '-', ' ' }}</a>
-                {% unless forloop.last %}<span class="sep">. </span>{% endunless %}
+                <a class="sscroll text-danger" href="{{ category_url }}">
+                  {{ category | replace: '-', ' ' }}
+                </a>
+                {% unless forloop.last %}
+                  <span class="sep">. </span>
+                {% endunless %}
               {% endfor %}
             </span>
           </p>
@@ -29,11 +37,13 @@ layout: default
           </h1>
 
           <div class="d-flex align-items-center">
+
             {% if author.avatar %}
-            <img class="rounded-circle"
-                 src="{{ author.avatar | relative_url }}"
-                 alt="{{ author.name | escape }}"
-                 width="70">
+            <img
+              class="rounded-circle"
+              src="{{ author.avatar | relative_url }}"
+              alt="{{ author.name | escape }}"
+              width="70">
             {% endif %}
 
             <small class="ml-3">
@@ -41,46 +51,56 @@ layout: default
 
               {% if author.site %}
               <span>
-                <a target="_blank"
-                   rel="noopener noreferrer"
-                   href="{{ author.site }}"
-                   class="btn btn-outline-success btn-sm btn-round ml-1">Follow</a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="{{ author.site }}"
+                  class="btn btn-outline-success btn-sm btn-round ml-1">
+                  Follow
+                </a>
               </span>
               {% endif %}
 
               <span class="text-muted d-block mt-1">
                 Published: {{ page.date | date: '%b %d, %Y' }}
+
                 {% if page.last_modified_at %}
                 · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
                 {% endif %}
+
                 · {% include meta-read-time.html %}
               </span>
             </small>
+
           </div>
         </div>
 
         {% if page.image %}
         <div class="col-md-6 pr-0 align-self-center">
+
           {% if page.image contains "://" %}
             {% assign featured_image = page.image %}
           {% else %}
             {% assign featured_image = page.image | relative_url %}
           {% endif %}
 
-          <img class="rounded lazyload"
-               data-src="{{ featured_image }}"
-               alt="{{ page.title | escape }}">
+          <img
+            class="rounded lazyload"
+            data-src="{{ featured_image }}"
+            alt="{{ page.title | escape }}">
 
           {% if page.title-image %}
           <small>
             <span class="text-muted d-block mt-1">
               {{ page.title-image }}
+
               {% if page.title-image-source %}
               - Source: {{ page.title-image-source }}
               {% endif %}
             </span>
           </small>
           {% endif %}
+
         </div>
         {% endif %}
 
@@ -89,7 +109,13 @@ layout: default
   </div>
 </div>
 
+
+<!-- ==================================================
+     STYLES
+================================================== -->
+
 <style>
+
 /* ==================================================
    ARTICLE TYPOGRAPHY
 ================================================== */
@@ -165,6 +191,8 @@ layout: default
   height: auto;
 }
 
+/* Drop cap */
+
 .article-post > p:first-of-type::first-letter {
   float: left;
   font-size: 3.5em;
@@ -174,14 +202,54 @@ layout: default
   font-weight: 700;
 }
 
-@media (max-width: 767.98px) {
-  .article-post { font-size: 15px; }
-  .article-post h2 { font-size: 22px; }
-  .article-post h3 { font-size: 18px; }
-  .article-post h4 { font-size: 17px; }
-  .article-post pre { font-size: 13px; }
-  .article-post > p:first-of-type::first-letter { font-size: 3.2em; }
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .article-post {
+    font-size: 16px;
+  }
+
+  .article-post h2 {
+    font-size: 23px;
+  }
+
+  .article-post h3 {
+    font-size: 19px;
+  }
+
+  .article-post h4 {
+    font-size: 18px;
+  }
+
+  .article-post pre {
+    font-size: 13px;
+  }
 }
+
+@media (max-width: 767.98px) {
+  .article-post {
+    font-size: 15px;
+  }
+
+  .article-post h2 {
+    font-size: 22px;
+  }
+
+  .article-post h3 {
+    font-size: 18px;
+  }
+
+  .article-post h4 {
+    font-size: 17px;
+  }
+
+  .article-post pre {
+    font-size: 13px;
+  }
+
+  .article-post > p:first-of-type::first-letter {
+    font-size: 3.2em;
+  }
+}
+
 
 /* ==================================================
    BLOCKQUOTES
@@ -219,8 +287,16 @@ layout: default
   margin-top: .8rem;
 }
 
+@media (max-width: 767.98px) {
+  .article-post blockquote {
+    padding: 12px 15px;
+    margin: 1.3rem 0;
+  }
+}
+
+
 /* ==================================================
-   TABLES
+   ARTICLE TABLES
 ================================================== */
 
 .article-post table {
@@ -270,13 +346,17 @@ layout: default
 }
 
 @media (max-width: 767.98px) {
-  .article-post table { font-size: 13px; }
+  .article-post table {
+    font-size: 13px;
+  }
+
   .article-post table th,
   .article-post table td {
     padding: 9px 10px;
     overflow-wrap: anywhere;
   }
 }
+
 
 /* ==================================================
    EDITORIAL TRANSPARENCY
@@ -347,12 +427,19 @@ layout: default
     padding: 18px;
     margin-top: 30px;
   }
-  .editorial-transparency h2 { font-size: 17px; }
-  .editorial-transparency p { font-size: 14px; }
+
+  .editorial-transparency h2 {
+    font-size: 17px;
+  }
+
+  .editorial-transparency p {
+    font-size: 14px;
+  }
 }
 
+
 /* ==================================================
-   MAIN ARTICLE GRID
+   ARTICLE GRID
 ================================================== */
 
 .article-body-container,
@@ -361,14 +448,8 @@ layout: default
   min-width: 0;
 }
 
-/*
-  Important:
-  The TOC and article are direct children of the
-  same grid row. This gives the sticky sidebar
-  enough height to follow the article.
-*/
-
 @media (min-width: 1200px) {
+
   .post-content-layout {
     display: grid;
     grid-template-columns: 55px minmax(0, 1fr) 230px;
@@ -413,6 +494,11 @@ layout: default
     padding: 0;
   }
 
+  /*
+    Outer TOC fills the article row.
+    Inner panel sticks to the viewport.
+  */
+
   .article-toc {
     grid-column: 3;
     grid-row: 1;
@@ -423,6 +509,7 @@ layout: default
     z-index: 10;
   }
 }
+
 
 /* ==================================================
    OWASP-STYLE TABLE OF CONTENTS
@@ -523,15 +610,15 @@ layout: default
   border-left-color: #6b7280;
 }
 
-.article-toc .toc-link.toc-active {
+/*
+  Selected link changes ONLY when clicked.
+  Scrolling the article does not change it.
+*/
+
+.article-toc .toc-link.toc-selected {
   color: #111;
   font-weight: 700;
   border-left-color: #222;
-}
-
-.article-toc .toc-link.toc-parent-active {
-  color: #374151;
-  font-weight: 600;
 }
 
 .article-post h2[id],
@@ -539,18 +626,21 @@ layout: default
   scroll-margin-top: 110px;
 }
 
+
 /* ==================================================
-   DESKTOP STICKY TOC - NO CUT-OFF
+   DESKTOP TOC
+   TOP AND BOTTOM SPACING
 ================================================== */
 
 @media (min-width: 1200px) {
 
   /*
-    Sticky positioning belongs to this INNER element.
+    Sticky panel:
+    90px space above
+    30px space below
 
-    The outer .article-toc fills the article row.
-    This prevents the sticky sidebar from losing
-    its scrolling area.
+    The total maximum height is:
+    viewport - 120px.
   */
 
   .article-toc details {
@@ -558,23 +648,20 @@ layout: default
     top: 90px;
     display: block;
     width: 100%;
-    max-height: calc(100vh - 110px);
-    max-height: calc(100dvh - 110px);
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
     overflow: hidden;
     background: transparent;
     border: 0;
     border-radius: 0;
   }
 
-  /*
-    Keep "On this page" visible.
-    Only the links below it can scroll.
-  */
+  /* Heading remains visible */
 
   .article-toc summary {
     position: relative;
     display: flex;
-    padding: 0 0 12px;
+    padding: 0 0 14px;
     background: #fff;
     cursor: default;
     pointer-events: none;
@@ -584,38 +671,46 @@ layout: default
     display: none;
   }
 
+  /*
+    Only the link list scrolls.
+
+    Extra bottom padding ensures the last
+    heading does not touch the bottom edge.
+  */
+
   .article-toc .toc-links {
     display: block;
-    max-height: calc(100vh - 160px);
-    max-height: calc(100dvh - 160px);
+    max-height: calc(100vh - 175px);
+    max-height: calc(100dvh - 175px);
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 0 16px;
+    padding: 0 0 28px;
     scroll-padding-top: 16px;
-    scroll-padding-bottom: 16px;
+    scroll-padding-bottom: 28px;
     overscroll-behavior: contain;
-  }
-
-  /*
-    On shorter screens, reduce the sticky offset
-    so the TOC remains fully inside the viewport.
-  */
-
-  @media (max-height: 650px) {
-    .article-toc details {
-      top: 20px;
-      max-height: calc(100dvh - 40px);
-    }
-
-    .article-toc .toc-links {
-      max-height: calc(100dvh - 85px);
-    }
   }
 }
 
+/* Short desktop screens */
+
+@media (min-width: 1200px) and (max-height: 650px) {
+
+  .article-toc details {
+    top: 20px;
+    max-height: calc(100vh - 50px);
+    max-height: calc(100dvh - 50px);
+  }
+
+  .article-toc .toc-links {
+    max-height: calc(100vh - 105px);
+    max-height: calc(100dvh - 105px);
+  }
+}
+
+
 /* ==================================================
-   TABLET AND MOBILE
+   TABLET AND MOBILE TOC
 ================================================== */
 
 @media (max-width: 1199.98px) {
@@ -681,7 +776,7 @@ layout: default
 
   .article-toc .toc-links {
     max-height: 320px;
-    padding: 8px 0;
+    padding: 8px 0 20px;
     border-top: 1px solid #e5e7eb;
   }
 
@@ -696,6 +791,7 @@ layout: default
     padding: 0 15px;
   }
 }
+
 
 /* ==================================================
    BACK TO TOP
@@ -771,78 +867,118 @@ layout: default
 
 </style>
 
-<!-- ARTICLE BODY -->
+
+<!-- ==================================================
+     ARTICLE BODY
+================================================== -->
+
 <div class="container pt-4 pb-4 article-body-container">
+
   <div class="row post-content-layout">
 
     <!-- SHARE SIDEBAR -->
+
     <div class="post-share-sidebar">
       <div class="sticky-top sticky-top-offset text-center">
-        <div class="text-muted">Share this</div>
+
+        <div class="text-muted">
+          Share this
+        </div>
+
         <div class="share d-inline-block">
+
           <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
             <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
             <a class="a2a_button_facebook"></a>
             <a class="a2a_button_twitter"></a>
           </div>
+
           <script async src="https://static.addtoany.com/menu/page.js"></script>
+
         </div>
       </div>
     </div>
 
-    <!-- RIGHT-HAND TABLE OF CONTENTS -->
-    <nav class="article-toc"
-         id="article-toc"
-         aria-label="Table of contents"
-         hidden>
+
+    <!-- TABLE OF CONTENTS -->
+
+    <nav
+      class="article-toc"
+      id="article-toc"
+      aria-label="Table of contents"
+      hidden>
 
       <details id="article-toc-details">
+
         <summary>
+
           <span class="toc-summary-title">
-            <svg class="toc-list-icon"
-                 xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 aria-hidden="true">
+
+            <svg
+              class="toc-list-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true">
+
               <line x1="8" y1="6" x2="21" y2="6"></line>
               <line x1="8" y1="12" x2="21" y2="12"></line>
               <line x1="8" y1="18" x2="21" y2="18"></line>
               <circle cx="3" cy="6" r="1"></circle>
               <circle cx="3" cy="12" r="1"></circle>
               <circle cx="3" cy="18" r="1"></circle>
+
             </svg>
+
             On this page
+
           </span>
 
           <span class="toc-toggle-icon" aria-hidden="true"></span>
+
         </summary>
 
-        <div class="toc-links" id="article-toc-links"></div>
+        <div
+          class="toc-links"
+          id="article-toc-links">
+        </div>
+
       </details>
+
     </nav>
 
-    <!-- ARTICLE -->
+
+    <!-- ARTICLE CONTENT -->
+
     <div class="post-article-column">
+
       <article class="article-post" data-pagefind-body>
         {{ content }}
       </article>
 
+
       <!-- EDITORIAL TRANSPARENCY -->
+
       {% if page.ai_assisted == true %}
-      <aside class="editorial-transparency"
-             aria-labelledby="editorial-transparency-title">
+
+      <aside
+        class="editorial-transparency"
+        aria-labelledby="editorial-transparency-title">
 
         <div class="editorial-transparency-heading">
+
           <span class="editorial-transparency-icon" aria-hidden="true">
             &#10003;
           </span>
+
           <h2 id="editorial-transparency-title">
             Editorial Transparency &amp; AI Assistance
           </h2>
+
         </div>
 
         <p>
@@ -854,178 +990,303 @@ layout: default
           explanations and references are reviewed
           before publication.
         </p>
+
       </aside>
+
       {% endif %}
+
 
       <!-- TAGS -->
+
       {% if page.tags.size > 0 %}
+
       <div class="mb-4">
-        <span class="font-weight-bold">Tags:</span>
-        <span class="taglist">
-          {% for tag in page.tags %}
-            {% assign tag_url = tag | slugify | prepend: '/tags/' | append: '/' | relative_url %}
-            <a class="sscroll btn btn-light btn-sm font-weight-bold"
-               href="{{ tag_url }}">
-              {{ tag | upcase | replace: '-', ' ' }}
-            </a>
-          {% endfor %}
+
+        <span class="font-weight-bold">
+          Tags:
         </span>
+
+        <span class="taglist">
+
+          {% for tag in page.tags %}
+
+            {% assign tag_url = tag | slugify | prepend: '/tags/' | append: '/' | relative_url %}
+
+            <a
+              class="sscroll btn btn-light btn-sm font-weight-bold"
+              href="{{ tag_url }}">
+
+              {{ tag | upcase | replace: '-', ' ' }}
+
+            </a>
+
+          {% endfor %}
+
+        </span>
+
       </div>
+
       {% endif %}
 
+
       <!-- NEWSLETTER -->
+
       {% if site.feedburner-list %}
         {% assign home = false %}
         {% include newsletter.html %}
       {% endif %}
 
-      <!-- AUTHOR -->
+
+      <!-- AUTHOR BOX -->
+
       {% if page.author %}
+
       <div class="row mt-5">
+
         <div class="col-md-2 align-self-center">
+
           {% if author.avatar %}
-          <img class="rounded-circle"
-               src="{{ author.avatar | relative_url }}"
-               alt="{{ author.name | escape }}"
-               width="90">
+          <img
+            class="rounded-circle"
+            src="{{ author.avatar | relative_url }}"
+            alt="{{ author.name | escape }}"
+            width="90">
           {% endif %}
+
         </div>
 
         <div class="col-md-10">
+
           <h5 class="font-weight-bold">
+
             Written by {{ author.name }}
 
             {% if author.site %}
+
             <span>
-              <a target="_blank"
-                 rel="noopener noreferrer"
-                 href="{{ author.site }}"
-                 class="btn btn-outline-success btn-sm btn-round ml-2">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="{{ author.site }}"
+                class="btn btn-outline-success btn-sm btn-round ml-2">
+
                 Follow
+
               </a>
             </span>
+
             {% endif %}
+
           </h5>
+
           {{ author.bio }}
+
         </div>
+
       </div>
+
       {% endif %}
 
+
       <!-- COMMENTS -->
+
       {% if page.comments != false %}
         {% include comments.html %}
       {% endif %}
+
     </div>
 
   </div>
+
 </div>
 
-<!-- PREVIOUS AND NEXT ARTICLES -->
+
+<!-- ==================================================
+     PREVIOUS / NEXT ARTICLES
+================================================== -->
+
 <div class="alertbar">
+
   <div class="container">
+
     <div class="row prevnextlinks small font-weight-bold">
 
       {% if page.previous.url %}
+
       <div class="col-md-6 rightborder pl-0">
+
         <a class="text-dark" href="{{ page.previous.url | relative_url }}">
+
           {% if page.previous.image %}
+
             {% if page.previous.image contains "://" %}
               {% assign previous_image = page.previous.image %}
             {% else %}
               {% assign previous_image = page.previous.image | relative_url %}
             {% endif %}
-            <img height="30" class="mr-1" src="{{ previous_image }}" alt="">
+
+            <img
+              height="30"
+              class="mr-1"
+              src="{{ previous_image }}"
+              alt="">
+
           {% endif %}
+
           {{ page.previous.title | escape }}
+
         </a>
+
       </div>
+
       {% endif %}
 
+
       {% if page.next.url %}
+
       <div class="col-md-6 text-right pr-0">
+
         <a class="text-dark" href="{{ page.next.url | relative_url }}">
+
           {{ page.next.title | escape }}
+
           {% if page.next.image %}
+
             {% if page.next.image contains "://" %}
               {% assign next_image = page.next.image %}
             {% else %}
               {% assign next_image = page.next.image | relative_url %}
             {% endif %}
-            <img height="30" class="ml-1" src="{{ next_image }}" alt="">
+
+            <img
+              height="30"
+              class="ml-1"
+              src="{{ next_image }}"
+              alt="">
+
           {% endif %}
+
         </a>
+
       </div>
+
       {% endif %}
 
     </div>
+
   </div>
+
 </div>
 
-<!-- BACK TO TOP -->
-<button type="button"
-        class="back-to-top"
-        id="back-to-top"
-        aria-label="Back to top"
-        title="Back to top">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       viewBox="0 0 24 24"
-       fill="none"
-       stroke="currentColor"
-       stroke-width="4"
-       stroke-linecap="square"
-       stroke-linejoin="miter"
-       aria-hidden="true">
+
+<!-- ==================================================
+     BACK TO TOP BUTTON
+================================================== -->
+
+<button
+  type="button"
+  class="back-to-top"
+  id="back-to-top"
+  aria-label="Back to top"
+  title="Back to top">
+
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="4"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+    aria-hidden="true">
+
     <path d="M4 15 L12 7 L20 15"></path>
+
   </svg>
+
 </button>
+
+
+<!-- ==================================================
+     BACK TO TOP SCRIPT
+================================================== -->
 
 <script>
 (function () {
   "use strict";
 
-  function initBackToTop() {
+  function initialiseBackToTop() {
+
     const button = document.getElementById("back-to-top");
+
     if (!button) return;
 
-    function update() {
-      button.classList.toggle("is-visible", window.scrollY > 350);
+    function updateVisibility() {
+      button.classList.toggle(
+        "is-visible",
+        window.scrollY > 350
+      );
     }
 
-    window.addEventListener("scroll", update, { passive: true });
-    update();
+    window.addEventListener(
+      "scroll",
+      updateVisibility,
+      { passive: true }
+    );
+
+    updateVisibility();
 
     button.addEventListener("click", function () {
-      const reduced = window.matchMedia(
+
+      const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
       window.scrollTo({
         top: 0,
-        behavior: reduced ? "auto" : "smooth"
+        behavior: reducedMotion ? "auto" : "smooth"
       });
+
     });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initBackToTop);
+    document.addEventListener(
+      "DOMContentLoaded",
+      initialiseBackToTop
+    );
   } else {
-    initBackToTop();
+    initialiseBackToTop();
   }
+
 })();
 </script>
 
-<!-- TABLE OF CONTENTS SCRIPT -->
+
+<!-- ==================================================
+     TABLE OF CONTENTS SCRIPT
+
+     Automatic H2 / H3 links
+     Desktop always expanded
+     Mobile collapsible
+     No scroll tracking
+     No automatic TOC scrolling
+================================================== -->
+
 <script>
 (function () {
   "use strict";
 
-  function initToc() {
+  function initialiseArticleToc() {
+
     const article = document.querySelector(".article-post");
     const toc = document.getElementById("article-toc");
     const details = document.getElementById("article-toc-details");
     const list = document.getElementById("article-toc-links");
 
-    if (!article || !toc || !details || !list) return;
+    if (!article || !toc || !details || !list) {
+      return;
+    }
 
     const headings = Array.from(
       article.querySelectorAll("h2, h3")
@@ -1033,7 +1294,14 @@ layout: default
       return heading.textContent.trim().length > 0;
     });
 
-    if (!headings.length) return;
+    if (headings.length === 0) {
+      return;
+    }
+
+    /*
+      Keep existing heading IDs.
+      Generate IDs only when missing.
+    */
 
     const usedIds = new Set(
       Array.from(document.querySelectorAll("[id]"))
@@ -1042,12 +1310,12 @@ layout: default
         })
     );
 
-    const sections = [];
-    let parentHeading = null;
+    const links = [];
 
-    /* Build links from article headings */
     headings.forEach(function (heading, index) {
+
       if (!heading.id) {
+
         const base = heading.textContent
           .trim()
           .toLowerCase()
@@ -1055,226 +1323,159 @@ layout: default
           .replace(/[\u0300-\u036f]/g, "")
           .replace(/[^a-z0-9\s-]/g, "")
           .trim()
-          .replace(/\s+/g, "-") || "section-" + (index + 1);
+          .replace(/\s+/g, "-") ||
+          "section-" + (index + 1);
 
-        let id = base;
+        let candidate = base;
         let suffix = 2;
 
-        while (usedIds.has(id)) {
-          id = base + "-" + suffix++;
+        while (usedIds.has(candidate)) {
+          candidate = base + "-" + suffix;
+          suffix++;
         }
 
-        heading.id = id;
-        usedIds.add(id);
-      }
-
-      if (heading.tagName === "H2") {
-        parentHeading = heading;
+        heading.id = candidate;
+        usedIds.add(candidate);
       }
 
       const link = document.createElement("a");
-      link.className = "toc-link";
 
-      if (heading.tagName === "H3") {
-        link.classList.add("toc-h3");
-      }
+      link.className =
+        "toc-link" +
+        (heading.tagName === "H3" ? " toc-h3" : "");
 
       link.href = "#" + encodeURIComponent(heading.id);
       link.textContent = heading.textContent.trim();
 
       list.appendChild(link);
 
-      sections.push({
+      links.push({
         heading: heading,
-        link: link,
-        parent: heading.tagName === "H3" ? parentHeading : null
+        link: link
       });
+
     });
 
     toc.hidden = false;
 
-    const desktop = window.matchMedia("(min-width: 1200px)");
+    /*
+      Desktop: always expanded.
+      Tablet/mobile: collapsed initially.
+    */
 
-    /* Desktop open, mobile collapsed */
-    function syncLayout() {
-      details.open = desktop.matches;
+    const desktopQuery = window.matchMedia(
+      "(min-width: 1200px)"
+    );
+
+    function updateResponsiveToc() {
+      details.open = desktopQuery.matches;
     }
 
-    syncLayout();
+    updateResponsiveToc();
 
-    if (desktop.addEventListener) {
-      desktop.addEventListener("change", syncLayout);
+    if (desktopQuery.addEventListener) {
+      desktopQuery.addEventListener(
+        "change",
+        updateResponsiveToc
+      );
     } else {
-      desktop.addListener(syncLayout);
+      desktopQuery.addListener(updateResponsiveToc);
     }
 
     /*
-      Do not allow the desktop details to collapse.
-      Mobile retains native details behaviour.
+      Prevent desktop collapse.
+      Mobile can still expand and collapse.
     */
+
     details.addEventListener("toggle", function () {
-      if (desktop.matches && !details.open) {
+
+      if (desktopQuery.matches && !details.open) {
         details.open = true;
       }
 
-      if (details.open && active) {
-        requestAnimationFrame(function () {
-          keepVisible(active.link);
-        });
-      }
     });
 
-    let active = null;
-    let scheduled = false;
-    let navigationTarget = null;
-    let navigationStart = 0;
-
     /*
-      Scroll ONLY the internal heading list.
-      Do not call scrollIntoView on TOC links:
-      that can scroll the whole document and
-      cause the top of the sidebar to disappear.
+      Highlight only the link that was clicked.
+      Scrolling the article does not update links.
     */
-    function keepVisible(link) {
-      if (!details.open || !link) return;
 
-      const viewport = list.getBoundingClientRect();
-      const item = link.getBoundingClientRect();
-      const margin = 18;
+    function selectLink(selectedLink) {
 
-      if (item.top < viewport.top + margin) {
-        list.scrollTop += item.top - viewport.top - margin;
-      } else if (item.bottom > viewport.bottom - margin) {
-        list.scrollTop += item.bottom - viewport.bottom + margin;
-      }
-    }
+      links.forEach(function (item) {
 
-    function setActive(section) {
-      if (!section) return;
+        const selected = item.link === selectedLink;
 
-      const changed = active !== section;
-      active = section;
-
-      sections.forEach(function (item) {
-        const selected = item === section;
-        const isParent = section.parent &&
-          item.heading === section.parent;
-
-        item.link.classList.toggle("toc-active", selected);
         item.link.classList.toggle(
-          "toc-parent-active",
-          Boolean(isParent && !selected)
+          "toc-selected",
+          selected
         );
 
         if (selected) {
-          item.link.setAttribute("aria-current", "location");
+          item.link.setAttribute(
+            "aria-current",
+            "location"
+          );
         } else {
-          item.link.removeAttribute("aria-current");
+          item.link.removeAttribute(
+            "aria-current"
+          );
         }
+
       });
-
-      if (changed) {
-        keepVisible(section.link);
-      }
     }
 
-    function updateActive() {
-      scheduled = false;
+    /*
+      Navigate to the clicked heading.
+      Do not scroll the TOC automatically.
+    */
 
-      const threshold = 125;
-      let current = sections[0];
+    links.forEach(function (item) {
 
-      /*
-        Detect the last heading that has passed
-        the top reading threshold.
-      */
-      for (const section of sections) {
-        if (
-          section.heading.getBoundingClientRect().top <= threshold
-        ) {
-          current = section;
-        } else {
-          break;
-        }
-      }
+      item.link.addEventListener("click", function (event) {
 
-      /*
-        During smooth navigation, keep the chosen
-        section highlighted until the destination
-        is reached or navigation has timed out.
-      */
-      if (navigationTarget) {
-        const distance = Math.abs(
-          navigationTarget.heading.getBoundingClientRect().top - 110
-        );
-
-        const timedOut = performance.now() - navigationStart > 1800;
-
-        if (distance < 12 || timedOut) {
-          navigationTarget = null;
-        } else {
-          setActive(navigationTarget);
-          return;
-        }
-      }
-
-      setActive(current);
-    }
-
-    function requestUpdate() {
-      if (scheduled) return;
-      scheduled = true;
-      requestAnimationFrame(updateActive);
-    }
-
-    sections.forEach(function (section) {
-      section.link.addEventListener("click", function (event) {
         event.preventDefault();
 
-        const reduced = window.matchMedia(
+        const reducedMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
 
-        navigationTarget = reduced ? null : section;
-        navigationStart = performance.now();
+        selectLink(item.link);
 
-        setActive(section);
-
-        section.heading.scrollIntoView({
-          behavior: reduced ? "auto" : "smooth",
+        item.heading.scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
           block: "start"
         });
 
         history.pushState(
           null,
           "",
-          "#" + encodeURIComponent(section.heading.id)
+          "#" + encodeURIComponent(item.heading.id)
         );
 
-        if (!desktop.matches) {
+        /*
+          Close the TOC after selection
+          only on tablet and mobile.
+        */
+
+        if (!desktopQuery.matches) {
           details.open = false;
         }
 
-        requestUpdate();
       });
+
     });
 
-    window.addEventListener(
-      "scroll",
-      requestUpdate,
-      { passive: true }
-    );
-
-    window.addEventListener("resize", requestUpdate);
-    window.addEventListener("hashchange", requestUpdate);
-
-    requestUpdate();
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initToc);
+    document.addEventListener(
+      "DOMContentLoaded",
+      initialiseArticleToc
+    );
   } else {
-    initToc();
+    initialiseArticleToc();
   }
+
 })();
 </script>
