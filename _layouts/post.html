@@ -382,6 +382,86 @@ layout: default
     }
 }
 
+     
+/* =====================================================
+   SHARE SIDEBAR LAYOUT FIX
+   Desktop: left of article
+   Mobile: horizontal buttons above article
+   ===================================================== */
+
+/* Desktop */
+@media (min-width: 992px) {
+
+    .post-content-layout {
+        position: relative;
+    }
+
+    .post-share-sidebar {
+        position: absolute;
+        top: 0;
+        left: -85px;
+        width: 70px;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        z-index: 5;
+    }
+
+    .post-share-sidebar .sticky-top {
+        position: sticky;
+        top: 100px;
+        text-align: center !important;
+    }
+
+    .post-share-sidebar .a2a_kit {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .post-share-sidebar .a2a_kit a {
+        float: none !important;
+    }
+}
+
+/* Large desktop */
+@media (min-width: 1400px) {
+
+    .post-share-sidebar {
+        left: -125px;
+        width: 100px;
+    }
+}
+
+/* Tablet and mobile */
+@media (max-width: 991.98px) {
+
+    .post-share-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin-bottom: 1.5rem;
+        padding: 0 15px;
+    }
+
+    .post-share-sidebar .sticky-top {
+        position: static !important;
+        text-align: left !important;
+    }
+
+    .post-share-sidebar .a2a_kit {
+        display: inline-flex !important;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .post-share-sidebar .a2a_kit a {
+        float: none !important;
+    }
+}
+
 </style>
 
 
