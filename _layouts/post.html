@@ -1,3 +1,4 @@
+
 ---
 layout: default
 ---
@@ -134,11 +135,13 @@ layout: default
 
 <!-- =====================================================
      ARTICLE LAYOUT CSS
-     Preserves original drop-cap styling
 ===================================================== -->
 
 <style>
 
+/* =====================================================
+   EDITORIAL TRANSPARENCY
+===================================================== */
 
 .editorial-transparency {
     margin: 45px 0 35px;
@@ -215,13 +218,11 @@ layout: default
     }
 }
 
+
 /* =====================================================
    RESPONSIVE ARTICLE TYPOGRAPHY
-   Balanced sizes for desktop, tablet and mobile
-   Only affects blog article content
-   ===================================================== */
+===================================================== */
 
-/* Main article text */
 .article-post {
     font-size: 16px;
     line-height: 1.7;
@@ -230,14 +231,12 @@ layout: default
     text-size-adjust: 100%;
 }
 
-/* Paragraphs */
 .article-post p {
     font-size: inherit;
     line-height: 1.7;
     margin-bottom: 1.35rem;
 }
 
-/* Headings inside article only */
 .article-post h2 {
     font-size: 25px;
     line-height: 1.35;
@@ -262,7 +261,6 @@ layout: default
     margin-bottom: 0.75rem;
 }
 
-/* Lists */
 .article-post ul,
 .article-post ol {
     font-size: inherit;
@@ -277,13 +275,6 @@ layout: default
     margin-bottom: 0.4rem;
 }
 
-/* Quotes */
-.article-post blockquote {
-    font-size: 1em;
-    line-height: 1.7;
-}
-
-/* Code blocks */
 .article-post pre {
     font-size: 14px;
     line-height: 1.6;
@@ -298,13 +289,7 @@ layout: default
     font-size: 0.88em;
 }
 
-/* Tables */
-.article-post table {
-    font-size: 0.92em;
-    line-height: 1.55;
-}
-
-/* Preserve the large first letter */
+/* Preserve large first letter */
 .article-post > p:first-of-type::first-letter {
     float: left;
     font-size: 3.5em;
@@ -314,12 +299,7 @@ layout: default
     font-weight: 700;
 }
 
-/* =====================================================
-   TABLET
-   ===================================================== */
-
 @media (min-width: 768px) and (max-width: 991.98px) {
-
     .article-post {
         font-size: 16px;
     }
@@ -341,12 +321,7 @@ layout: default
     }
 }
 
-/* =====================================================
-   MOBILE
-   ===================================================== */
-
 @media (max-width: 767.98px) {
-
     .article-post {
         font-size: 15px;
         line-height: 1.7;
@@ -384,27 +359,181 @@ layout: default
 
 
 /* =====================================================
-   SHARE SIDEBAR LAYOUT FIX
-   Desktop: left of article
-   Mobile: horizontal buttons above article
-   ===================================================== */
+   ARTICLE BLOCKQUOTES
+===================================================== */
 
-/* Desktop */
-@media (min-width: 992px) {
+.article-post blockquote {
+    position: relative;
+    display: block;
+    margin: 1.6rem 0;
+    padding: 14px 20px;
+    background: #f8f9fa;
+    border-left: 4px solid #64748b;
+    border-radius: 0 6px 6px 0;
+    font-size: inherit;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #374151;
+    quotes: none;
+}
+
+.article-post blockquote::before,
+.article-post blockquote::after {
+    content: none !important;
+    display: none !important;
+}
+
+.article-post blockquote p {
+    font-size: inherit;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.article-post blockquote p + p {
+    margin-top: 0.8rem;
+}
+
+@media (max-width: 767.98px) {
+    .article-post blockquote {
+        padding: 12px 15px;
+        margin: 1.3rem 0;
+    }
+}
+
+
+/* =====================================================
+   ARTICLE TABLES
+===================================================== */
+
+.article-post table {
+    width: 100%;
+    max-width: 100%;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    background: #ffffff;
+}
+
+.article-post table th {
+    padding: 12px 14px;
+    background: #f1f5f9;
+    color: #1f2937;
+    font-weight: 700;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #d1d5db;
+}
+
+.article-post table td {
+    padding: 11px 14px;
+    color: #374151;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #d1d5db;
+}
+
+.article-post table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.article-post table tbody tr:hover {
+    background: #f1f5f9;
+}
+
+.article-post table td p,
+.article-post table th p {
+    margin: 0;
+    font-size: inherit;
+    line-height: 1.6;
+}
+
+@media (max-width: 767.98px) {
+    .article-post table {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .article-post table th,
+    .article-post table td {
+        padding: 9px 10px;
+        overflow-wrap: anywhere;
+    }
+}
+
+
+/* =====================================================
+   ARTICLE BODY LAYOUT
+
+   Wide desktop:
+   Share | Article | Contents
+
+   Smaller screens:
+   Share
+   Contents
+   Article
+===================================================== */
+
+.article-body-container {
+    min-width: 0;
+}
+
+.post-content-layout {
+    min-width: 0;
+}
+
+.post-article-column {
+    min-width: 0;
+}
+
+.post-article-column .article-post {
+    min-width: 0;
+}
+
+.article-post img,
+.article-post video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prevent technical content from widening the layout */
+.article-post pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.article-post table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Wide desktop: three proper columns */
+@media (min-width: 1200px) {
 
     .post-content-layout {
-        position: relative;
+        display: grid;
+        grid-template-columns:
+            65px
+            minmax(0, 1fr)
+            210px;
+        column-gap: 24px;
+        align-items: start;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .post-share-sidebar {
-        position: absolute;
-        top: 0;
-        left: -85px;
-        width: 70px;
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        width: auto;
         height: 100%;
+        min-width: 0;
         margin: 0;
         padding: 0;
-        z-index: 5;
     }
 
     .post-share-sidebar .sticky-top {
@@ -423,25 +552,44 @@ layout: default
     .post-share-sidebar .a2a_kit a {
         float: none !important;
     }
-}
 
-/* Large desktop */
-@media (min-width: 1400px) {
+    .post-article-column {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+        max-width: none;
+        flex: none;
+        padding: 0;
+        min-width: 0;
+    }
 
-    .post-share-sidebar {
-        left: -125px;
-        width: 100px;
+    .article-toc {
+        grid-column: 3;
+        grid-row: 1;
+        position: sticky;
+        top: 100px;
+        align-self: start;
+        width: 100%;
+        min-width: 0;
+        max-height: calc(100vh - 120px);
     }
 }
 
-/* Tablet and mobile */
-@media (max-width: 991.98px) {
+/* Tablet and smaller desktop */
+@media (max-width: 1199.98px) {
+
+    .post-content-layout {
+        display: flex;
+        flex-direction: column;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
 
     .post-share-sidebar {
         position: static;
         width: 100%;
         height: auto;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         padding: 0 15px;
     }
 
@@ -460,40 +608,186 @@ layout: default
     .post-share-sidebar .a2a_kit a {
         float: none !important;
     }
+
+    .article-toc {
+        position: static;
+        width: calc(100% - 30px);
+        margin: 0 15px 1.5rem;
+    }
+
+    .post-article-column {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+        padding: 0 15px;
+    }
 }
 
 
 /* =====================================================
-   BACK TO TOP BUTTON - CIRCULAR CHEVRON DESIGN
-   ===================================================== */
+   COLLAPSIBLE TABLE OF CONTENTS
+===================================================== */
+
+.article-toc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #374151;
+    z-index: 10;
+}
+
+.article-toc[hidden] {
+    display: none !important;
+}
+
+.article-toc details {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e0e3e8;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.article-toc summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222222;
+    list-style: none;
+    user-select: none;
+}
+
+.article-toc summary::-webkit-details-marker {
+    display: none;
+}
+
+.article-toc summary::marker {
+    content: "";
+}
+
+.article-toc summary:hover {
+    background: #f8f9fa;
+}
+
+.article-toc summary:focus-visible {
+    outline: 2px solid #333333;
+    outline-offset: -3px;
+}
+
+.toc-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.toc-list-icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+}
+
+.toc-toggle-icon {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    flex: none;
+    margin-right: 3px;
+}
+
+.article-toc details[open] .toc-toggle-icon {
+    transform: rotate(225deg);
+}
+
+.article-toc .toc-links {
+    padding: 7px 0;
+    border-top: 1px solid #e5e7eb;
+    max-height: min(65vh, 520px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.article-toc .toc-link {
+    display: block;
+    padding: 8px 12px;
+    color: #4b5563;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    border-left: 3px solid transparent;
+}
+
+.article-toc .toc-link:hover,
+.article-toc .toc-link:focus-visible {
+    background: #f3f4f6;
+    color: #111111;
+    text-decoration: none;
+    border-left-color: #222222;
+}
+
+.article-toc .toc-link.toc-h3 {
+    padding-left: 25px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.article-toc .toc-link.toc-h3:hover,
+.article-toc .toc-link.toc-h3:focus-visible {
+    color: #111111;
+}
+
+/* Anchor destination spacing */
+.article-post h2[id],
+.article-post h3[id] {
+    scroll-margin-top: 100px;
+}
+
+@media (max-width: 1199.98px) {
+    .article-toc .toc-links {
+        max-height: 320px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toc-toggle-icon {
+        transition: none;
+    }
+}
+
+
+/* =====================================================
+   BACK TO TOP BUTTON
+===================================================== */
 
 .back-to-top {
     position: fixed;
     right: 28px;
     bottom: 28px;
-
     width: 48px;
     height: 48px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #ffffff;
     color: #222222;
-
     border: 5px solid #222222;
     border-radius: 50%;
-
     padding: 0;
     cursor: pointer;
     z-index: 9999;
-
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transform: translateY(12px);
-
     transition:
         opacity 0.3s ease,
         visibility 0.3s ease,
@@ -501,7 +795,6 @@ layout: default
         background-color 0.3s ease;
 }
 
-/* Show after scrolling */
 .back-to-top.is-visible {
     opacity: 1;
     visibility: visible;
@@ -509,26 +802,22 @@ layout: default
     transform: translateY(0);
 }
 
-/* Chevron icon */
 .back-to-top svg {
     width: 25px;
     height: 25px;
     display: block;
 }
 
-/* Hover effect */
 .back-to-top:hover {
     background: #f2f2f2;
     transform: translateY(-3px);
 }
 
-/* Keyboard accessibility */
 .back-to-top:focus-visible {
     outline: 3px solid #777777;
     outline-offset: 3px;
 }
 
-/* Mobile */
 @media (max-width: 767.98px) {
     .back-to-top {
         width: 43px;
@@ -544,284 +833,8 @@ layout: default
     }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .back-to-top {
-        transition: none;
-    }
-}
-     
-/* =====================================================
-   ARTICLE BLOCKQUOTE FIX
-   Removes oversized decorative quotation marks
-   ===================================================== */
-
-.article-post blockquote {
-    position: relative;
-    display: block;
-    margin: 1.6rem 0;
-    padding: 14px 20px;
-
-    background: #f8f9fa;
-    border-left: 4px solid #64748b;
-    border-radius: 0 6px 6px 0;
-
-    font-size: inherit;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.7;
-    color: #374151;
-
-    quotes: none;
-}
-
-/* Remove decorative quotation marks */
-.article-post blockquote::before,
-.article-post blockquote::after {
-    content: none !important;
-    display: none !important;
-}
-
-/* Keep paragraph sizes consistent */
-.article-post blockquote p {
-    font-size: inherit;
-    line-height: 1.7;
-    margin: 0;
-}
-
-/* Maintain spacing between multiple paragraphs */
-.article-post blockquote p + p {
-    margin-top: 0.8rem;
-}
-
-/* Mobile */
-@media (max-width: 767.98px) {
-    .article-post blockquote {
-        padding: 12px 15px;
-        margin: 1.3rem 0;
-    }
-}
-
-
-/* =====================================================
-   ARTICLE TABLE STYLING
-   Clear borders and readable spacing
-   ===================================================== */
-
-.article-post table {
-    width: 100%;
-    max-width: 100%;
-    margin: 1.5rem 0;
-
-    border-collapse: collapse;
-    border-spacing: 0;
-
-    font-size: 14px;
-    line-height: 1.6;
-
-    background: #ffffff;
-}
-
-/* Table headings */
-.article-post table th {
-    padding: 12px 14px;
-
-    background: #f1f5f9;
-    color: #1f2937;
-
-    font-weight: 700;
-    text-align: left;
-    vertical-align: top;
-
-    border: 1px solid #d1d5db;
-}
-
-/* Table cells */
-.article-post table td {
-    padding: 11px 14px;
-
-    color: #374151;
-    text-align: left;
-    vertical-align: top;
-
-    border: 1px solid #d1d5db;
-}
-
-/* Alternate row background */
-.article-post table tbody tr:nth-child(even) {
-    background: #f8fafc;
-}
-
-/* Hover effect */
-.article-post table tbody tr:hover {
-    background: #f1f5f9;
-}
-
-/* Keep paragraphs inside cells compact */
-.article-post table td p,
-.article-post table th p {
-    margin: 0;
-    font-size: inherit;
-    line-height: 1.6;
-}
-
-/* Mobile table adjustments */
-@media (max-width: 767.98px) {
-
-    .article-post table {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-
-    .article-post table th,
-    .article-post table td {
-        padding: 9px 10px;
-        overflow-wrap: anywhere;
-    }
-}
-
-
-/* =====================================================
-   COLLAPSIBLE ARTICLE TABLE OF CONTENTS
-   ===================================================== */
-
-.article-toc {
-    font-size: 13px;
-    line-height: 1.45;
-    color: #374151;
-    z-index: 50;
-}
-
-.article-toc details {
-    background: #fff;
-    border: 1px solid #dce1e7;
-    border-radius: 9px;
-    box-shadow: 0 3px 16px rgba(0, 0, 0, .07);
-    overflow: hidden;
-}
-
-.article-toc summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 12px 14px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 700;
-    color: #222;
-    list-style: none;
-    user-select: none;
-}
-
-.article-toc summary::-webkit-details-marker {
-    display: none;
-}
-
-.article-toc summary::marker {
-    content: '';
-}
-
-.article-toc .toc-toggle-icon {
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(45deg);
-    transition: transform .2s ease;
-    flex: none;
-    margin-right: 3px;
-}
-
-.article-toc details[open] .toc-toggle-icon {
-    transform: rotate(225deg);
-}
-
-.article-toc .toc-links {
-    border-top: 1px solid #e5e7eb;
-    padding: 8px 0;
-    max-height: min(65vh, 520px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-}
-
-.article-toc .toc-link {
-    display: block;
-    padding: 7px 12px;
-    border-left: 3px solid transparent;
-    color: #5b6472;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-    font-weight: 400;
-}
-
-.article-toc .toc-link:hover,
-.article-toc .toc-link:focus-visible {
-    color: #111;
-    background: #f5f6f8;
-    text-decoration: none;
-}
-
-.article-toc .toc-link.toc-h3 {
-    padding-left: 25px;
-    font-size: 12px;
-}
-
-.article-post h2[id],
-.article-post h3[id] {
-    scroll-margin-top: 100px;
-}
-
-
-/* Desktop: TOC moves naturally with article */
-@media (min-width: 992px) {
-    .post-article-column {
-        position: relative;
-    }
-
-    .article-toc {
-        position: absolute;
-        top: 0;
-        left: calc(100% + 20px);
-        right: auto;
-        width: 190px;
-        z-index: 10;
-    }
-
-    .article-toc details[open] {
-        width: 220px;
-    }
-}
-
-/* Keep TOC above article on smaller screens */
-@media (max-width: 991.98px) {
-    .article-toc {
-        position: static;
-        width: 100%;
-        margin-bottom: 1.5rem;
-    }
-
-    .article-toc details[open] {
-        width: 100%;
-    }
-}
-
-
-/* Tablet and mobile: above article */
-@media (max-width: 991.98px) {
-    .article-toc {
-        position: static;
-        width: 100%;
-        margin-bottom: 1.5rem;
-    }
-
-    .article-toc .toc-links {
-        max-height: 320px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .article-toc .toc-toggle-icon {
         transition: none;
     }
 }
@@ -835,10 +848,10 @@ layout: default
 
 <div class="container pt-4 pb-4 article-body-container">
 
-    <div class="row post-content-layout {% unless page.image %}justify-content-center{% endunless %}">
+    <div class="row post-content-layout">
 
         <!-- =================================================
-             SHARE BUTTONS
+             LEFT SHARE SIDEBAR
         ================================================= -->
 
         <div class="post-share-sidebar">
@@ -879,43 +892,71 @@ layout: default
 
 
         <!-- =================================================
-             ARTICLE CONTENT
-             Original drop-cap CSS remains untouched
+             TABLE OF CONTENTS
+
+             Desktop: Right sidebar
+             Mobile: Above article
+             Collapsed by default
         ================================================= -->
 
-        <div class="post-article-column {% if page.image %}col-12{% else %}col-12 col-md-8{% endif %}">
+        <nav
+            class="article-toc"
+            id="article-toc"
+            aria-label="Table of contents"
+            hidden>
 
-             
-<!-- =====================================================
-     AUTOMATIC TABLE OF CONTENTS
-     Collapsed by default
-===================================================== -->
+            <details id="article-toc-details">
 
-<nav
-    class="article-toc"
-    id="article-toc"
-    aria-label="Table of contents"
-    hidden>
+                <summary>
 
-    <details id="article-toc-details">
+                    <span class="toc-summary-title">
 
-        <summary>
-            On this page
-            <span
-                class="toc-toggle-icon"
-                aria-hidden="true">
-            </span>
-        </summary>
+                        <svg
+                            class="toc-list-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true">
 
-        <div
-            class="toc-links"
-            id="article-toc-links">
-        </div>
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <circle cx="3" cy="6" r="1"></circle>
+                            <circle cx="3" cy="12" r="1"></circle>
+                            <circle cx="3" cy="18" r="1"></circle>
 
-    </details>
+                        </svg>
 
-</nav>
+                        On this page
 
+                    </span>
+
+                    <span
+                        class="toc-toggle-icon"
+                        aria-hidden="true">
+                    </span>
+
+                </summary>
+
+                <div
+                    class="toc-links"
+                    id="article-toc-links">
+                </div>
+
+            </details>
+
+        </nav>
+
+
+        <!-- =================================================
+             MAIN ARTICLE COLUMN
+        ================================================= -->
+
+        <div class="post-article-column">
 
             <!-- Indexed Article Content -->
             <article class="article-post" data-pagefind-body>
@@ -925,37 +966,43 @@ layout: default
             </article>
 
 
-{% if page.ai_assisted == true %}
+            <!-- =================================================
+                 EDITORIAL TRANSPARENCY
+            ================================================= -->
 
-<aside class="editorial-transparency border p-3 bg-lightblue"
-       aria-labelledby="editorial-transparency-title">
+            {% if page.ai_assisted == true %}
 
-    <div class="editorial-transparency-heading">
+            <aside
+                class="editorial-transparency border p-3 bg-lightblue"
+                aria-labelledby="editorial-transparency-title">
 
-        <span class="editorial-transparency-icon"
-              aria-hidden="true">
-            &#10003;
-        </span>
+                <div class="editorial-transparency-heading">
 
-        <h2 id="editorial-transparency-title">
-            Editorial Transparency &amp; AI Assistance
-        </h2>
+                    <span
+                        class="editorial-transparency-icon"
+                        aria-hidden="true">
+                        &#10003;
+                    </span>
 
-    </div>
+                    <h2 id="editorial-transparency-title">
+                        Editorial Transparency &amp; AI Assistance
+                    </h2>
 
-    <p>
-        Artificial intelligence (AI) tools assisted with
-        the research organisation, drafting and structure
-        of this article. The author is responsible for
-        the final published content, including its
-        accuracy, clarity and relevance. Technical
-        explanations and references are reviewed
-        before publication.
-    </p>
+                </div>
 
-</aside>
+                <p>
+                    Artificial intelligence (AI) tools assisted with
+                    the research organisation, drafting and structure
+                    of this article. The author is responsible for
+                    the final published content, including its
+                    accuracy, clarity and relevance. Technical
+                    explanations and references are reviewed
+                    before publication.
+                </p>
 
-{% endif %}
+            </aside>
+
+            {% endif %}
 
 
             <!-- =================================================
@@ -1162,6 +1209,7 @@ layout: default
 
 </div>
 
+
 <!-- =====================================================
      BACK TO TOP BUTTON
 ===================================================== -->
@@ -1239,15 +1287,17 @@ layout: default
         initialiseBackToTop();
     }
 })();
-
-     
 </script>
 
 
-
 <!-- =====================================================
-     SIMPLE ARTICLE TABLE OF CONTENTS
-     Navigation only - no scroll tracking
+     TABLE OF CONTENTS FUNCTIONALITY
+
+     - Automatic H2/H3 detection
+     - Collapsed by default
+     - Smooth anchor navigation
+     - No scroll tracking
+     - No active-section highlighting
 ===================================================== -->
 
 <script>
@@ -1255,6 +1305,7 @@ layout: default
     "use strict";
 
     function initialiseArticleToc() {
+
         const article = document.querySelector(".article-post");
         const toc = document.getElementById("article-toc");
         const linksContainer = document.getElementById("article-toc-links");
@@ -1266,17 +1317,28 @@ layout: default
 
         const headings = Array.from(
             article.querySelectorAll("h2, h3")
-        ).filter(heading => heading.textContent.trim());
+        ).filter(function (heading) {
+            return heading.textContent.trim().length > 0;
+        });
 
-        if (!headings.length) return;
+        /* Hide TOC on posts without headings */
+        if (headings.length === 0) {
+            return;
+        }
 
+        /* Collect existing IDs to avoid duplicates */
         const usedIds = new Set(
             Array.from(document.querySelectorAll("[id]"))
-                .map(element => element.id)
+                .map(function (element) {
+                    return element.id;
+                })
         );
 
-        headings.forEach((heading, index) => {
+        headings.forEach(function (heading, index) {
+
+            /* Generate an ID only when one does not exist */
             if (!heading.id) {
+
                 const base = heading.textContent
                     .trim()
                     .toLowerCase()
@@ -1284,19 +1346,22 @@ layout: default
                     .replace(/[\u0300-\u036f]/g, "")
                     .replace(/[^a-z0-9\s-]/g, "")
                     .trim()
-                    .replace(/\s+/g, "-") || "section-" + (index + 1);
+                    .replace(/\s+/g, "-") ||
+                    "section-" + (index + 1);
 
                 let candidate = base;
                 let suffix = 2;
 
                 while (usedIds.has(candidate)) {
-                    candidate = base + "-" + suffix++;
+                    candidate = base + "-" + suffix;
+                    suffix++;
                 }
 
                 heading.id = candidate;
                 usedIds.add(candidate);
             }
 
+            /* Create navigation link */
             const link = document.createElement("a");
 
             link.className =
@@ -1306,7 +1371,9 @@ layout: default
             link.href = "#" + encodeURIComponent(heading.id);
             link.textContent = heading.textContent.trim();
 
+            /* Navigate to heading */
             link.addEventListener("click", function (event) {
+
                 event.preventDefault();
 
                 const reducedMotion = window.matchMedia(
@@ -1318,16 +1385,17 @@ layout: default
                     block: "start"
                 });
 
+                /* Update address bar without reloading */
                 history.replaceState(
                     null,
                     "",
                     "#" + encodeURIComponent(heading.id)
                 );
 
-                /* Collapse after selection on mobile */
+                /* Collapse contents after selecting on mobile */
                 if (
                     window.matchMedia(
-                        "(max-width: 991.98px)"
+                        "(max-width: 1199.98px)"
                     ).matches
                 ) {
                     details.open = false;
@@ -1335,9 +1403,14 @@ layout: default
             });
 
             linksContainer.appendChild(link);
+
         });
 
+        /* Show TOC once links are generated */
         toc.hidden = false;
+
+        /* Always start collapsed */
+        details.open = false;
     }
 
     if (document.readyState === "loading") {
@@ -1348,5 +1421,6 @@ layout: default
     } else {
         initialiseArticleToc();
     }
+
 })();
 </script>
