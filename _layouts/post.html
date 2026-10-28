@@ -762,13 +762,6 @@ layout: default
     text-decoration: none;
 }
 
-.article-toc .toc-link.is-active {
-    color: #111;
-    background: #f3f4f6;
-    border-left-color: #222;
-    font-weight: 700;
-}
-
 .article-toc .toc-link.toc-h3 {
     padding-left: 25px;
     font-size: 12px;
@@ -779,19 +772,40 @@ layout: default
     scroll-margin-top: 100px;
 }
 
-/* Desktop: floating on right */
+
+/* Desktop: TOC moves naturally with article */
 @media (min-width: 992px) {
-    .article-toc {
-        position: fixed;
-        top: 115px;
-        right: 16px;
-        width: 170px;
+    .post-article-column {
+        position: relative;
     }
 
-    .article-toc:has(details[open]) {
-        width: 225px;
+    .article-toc {
+        position: absolute;
+        top: 0;
+        left: calc(100% + 20px);
+        right: auto;
+        width: 190px;
+        z-index: 10;
+    }
+
+    .article-toc details[open] {
+        width: 220px;
     }
 }
+
+/* Keep TOC above article on smaller screens */
+@media (max-width: 991.98px) {
+    .article-toc {
+        position: static;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .article-toc details[open] {
+        width: 100%;
+    }
+}
+
 
 /* Tablet and mobile: above article */
 @media (max-width: 991.98px) {
@@ -1230,9 +1244,12 @@ layout: default
 </script>
 
 
+
 <!-- =====================================================
-     AUTOMATIC TABLE OF CONTENTS AND ACTIVE SECTION
+     SIMPLE ARTICLE TABLE OF CONTENTS
+     Navigation only - no scroll tracking
 ===================================================== -->
+
 <script>
 (function () {
     "use strict";
@@ -1243,11 +1260,13 @@ layout: default
         const linksContainer = document.getElementById("article-toc-links");
         const details = document.getElementById("article-toc-details");
 
-        if (!article || !toc || !linksContainer || !details) return;
+        if (!article || !toc || !linksContainer || !details) {
+            return;
+        }
 
         const headings = Array.from(
             article.querySelectorAll("h2, h3")
-        ).filter(heading => heading.textContent.trim().length > 0);
+        ).filter(heading => heading.textContent.trim());
 
         if (!headings.length) return;
 
@@ -1255,8 +1274,6 @@ layout: default
             Array.from(document.querySelectorAll("[id]"))
                 .map(element => element.id)
         );
-
-        const entries = [];
 
         headings.forEach((heading, index) => {
             if (!heading.id) {
@@ -1307,8 +1324,7 @@ layout: default
                     "#" + encodeURIComponent(heading.id)
                 );
 
-                setActive(heading);
-
+                /* Collapse after selection on mobile */
                 if (
                     window.matchMedia(
                         "(max-width: 991.98px)"
@@ -1319,107 +1335,9 @@ layout: default
             });
 
             linksContainer.appendChild(link);
-            entries.push({ heading, link });
         });
 
         toc.hidden = false;
-
-        let activeHeading = null;
-
-        function setActive(heading) {
-            if (heading === activeHeading) return;
-
-            activeHeading = heading;
-
-            entries.forEach(entry => {
-                const active = entry.heading === heading;
-
-                entry.link.classList.toggle(
-                    "is-active",
-                    active
-                );
-
-                if (active) {
-                    entry.link.setAttribute(
-                        "aria-current",
-                        "location"
-                    );
-                } else {
-                    entry.link.removeAttribute("aria-current");
-                }
-            });
-
-            if (details.open) {
-                const selected = entries.find(
-                    entry => entry.heading === heading
-                );
-
-                if (selected) {
-                    const box =
-                        linksContainer.getBoundingClientRect();
-
-                    const item =
-                        selected.link.getBoundingClientRect();
-
-                    if (
-                        item.top < box.top ||
-                        item.bottom > box.bottom
-                    ) {
-                        linksContainer.scrollTop +=
-                            item.top -
-                            box.top -
-                            box.height / 2;
-                    }
-                }
-            }
-        }
-
-        let scheduled = false;
-
-        function updateActive() {
-            scheduled = false;
-
-            const cutoff = 155;
-            let current = headings[0];
-
-            for (const heading of headings) {
-                if (
-                    heading.getBoundingClientRect().top <= cutoff
-                ) {
-                    current = heading;
-                } else {
-                    break;
-                }
-            }
-
-            setActive(current);
-        }
-
-        function requestUpdate() {
-            if (!scheduled) {
-                scheduled = true;
-
-                window.requestAnimationFrame(updateActive);
-            }
-        }
-
-        window.addEventListener(
-            "scroll",
-            requestUpdate,
-            { passive: true }
-        );
-
-        window.addEventListener(
-            "resize",
-            requestUpdate
-        );
-
-        details.addEventListener(
-            "toggle",
-            requestUpdate
-        );
-
-        requestUpdate();
     }
 
     if (document.readyState === "loading") {
@@ -1432,4 +1350,3 @@ layout: default
     }
 })();
 </script>
-
