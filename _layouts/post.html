@@ -651,25 +651,37 @@ layout: default
 }
 
 
+
 /* =====================================================
-   DESKTOP TOC
+   DESKTOP TOC - NO CUT-OFF WHILE SCROLLING
 ===================================================== */
 
 @media (min-width: 1200px) {
 
     .article-toc {
-        max-height: calc(100vh - 110px);
+        position: sticky;
+        top: 90px;
+        align-self: start;
+        height: auto;
+        max-height: calc(100dvh - 110px);
+        overflow: visible;
     }
 
     .article-toc details {
         display: flex;
         flex-direction: column;
-        max-height: calc(100vh - 110px);
+        width: 100%;
+        max-height: calc(100dvh - 110px);
+        overflow: hidden;
     }
 
-    /* Always show navigation on desktop */
+    /* Keep the heading visible at all times */
     .article-toc summary {
-        flex-shrink: 0;
+        position: relative;
+        display: flex;
+        flex: 0 0 auto;
+        padding: 0 0 12px;
+        background: #fff;
         cursor: default;
         pointer-events: none;
     }
@@ -678,15 +690,19 @@ layout: default
         display: none;
     }
 
+    /* Only the heading links can scroll */
     .article-toc .toc-links {
         display: block !important;
         flex: 1 1 auto;
         min-height: 0;
-        max-height: calc(100vh - 155px);
-        padding: 0;
+        max-height: calc(100dvh - 155px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        padding-bottom: 20px;
     }
 }
-
 
 /* =====================================================
    MOBILE TOC
