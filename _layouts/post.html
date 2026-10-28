@@ -882,3 +882,54 @@ layout: default
 
 </button>
 
+
+<!-- =====================================================
+     BACK TO TOP FUNCTIONALITY
+===================================================== -->
+
+<script>
+(function () {
+    "use strict";
+
+    function initialiseBackToTop() {
+        const button = document.getElementById("back-to-top");
+
+        if (!button) return;
+
+        function updateVisibility() {
+            button.classList.toggle(
+                "is-visible",
+                window.scrollY > 350
+            );
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateVisibility,
+            { passive: true }
+        );
+
+        updateVisibility();
+
+        button.addEventListener("click", function () {
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+            window.scrollTo({
+                top: 0,
+                behavior: reducedMotion ? "auto" : "smooth"
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialiseBackToTop
+        );
+    } else {
+        initialiseBackToTop();
+    }
+})();
+</script>
