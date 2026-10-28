@@ -550,6 +550,136 @@ layout: default
         transition: none;
     }
 }
+     
+/* =====================================================
+   ARTICLE BLOCKQUOTE FIX
+   Removes oversized decorative quotation marks
+   ===================================================== */
+
+.article-post blockquote {
+    position: relative;
+    display: block;
+    margin: 1.6rem 0;
+    padding: 14px 20px;
+
+    background: #f8f9fa;
+    border-left: 4px solid #64748b;
+    border-radius: 0 6px 6px 0;
+
+    font-size: inherit;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #374151;
+
+    quotes: none;
+}
+
+/* Remove decorative quotation marks */
+.article-post blockquote::before,
+.article-post blockquote::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Keep paragraph sizes consistent */
+.article-post blockquote p {
+    font-size: inherit;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Maintain spacing between multiple paragraphs */
+.article-post blockquote p + p {
+    margin-top: 0.8rem;
+}
+
+/* Mobile */
+@media (max-width: 767.98px) {
+    .article-post blockquote {
+        padding: 12px 15px;
+        margin: 1.3rem 0;
+    }
+}
+
+
+/* =====================================================
+   ARTICLE TABLE STYLING
+   Clear borders and readable spacing
+   ===================================================== */
+
+.article-post table {
+    width: 100%;
+    max-width: 100%;
+    margin: 1.5rem 0;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    background: #ffffff;
+}
+
+/* Table headings */
+.article-post table th {
+    padding: 12px 14px;
+
+    background: #f1f5f9;
+    color: #1f2937;
+
+    font-weight: 700;
+    text-align: left;
+    vertical-align: top;
+
+    border: 1px solid #d1d5db;
+}
+
+/* Table cells */
+.article-post table td {
+    padding: 11px 14px;
+
+    color: #374151;
+    text-align: left;
+    vertical-align: top;
+
+    border: 1px solid #d1d5db;
+}
+
+/* Alternate row background */
+.article-post table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+/* Hover effect */
+.article-post table tbody tr:hover {
+    background: #f1f5f9;
+}
+
+/* Keep paragraphs inside cells compact */
+.article-post table td p,
+.article-post table th p {
+    margin: 0;
+    font-size: inherit;
+    line-height: 1.6;
+}
+
+/* Mobile table adjustments */
+@media (max-width: 767.98px) {
+
+    .article-post table {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .article-post table th,
+    .article-post table td {
+        padding: 9px 10px;
+        overflow-wrap: anywhere;
+    }
+}
+
 
 </style>
 
