@@ -462,26 +462,30 @@ layout: default
     }
 }
 
+
 /* =====================================================
-   BACK TO TOP BUTTON
+   BACK TO TOP BUTTON - CIRCULAR CHEVRON DESIGN
    ===================================================== */
 
 .back-to-top {
     position: fixed;
     right: 28px;
     bottom: 28px;
-    width: 46px;
-    height: 46px;
-    border: none;
-    border-radius: 50%;
-    background: #222222;
-    color: #ffffff;
+
+    width: 48px;
+    height: 48px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 1;
+
+    background: #ffffff;
+    color: #222222;
+
+    border: 5px solid #222222;
+    border-radius: 50%;
+
+    padding: 0;
     cursor: pointer;
     z-index: 9999;
 
@@ -497,6 +501,7 @@ layout: default
         background-color 0.3s ease;
 }
 
+/* Show after scrolling */
 .back-to-top.is-visible {
     opacity: 1;
     visibility: visible;
@@ -504,27 +509,42 @@ layout: default
     transform: translateY(0);
 }
 
-.back-to-top:hover,
-.back-to-top:focus-visible {
-    background: #444444;
+/* Chevron icon */
+.back-to-top svg {
+    width: 25px;
+    height: 25px;
+    display: block;
+}
+
+/* Hover effect */
+.back-to-top:hover {
+    background: #f2f2f2;
     transform: translateY(-3px);
 }
 
+/* Keyboard accessibility */
 .back-to-top:focus-visible {
-    outline: 3px solid #2563eb;
+    outline: 3px solid #777777;
     outline-offset: 3px;
 }
 
+/* Mobile */
 @media (max-width: 767.98px) {
     .back-to-top {
+        width: 43px;
+        height: 43px;
         right: 18px;
         bottom: 18px;
-        width: 42px;
-        height: 42px;
-        font-size: 23px;
+        border-width: 4px;
+    }
+
+    .back-to-top svg {
+        width: 22px;
+        height: 22px;
     }
 }
 
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .back-to-top {
         transition: none;
@@ -845,54 +865,20 @@ layout: default
     id="back-to-top"
     aria-label="Back to top"
     title="Back to top">
-    <span aria-hidden="true">^</span>
+
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+        aria-hidden="true">
+
+        <path d="M4 15 L12 7 L20 15" />
+
+    </svg>
+
 </button>
 
-<script>
-(function () {
-    "use strict";
-
-    function initialiseBackToTop() {
-        var button = document.getElementById("back-to-top");
-
-        if (!button) return;
-
-        function updateVisibility() {
-            button.classList.toggle(
-                "is-visible",
-                window.scrollY > 350
-            );
-        }
-
-        window.addEventListener(
-            "scroll",
-            updateVisibility,
-            { passive: true }
-        );
-
-        updateVisibility();
-
-        button.addEventListener("click", function () {
-            var reducedMotion =
-                window.matchMedia &&
-                window.matchMedia(
-                    "(prefers-reduced-motion: reduce)"
-                ).matches;
-
-            window.scrollTo({
-                top: 0,
-                behavior: reducedMotion ? "auto" : "smooth"
-            });
-        });
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded",
-            initialiseBackToTop
-        );
-    } else {
-        initialiseBackToTop();
-    }
-})();
-</script>
