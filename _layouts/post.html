@@ -4,1627 +4,1277 @@ layout: default
 
 {% assign author = site.authors[page.author] %}
 
-<!-- =====================================================
-     ARTICLE HEADER
-===================================================== -->
-
+<!-- ARTICLE HEADER -->
 <div class="container">
-    <div class="jumbotron jumbotron-fluid mb-3 pl-0 pt-0 pb-0 bg-white position-relative">
-        <div class="h-100 tofront">
-            <div class="row {% if page.image %}justify-content-between{% else %}justify-content-center{% endif %}">
+  <div class="jumbotron jumbotron-fluid mb-3 pl-0 pt-0 pb-0 bg-white position-relative">
+    <div class="h-100 tofront">
+      <div class="row {% if page.image %}justify-content-between{% else %}justify-content-center{% endif %}">
 
-                <div class="{% if page.image %}col-md-6{% else %}col-md-8{% endif %} pr-0 pr-md-4 pt-4 pb-4 align-self-center">
+        <div class="{% if page.image %}col-md-6{% else %}col-md-8{% endif %} pr-0 pr-md-4 pt-4 pb-4 align-self-center">
 
-                    {% if page.categories.size > 0 %}
-                    <p class="text-uppercase font-weight-bold">
-                        <span class="catlist">
-                            {% for category in page.categories %}
-                            {% assign category_url = category | slugify | prepend: '/categories/' | append: '/' | relative_url %}
-                            <a class="sscroll text-danger" href="{{ category_url }}">
-                                {{ category | replace: '-', ' ' }}
-                            </a>
-                            {% unless forloop.last %}
-                            <span class="sep">. </span>
-                            {% endunless %}
-                            {% endfor %}
-                        </span>
-                    </p>
-                    {% endif %}
+          {% if page.categories.size > 0 %}
+          <p class="text-uppercase font-weight-bold">
+            <span class="catlist">
+              {% for category in page.categories %}
+                {% assign category_url = category | slugify | prepend: '/categories/' | append: '/' | relative_url %}
+                <a class="sscroll text-danger" href="{{ category_url }}">{{ category | replace: '-', ' ' }}</a>
+                {% unless forloop.last %}<span class="sep">. </span>{% endunless %}
+              {% endfor %}
+            </span>
+          </p>
+          {% endif %}
 
-                    <h1 class="display-4 mb-4 article-headline" data-pagefind-meta="title">
-                        {{ page.title | escape }}
-                    </h1>
+          <h1 class="display-4 mb-4 article-headline" data-pagefind-meta="title">
+            {{ page.title | escape }}
+          </h1>
 
-                    <div class="d-flex align-items-center">
-                        {% if author.avatar %}
-                        <img
-                            class="rounded-circle"
-                            src="{{ author.avatar | relative_url }}"
-                            alt="{{ author.name | escape }}"
-                            width="70">
-                        {% endif %}
+          <div class="d-flex align-items-center">
+            {% if author.avatar %}
+            <img class="rounded-circle"
+                 src="{{ author.avatar | relative_url }}"
+                 alt="{{ author.name | escape }}"
+                 width="70">
+            {% endif %}
 
-                        <small class="ml-3">
-                            {{ author.name }}
+            <small class="ml-3">
+              {{ author.name }}
 
-                            {% if author.site %}
-                            <span>
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="{{ author.site }}"
-                                    class="btn btn-outline-success btn-sm btn-round ml-1">
-                                    Follow
-                                </a>
-                            </span>
-                            {% endif %}
+              {% if author.site %}
+              <span>
+                <a target="_blank"
+                   rel="noopener noreferrer"
+                   href="{{ author.site }}"
+                   class="btn btn-outline-success btn-sm btn-round ml-1">Follow</a>
+              </span>
+              {% endif %}
 
-                            <span class="text-muted d-block mt-1">
-                                Published: {{ page.date | date: '%b %d, %Y' }}
-                                {% if page.last_modified_at %}
-                                · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
-                                {% endif %}
-                                · {% include meta-read-time.html %}
-                            </span>
-                        </small>
-                    </div>
-                </div>
-
-                {% if page.image %}
-                <div class="col-md-6 pr-0 align-self-center">
-
-                    {% if page.image contains "://" %}
-                        {% assign featured_image = page.image %}
-                    {% else %}
-                        {% assign featured_image = page.image | relative_url %}
-                    {% endif %}
-
-                    <img
-                        class="rounded lazyload"
-                        data-src="{{ featured_image }}"
-                        alt="{{ page.title | escape }}">
-
-                    {% if page.title-image %}
-                    <small>
-                        <span class="text-muted d-block mt-1">
-                            {{ page.title-image }}
-                            {% if page.title-image-source %}
-                            - Source: {{ page.title-image-source }}
-                            {% endif %}
-                        </span>
-                    </small>
-                    {% endif %}
-                </div>
+              <span class="text-muted d-block mt-1">
+                Published: {{ page.date | date: '%b %d, %Y' }}
+                {% if page.last_modified_at %}
+                · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
                 {% endif %}
-
-            </div>
+                · {% include meta-read-time.html %}
+              </span>
+            </small>
+          </div>
         </div>
+
+        {% if page.image %}
+        <div class="col-md-6 pr-0 align-self-center">
+          {% if page.image contains "://" %}
+            {% assign featured_image = page.image %}
+          {% else %}
+            {% assign featured_image = page.image | relative_url %}
+          {% endif %}
+
+          <img class="rounded lazyload"
+               data-src="{{ featured_image }}"
+               alt="{{ page.title | escape }}">
+
+          {% if page.title-image %}
+          <small>
+            <span class="text-muted d-block mt-1">
+              {{ page.title-image }}
+              {% if page.title-image-source %}
+              - Source: {{ page.title-image-source }}
+              {% endif %}
+            </span>
+          </small>
+          {% endif %}
+        </div>
+        {% endif %}
+
+      </div>
     </div>
+  </div>
 </div>
 
-
-<!-- =====================================================
-     ARTICLE STYLES
-===================================================== -->
-
 <style>
-     
-/* Keep sticky TOC aligned with available viewport height */
-@media (min-width: 1200px) and (max-height: 650px) {
-
-    .article-toc {
-        top: 20px;
-        max-height: calc(100dvh - 40px);
-    }
-
-    .article-toc details {
-        max-height: calc(100dvh - 40px);
-    }
-
-    .article-toc .toc-links {
-        max-height: calc(100dvh - 85px);
-    }
-}
-
-
-/* =====================================================
+/* ==================================================
    ARTICLE TYPOGRAPHY
-===================================================== */
+================================================== */
 
 .article-post {
-    font-size: 16px;
-    line-height: 1.7;
-    font-weight: 400;
-    min-width: 0;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  min-width: 0;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .article-post p {
-    font-size: inherit;
-    line-height: 1.7;
-    margin-bottom: 1.35rem;
+  font-size: inherit;
+  line-height: 1.7;
+  margin-bottom: 1.35rem;
 }
 
 .article-post h2 {
-    font-size: 25px;
-    line-height: 1.35;
-    font-weight: 700;
-    margin-top: 2.2rem;
-    margin-bottom: 1rem;
+  font-size: 25px;
+  line-height: 1.35;
+  font-weight: 700;
+  margin: 2.2rem 0 1rem;
 }
 
 .article-post h3 {
-    font-size: 20px;
-    line-height: 1.4;
-    font-weight: 700;
-    margin-top: 1.8rem;
-    margin-bottom: .85rem;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  margin: 1.8rem 0 .85rem;
 }
 
 .article-post h4 {
-    font-size: 18px;
-    line-height: 1.45;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: .75rem;
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: 600;
+  margin: 1.5rem 0 .75rem;
 }
 
 .article-post ul,
 .article-post ol {
-    font-size: inherit;
-    line-height: 1.7;
-    margin-bottom: 1.35rem;
-    padding-left: 1.5rem;
+  font-size: inherit;
+  line-height: 1.7;
+  margin-bottom: 1.35rem;
+  padding-left: 1.5rem;
 }
 
 .article-post li {
-    font-size: inherit;
-    line-height: 1.7;
-    margin-bottom: .4rem;
+  font-size: inherit;
+  line-height: 1.7;
+  margin-bottom: .4rem;
 }
 
 .article-post pre {
-    max-width: 100%;
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-x: auto;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
 }
 
 .article-post pre code {
-    font-size: inherit;
+  font-size: inherit;
 }
 
 .article-post :not(pre) > code {
-    font-size: .88em;
+  font-size: .88em;
 }
 
 .article-post img,
 .article-post video {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
-/* Preserve original drop cap */
 .article-post > p:first-of-type::first-letter {
-    float: left;
-    font-size: 3.5em;
-    line-height: .85;
-    padding-top: .08em;
-    padding-right: .12em;
-    font-weight: 700;
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .article-post { font-size: 16px; }
-    .article-post h2 { font-size: 23px; }
-    .article-post h3 { font-size: 19px; }
-    .article-post h4 { font-size: 18px; }
-    .article-post pre { font-size: 13px; }
+  float: left;
+  font-size: 3.5em;
+  line-height: .85;
+  padding-top: .08em;
+  padding-right: .12em;
+  font-weight: 700;
 }
 
 @media (max-width: 767.98px) {
-    .article-post { font-size: 15px; }
-    .article-post h2 {
-        font-size: 22px;
-        margin-top: 1.9rem;
-    }
-    .article-post h3 {
-        font-size: 18px;
-        margin-top: 1.5rem;
-    }
-    .article-post h4 { font-size: 17px; }
-    .article-post pre { font-size: 13px; }
-    .article-post > p:first-of-type::first-letter {
-        font-size: 3.2em;
-    }
+  .article-post { font-size: 15px; }
+  .article-post h2 { font-size: 22px; }
+  .article-post h3 { font-size: 18px; }
+  .article-post h4 { font-size: 17px; }
+  .article-post pre { font-size: 13px; }
+  .article-post > p:first-of-type::first-letter { font-size: 3.2em; }
 }
 
-
-/* =====================================================
+/* ==================================================
    BLOCKQUOTES
-===================================================== */
+================================================== */
 
 .article-post blockquote {
-    position: relative;
-    display: block;
-    margin: 1.6rem 0;
-    padding: 14px 20px;
-    background: #f8f9fa;
-    border-left: 4px solid #64748b;
-    border-radius: 0 6px 6px 0;
-    font-size: inherit;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.7;
-    color: #374151;
-    quotes: none;
+  position: relative;
+  display: block;
+  margin: 1.6rem 0;
+  padding: 14px 20px;
+  background: #f8f9fa;
+  border-left: 4px solid #64748b;
+  border-radius: 0 6px 6px 0;
+  font-size: inherit;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #374151;
+  quotes: none;
 }
 
 .article-post blockquote::before,
 .article-post blockquote::after {
-    content: none !important;
-    display: none !important;
+  content: none !important;
+  display: none !important;
 }
 
 .article-post blockquote p {
-    font-size: inherit;
-    line-height: 1.7;
-    margin: 0;
+  font-size: inherit;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .article-post blockquote p + p {
-    margin-top: .8rem;
+  margin-top: .8rem;
 }
 
-@media (max-width: 767.98px) {
-    .article-post blockquote {
-        padding: 12px 15px;
-        margin: 1.3rem 0;
-    }
-}
-
-
-/* =====================================================
-   ARTICLE TABLES
-===================================================== */
+/* ==================================================
+   TABLES
+================================================== */
 
 .article-post table {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    margin: 1.5rem 0;
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: 14px;
-    line-height: 1.6;
-    background: #fff;
-    overflow-x: auto;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  background: #fff;
+  overflow-x: auto;
+}
+
+.article-post table th,
+.article-post table td {
+  padding: 11px 14px;
+  border: 1px solid #d1d5db;
+  text-align: left;
+  vertical-align: top;
 }
 
 .article-post table th {
-    padding: 12px 14px;
-    background: #f1f5f9;
-    color: #1f2937;
-    font-weight: 700;
-    text-align: left;
-    vertical-align: top;
-    border: 1px solid #d1d5db;
+  background: #f1f5f9;
+  color: #1f2937;
+  font-weight: 700;
 }
 
 .article-post table td {
-    padding: 11px 14px;
-    color: #374151;
-    text-align: left;
-    vertical-align: top;
-    border: 1px solid #d1d5db;
+  color: #374151;
 }
 
 .article-post table tbody tr:nth-child(even) {
-    background: #f8fafc;
+  background: #f8fafc;
 }
 
 .article-post table tbody tr:hover {
-    background: #f1f5f9;
+  background: #f1f5f9;
 }
 
 .article-post table td p,
 .article-post table th p {
-    margin: 0;
-    font-size: inherit;
-    line-height: 1.6;
+  margin: 0;
+  font-size: inherit;
+  line-height: 1.6;
 }
 
 @media (max-width: 767.98px) {
-    .article-post table { font-size: 13px; }
-    .article-post table th,
-    .article-post table td {
-        padding: 9px 10px;
-        overflow-wrap: anywhere;
-    }
+  .article-post table { font-size: 13px; }
+  .article-post table th,
+  .article-post table td {
+    padding: 9px 10px;
+    overflow-wrap: anywhere;
+  }
 }
 
-
-/* =====================================================
+/* ==================================================
    EDITORIAL TRANSPARENCY
-===================================================== */
+================================================== */
 
 .editorial-transparency {
-    margin: 45px 0 35px;
-    padding: 24px 28px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-left: 4px solid #2563eb;
-    border-radius: 8px;
+  margin: 45px 0 35px;
+  padding: 24px 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #2563eb;
+  border-radius: 8px;
 }
 
 .editorial-transparency-heading {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .editorial-transparency-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #e8f0fe;
-    color: #2563eb;
-    font-size: 17px;
-    font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e8f0fe;
+  color: #2563eb;
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .editorial-transparency h2 {
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 1.4;
-    margin: 0;
-    color: #1e293b;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0;
+  color: #1e293b;
 }
 
 .editorial-transparency p {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #475569;
-    margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #475569;
+  margin: 0 0 12px;
 }
 
 .editorial-transparency-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-top: 13px;
-    margin-top: 15px;
-    border-top: 1px solid #e2e8f0;
-    font-size: 12px;
-    color: #64748b;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 13px;
+  margin-top: 15px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 12px;
+  color: #64748b;
 }
 
 .editorial-dot {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
 @media (max-width: 767px) {
-    .editorial-transparency {
-        padding: 18px;
-        margin-top: 30px;
-    }
-    .editorial-transparency h2 { font-size: 17px; }
-    .editorial-transparency p { font-size: 14px; }
+  .editorial-transparency {
+    padding: 18px;
+    margin-top: 30px;
+  }
+  .editorial-transparency h2 { font-size: 17px; }
+  .editorial-transparency p { font-size: 14px; }
 }
 
-
-/* =====================================================
-   MAIN LAYOUT
-   DESKTOP: SHARE | ARTICLE | DOCUMENTATION SIDEBAR
-===================================================== */
+/* ==================================================
+   MAIN ARTICLE GRID
+================================================== */
 
 .article-body-container,
 .post-content-layout,
 .post-article-column {
-    min-width: 0;
+  min-width: 0;
 }
+
+/*
+  Important:
+  The TOC and article are direct children of the
+  same grid row. This gives the sticky sidebar
+  enough height to follow the article.
+*/
 
 @media (min-width: 1200px) {
+  .post-content-layout {
+    display: grid;
+    grid-template-columns: 55px minmax(0, 1fr) 230px;
+    column-gap: 25px;
+    align-items: stretch;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-    .post-content-layout {
-        display: grid;
-        grid-template-columns: 55px minmax(0, 1fr) 230px;
-        column-gap: 25px;
-        align-items: start;
-        margin-left: 0;
-        margin-right: 0;
-    }
+  .post-share-sidebar {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    width: auto;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-    .post-share-sidebar {
-        grid-column: 1;
-        grid-row: 1;
-        position: relative;
-        width: auto;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
+  .post-share-sidebar .sticky-top {
+    position: sticky;
+    top: 100px;
+    text-align: center !important;
+  }
 
-    .post-share-sidebar .sticky-top {
-        position: sticky;
-        top: 100px;
-        text-align: center !important;
-    }
+  .post-share-sidebar .a2a_kit {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 
-    .post-share-sidebar .a2a_kit {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
+  .post-share-sidebar .a2a_kit a {
+    float: none !important;
+  }
 
-    .post-share-sidebar .a2a_kit a {
-        float: none !important;
-    }
+  .post-article-column {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
 
-    .post-article-column {
-        grid-column: 2;
-        grid-row: 1;
-        width: 100%;
-        max-width: none;
-        min-width: 0;
-        padding: 0;
-    }
-
-    .article-toc {
-        grid-column: 3;
-        grid-row: 1;
-        position: sticky;
-        top: 90px;
-        align-self: start;
-        min-width: 0;
-        width: 100%;
-    }
-}
-
-
-/* =====================================================
-   MOBILE AND TABLET LAYOUT
-===================================================== */
-
-@media (max-width: 1199.98px) {
-
-    .post-content-layout {
-        display: flex;
-        flex-direction: column;
-        margin-left: -15px;
-        margin-right: -15px;
-    }
-
-    .post-share-sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        margin-bottom: 1rem;
-        padding: 0 15px;
-    }
-
-    .post-share-sidebar .sticky-top {
-        position: static !important;
-        text-align: left !important;
-    }
-
-    .post-share-sidebar .a2a_kit {
-        display: inline-flex !important;
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .post-share-sidebar .a2a_kit a {
-        float: none !important;
-    }
-
-    .article-toc {
-        position: static;
-        width: calc(100% - 30px);
-        margin: 0 15px 1.5rem;
-    }
-
-    .post-article-column {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        padding: 0 15px;
-    }
-}
-
-
-/* =====================================================
-   DOCUMENTATION-STYLE TABLE OF CONTENTS
-
-   Desktop:
-   - Always visible
-   - No card
-   - No border around sidebar
-   - Independent scrolling
-   - Active section highlighting
-===================================================== */
-
-.article-toc {
-    font-size: 13px;
-    line-height: 1.5;
-    color: #4b5563;
+  .article-toc {
+    grid-column: 3;
+    grid-row: 1;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
     z-index: 10;
+  }
 }
+
+/* ==================================================
+   OWASP-STYLE TABLE OF CONTENTS
+================================================== */
 
 .article-toc[hidden] {
-    display: none !important;
+  display: none !important;
+}
+
+.article-toc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b5563;
 }
 
 .article-toc details {
-    width: 100%;
-    min-width: 0;
+  width: 100%;
+  min-width: 0;
 }
 
 .article-toc summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 0 0 12px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #222;
-    list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 0 12px;
+  color: #222;
+  font-size: 13px;
+  font-weight: 700;
+  list-style: none;
 }
 
 .article-toc summary::-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 .article-toc summary::marker {
-    content: "";
+  content: "";
 }
 
 .toc-summary-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .toc-list-icon {
-    width: 15px;
-    height: 15px;
-    flex: none;
+  width: 15px;
+  height: 15px;
+  flex: none;
 }
 
 .toc-toggle-icon {
-    width: 8px;
-    height: 8px;
-    flex: none;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(45deg);
-    transition: transform .2s ease;
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .2s ease;
 }
 
 .article-toc details[open] .toc-toggle-icon {
-    transform: rotate(225deg);
+  transform: rotate(225deg);
 }
 
 .article-toc .toc-links {
-    min-width: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
 .article-toc .toc-link {
-    display: block;
-    padding: 7px 10px 7px 13px;
-    border-left: 2px solid #e5e7eb;
-    color: #64748b;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.5;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-    transition: color .15s ease, border-color .15s ease;
+  display: block;
+  padding: 7px 10px 7px 13px;
+  border-left: 2px solid #e5e7eb;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color .15s ease, border-color .15s ease;
 }
 
 .article-toc .toc-link.toc-h3 {
-    padding-left: 27px;
-    font-size: 12px;
+  padding-left: 27px;
+  font-size: 12px;
 }
 
 .article-toc .toc-link:hover,
 .article-toc .toc-link:focus-visible {
-    color: #111;
-    text-decoration: none;
-    border-left-color: #6b7280;
+  color: #111;
+  text-decoration: none;
+  border-left-color: #6b7280;
 }
 
-/* Active heading */
-.article-toc .toc-link.toc-active,
-.article-toc .toc-link.toc-h3.toc-active {
-    color: #111;
-    font-weight: 700;
-    border-left-color: #222;
+.article-toc .toc-link.toc-active {
+  color: #111;
+  font-weight: 700;
+  border-left-color: #222;
 }
 
-/* Parent H2 remains identifiable while H3 is active */
 .article-toc .toc-link.toc-parent-active {
-    color: #374151;
-    font-weight: 600;
+  color: #374151;
+  font-weight: 600;
 }
 
-/* Anchor offset */
 .article-post h2[id],
 .article-post h3[id] {
-    scroll-margin-top: 110px;
+  scroll-margin-top: 110px;
 }
 
-
-
-/* =====================================================
-   DESKTOP TOC - NO CUT-OFF WHILE SCROLLING
-===================================================== */
+/* ==================================================
+   DESKTOP STICKY TOC - NO CUT-OFF
+================================================== */
 
 @media (min-width: 1200px) {
 
-    .article-toc {
-        position: sticky;
-        top: 90px;
-        align-self: start;
-        height: auto;
-        max-height: calc(100dvh - 110px);
-        overflow: visible;
-    }
+  /*
+    Sticky positioning belongs to this INNER element.
 
+    The outer .article-toc fills the article row.
+    This prevents the sticky sidebar from losing
+    its scrolling area.
+  */
+
+  .article-toc details {
+    position: sticky;
+    top: 90px;
+    display: block;
+    width: 100%;
+    max-height: calc(100vh - 110px);
+    max-height: calc(100dvh - 110px);
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  /*
+    Keep "On this page" visible.
+    Only the links below it can scroll.
+  */
+
+  .article-toc summary {
+    position: relative;
+    display: flex;
+    padding: 0 0 12px;
+    background: #fff;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .article-toc .toc-toggle-icon {
+    display: none;
+  }
+
+  .article-toc .toc-links {
+    display: block;
+    max-height: calc(100vh - 160px);
+    max-height: calc(100dvh - 160px);
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 0 16px;
+    scroll-padding-top: 16px;
+    scroll-padding-bottom: 16px;
+    overscroll-behavior: contain;
+  }
+
+  /*
+    On shorter screens, reduce the sticky offset
+    so the TOC remains fully inside the viewport.
+  */
+
+  @media (max-height: 650px) {
     .article-toc details {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-height: calc(100dvh - 110px);
-        overflow: hidden;
+      top: 20px;
+      max-height: calc(100dvh - 40px);
     }
 
-    /* Keep the heading visible at all times */
-    .article-toc summary {
-        position: relative;
-        display: flex;
-        flex: 0 0 auto;
-        padding: 0 0 12px;
-        background: #fff;
-        cursor: default;
-        pointer-events: none;
-    }
-
-    .article-toc .toc-toggle-icon {
-        display: none;
-    }
-
-    /* Only the heading links can scroll */
     .article-toc .toc-links {
-        display: block !important;
-        flex: 1 1 auto;
-        min-height: 0;
-        max-height: calc(100dvh - 155px);
-        overflow-y: auto;
-        overflow-x: hidden;
-        overscroll-behavior: contain;
-        scrollbar-width: thin;
-        padding-bottom: 20px;
+      max-height: calc(100dvh - 85px);
     }
+  }
 }
 
-/* =====================================================
-   MOBILE TOC
-===================================================== */
+/* ==================================================
+   TABLET AND MOBILE
+================================================== */
 
 @media (max-width: 1199.98px) {
 
-    .article-toc details {
-        display: block;
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        overflow: hidden;
-    }
+  .post-content-layout {
+    display: flex;
+    flex-direction: column;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 
-    .article-toc summary {
-        padding: 13px 14px;
-        cursor: pointer;
-    }
+  .post-share-sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 0 15px;
+  }
 
-    .article-toc summary:hover {
-        background: #f8f9fa;
-    }
+  .post-share-sidebar .sticky-top {
+    position: static !important;
+    text-align: left !important;
+  }
 
-    .article-toc summary:focus-visible {
-        outline: 2px solid #222;
-        outline-offset: -3px;
-    }
+  .post-share-sidebar .a2a_kit {
+    display: inline-flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
 
-    .article-toc .toc-links {
-        max-height: 320px;
-        padding: 8px 0;
-        border-top: 1px solid #e5e7eb;
-    }
+  .post-share-sidebar .a2a_kit a {
+    float: none !important;
+  }
 
-    .article-toc .toc-link {
-        margin-left: 12px;
-        margin-right: 12px;
-    }
+  .article-toc {
+    position: static;
+    width: calc(100% - 30px);
+    margin: 0 15px 1.5rem;
+  }
+
+  .article-toc details {
+    display: block;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .article-toc summary {
+    padding: 13px 14px;
+    cursor: pointer;
+  }
+
+  .article-toc summary:hover {
+    background: #f8f9fa;
+  }
+
+  .article-toc summary:focus-visible {
+    outline: 2px solid #222;
+    outline-offset: -3px;
+  }
+
+  .article-toc .toc-links {
+    max-height: 320px;
+    padding: 8px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .article-toc .toc-link {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .post-article-column {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 15px;
+  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .toc-toggle-icon,
-    .article-toc .toc-link {
-        transition: none;
-    }
-}
-
-
-/* =====================================================
-   BACK TO TOP BUTTON
-===================================================== */
+/* ==================================================
+   BACK TO TOP
+================================================== */
 
 .back-to-top {
-    position: fixed;
-    right: 28px;
-    bottom: 28px;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    color: #222;
-    border: 5px solid #222;
-    border-radius: 50%;
-    padding: 0;
-    cursor: pointer;
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(12px);
-    transition:
-        opacity .3s ease,
-        visibility .3s ease,
-        transform .3s ease,
-        background-color .3s ease;
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #222;
+  border: 5px solid #222;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity .3s, visibility .3s, transform .3s;
 }
 
 .back-to-top.is-visible {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .back-to-top svg {
-    width: 25px;
-    height: 25px;
-    display: block;
+  width: 25px;
+  height: 25px;
+  display: block;
 }
 
 .back-to-top:hover {
-    background: #f2f2f2;
-    transform: translateY(-3px);
+  background: #f2f2f2;
 }
 
 .back-to-top:focus-visible {
-    outline: 3px solid #777;
-    outline-offset: 3px;
+  outline: 3px solid #777;
+  outline-offset: 3px;
 }
 
 @media (max-width: 767.98px) {
-    .back-to-top {
-        width: 43px;
-        height: 43px;
-        right: 18px;
-        bottom: 18px;
-        border-width: 4px;
-    }
+  .back-to-top {
+    width: 43px;
+    height: 43px;
+    right: 18px;
+    bottom: 18px;
+    border-width: 4px;
+  }
 
-    .back-to-top svg {
-        width: 22px;
-        height: 22px;
-    }
+  .back-to-top svg {
+    width: 22px;
+    height: 22px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .back-to-top {
-        transition: none;
-    }
+  .back-to-top,
+  .toc-toggle-icon,
+  .article-toc .toc-link {
+    transition: none;
+  }
 }
 
 </style>
 
-
-<!-- =====================================================
-     ARTICLE BODY
-===================================================== -->
-
+<!-- ARTICLE BODY -->
 <div class="container pt-4 pb-4 article-body-container">
+  <div class="row post-content-layout">
 
-    <div class="row post-content-layout">
-
-        <!-- =================================================
-             SHARE SIDEBAR
-        ================================================= -->
-
-        <div class="post-share-sidebar">
-
-            <div class="sticky-top sticky-top-offset text-center">
-
-                <div class="text-muted">
-                    Share this
-                </div>
-
-                <div class="share d-inline-block">
-
-                    <!-- AddToAny BEGIN -->
-                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-
-                        <a
-                            class="a2a_dd"
-                            href="https://www.addtoany.com/share">
-                        </a>
-
-                        <a class="a2a_button_facebook"></a>
-                        <a class="a2a_button_twitter"></a>
-
-                    </div>
-
-                    <script
-                        async
-                        src="https://static.addtoany.com/menu/page.js">
-                    </script>
-                    <!-- AddToAny END -->
-
-                </div>
-
-            </div>
-
+    <!-- SHARE SIDEBAR -->
+    <div class="post-share-sidebar">
+      <div class="sticky-top sticky-top-offset text-center">
+        <div class="text-muted">Share this</div>
+        <div class="share d-inline-block">
+          <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_twitter"></a>
+          </div>
+          <script async src="https://static.addtoany.com/menu/page.js"></script>
         </div>
-
-
-        <!-- =================================================
-             DOCUMENTATION-STYLE TABLE OF CONTENTS
-        ================================================= -->
-
-        <nav
-            class="article-toc"
-            id="article-toc"
-            aria-label="Table of contents"
-            hidden>
-
-            <details id="article-toc-details">
-
-                <summary>
-
-                    <span class="toc-summary-title">
-
-                        <svg
-                            class="toc-list-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true">
-
-                            <line x1="8" y1="6" x2="21" y2="6"></line>
-                            <line x1="8" y1="12" x2="21" y2="12"></line>
-                            <line x1="8" y1="18" x2="21" y2="18"></line>
-                            <circle cx="3" cy="6" r="1"></circle>
-                            <circle cx="3" cy="12" r="1"></circle>
-                            <circle cx="3" cy="18" r="1"></circle>
-
-                        </svg>
-
-                        On this page
-
-                    </span>
-
-                    <span
-                        class="toc-toggle-icon"
-                        aria-hidden="true">
-                    </span>
-
-                </summary>
-
-                <div
-                    class="toc-links"
-                    id="article-toc-links">
-                </div>
-
-            </details>
-
-        </nav>
-
-
-        <!-- =================================================
-             ARTICLE CONTENT
-        ================================================= -->
-
-        <div class="post-article-column">
-
-            <article class="article-post" data-pagefind-body>
-                {{ content }}
-            </article>
-
-
-            <!-- =================================================
-                 EDITORIAL TRANSPARENCY
-            ================================================= -->
-
-            {% if page.ai_assisted == true %}
-
-            <aside
-                class="editorial-transparency border p-3 bg-lightblue"
-                aria-labelledby="editorial-transparency-title">
-
-                <div class="editorial-transparency-heading">
-
-                    <span
-                        class="editorial-transparency-icon"
-                        aria-hidden="true">
-                        &#10003;
-                    </span>
-
-                    <h2 id="editorial-transparency-title">
-                        Editorial Transparency &amp; AI Assistance
-                    </h2>
-
-                </div>
-
-                <p>
-                    Artificial intelligence (AI) tools assisted with
-                    the research organisation, drafting and structure
-                    of this article. The author is responsible for
-                    the final published content, including its
-                    accuracy, clarity and relevance. Technical
-                    explanations and references are reviewed
-                    before publication.
-                </p>
-
-            </aside>
-
-            {% endif %}
-
-
-            <!-- =================================================
-                 TAGS
-            ================================================= -->
-
-            {% if page.tags.size > 0 %}
-
-            <div class="mb-4">
-
-                <span class="font-weight-bold">
-                    Tags:
-                </span>
-
-                <span class="taglist">
-
-                    {% for tag in page.tags %}
-
-                    {% assign tag_url = tag | slugify | prepend: '/tags/' | append: '/' | relative_url %}
-
-                    <a
-                        class="sscroll btn btn-light btn-sm font-weight-bold"
-                        href="{{ tag_url }}">
-
-                        {{ tag | upcase | replace: '-', ' ' }}
-
-                    </a>
-
-                    {% endfor %}
-
-                </span>
-
-            </div>
-
-            {% endif %}
-
-
-            <!-- =================================================
-                 NEWSLETTER
-            ================================================= -->
-
-            {% if site.feedburner-list %}
-                {% assign home = false %}
-                {% include newsletter.html %}
-            {% endif %}
-
-
-            <!-- =================================================
-                 AUTHOR BOX
-            ================================================= -->
-
-            {% if page.author %}
-
-            <div class="row mt-5">
-
-                <div class="col-md-2 align-self-center">
-
-                    {% if author.avatar %}
-                    <img
-                        class="rounded-circle"
-                        src="{{ author.avatar | relative_url }}"
-                        alt="{{ author.name | escape }}"
-                        width="90">
-                    {% endif %}
-
-                </div>
-
-                <div class="col-md-10">
-
-                    <h5 class="font-weight-bold">
-
-                        Written by {{ author.name }}
-
-                        {% if author.site %}
-                        <span>
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href="{{ author.site }}"
-                                class="btn btn-outline-success btn-sm btn-round ml-2">
-                                Follow
-                            </a>
-                        </span>
-                        {% endif %}
-
-                    </h5>
-
-                    {{ author.bio }}
-
-                </div>
-
-            </div>
-
-            {% endif %}
-
-
-            <!-- =================================================
-                 COMMENTS
-            ================================================= -->
-
-            {% if page.comments != false %}
-                {% include comments.html %}
-            {% endif %}
-
-        </div>
-
+      </div>
     </div>
 
+    <!-- RIGHT-HAND TABLE OF CONTENTS -->
+    <nav class="article-toc"
+         id="article-toc"
+         aria-label="Table of contents"
+         hidden>
+
+      <details id="article-toc-details">
+        <summary>
+          <span class="toc-summary-title">
+            <svg class="toc-list-icon"
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <circle cx="3" cy="6" r="1"></circle>
+              <circle cx="3" cy="12" r="1"></circle>
+              <circle cx="3" cy="18" r="1"></circle>
+            </svg>
+            On this page
+          </span>
+
+          <span class="toc-toggle-icon" aria-hidden="true"></span>
+        </summary>
+
+        <div class="toc-links" id="article-toc-links"></div>
+      </details>
+    </nav>
+
+    <!-- ARTICLE -->
+    <div class="post-article-column">
+      <article class="article-post" data-pagefind-body>
+        {{ content }}
+      </article>
+
+      <!-- EDITORIAL TRANSPARENCY -->
+      {% if page.ai_assisted == true %}
+      <aside class="editorial-transparency"
+             aria-labelledby="editorial-transparency-title">
+
+        <div class="editorial-transparency-heading">
+          <span class="editorial-transparency-icon" aria-hidden="true">
+            &#10003;
+          </span>
+          <h2 id="editorial-transparency-title">
+            Editorial Transparency &amp; AI Assistance
+          </h2>
+        </div>
+
+        <p>
+          Artificial intelligence (AI) tools assisted with
+          the research organisation, drafting and structure
+          of this article. The author is responsible for
+          the final published content, including its
+          accuracy, clarity and relevance. Technical
+          explanations and references are reviewed
+          before publication.
+        </p>
+      </aside>
+      {% endif %}
+
+      <!-- TAGS -->
+      {% if page.tags.size > 0 %}
+      <div class="mb-4">
+        <span class="font-weight-bold">Tags:</span>
+        <span class="taglist">
+          {% for tag in page.tags %}
+            {% assign tag_url = tag | slugify | prepend: '/tags/' | append: '/' | relative_url %}
+            <a class="sscroll btn btn-light btn-sm font-weight-bold"
+               href="{{ tag_url }}">
+              {{ tag | upcase | replace: '-', ' ' }}
+            </a>
+          {% endfor %}
+        </span>
+      </div>
+      {% endif %}
+
+      <!-- NEWSLETTER -->
+      {% if site.feedburner-list %}
+        {% assign home = false %}
+        {% include newsletter.html %}
+      {% endif %}
+
+      <!-- AUTHOR -->
+      {% if page.author %}
+      <div class="row mt-5">
+        <div class="col-md-2 align-self-center">
+          {% if author.avatar %}
+          <img class="rounded-circle"
+               src="{{ author.avatar | relative_url }}"
+               alt="{{ author.name | escape }}"
+               width="90">
+          {% endif %}
+        </div>
+
+        <div class="col-md-10">
+          <h5 class="font-weight-bold">
+            Written by {{ author.name }}
+
+            {% if author.site %}
+            <span>
+              <a target="_blank"
+                 rel="noopener noreferrer"
+                 href="{{ author.site }}"
+                 class="btn btn-outline-success btn-sm btn-round ml-2">
+                Follow
+              </a>
+            </span>
+            {% endif %}
+          </h5>
+          {{ author.bio }}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- COMMENTS -->
+      {% if page.comments != false %}
+        {% include comments.html %}
+      {% endif %}
+    </div>
+
+  </div>
 </div>
 
-
-<!-- =====================================================
-     PREVIOUS / NEXT ARTICLES
-===================================================== -->
-
+<!-- PREVIOUS AND NEXT ARTICLES -->
 <div class="alertbar">
+  <div class="container">
+    <div class="row prevnextlinks small font-weight-bold">
 
-    <div class="container">
-
-        <div class="row prevnextlinks small font-weight-bold">
-
-            {% if page.previous.url %}
-
-            <div class="col-md-6 rightborder pl-0">
-
-                <a
-                    class="text-dark"
-                    href="{{ page.previous.url | relative_url }}">
-
-                    {% if page.previous.image %}
-
-                        {% if page.previous.image contains "://" %}
-                            {% assign previous_image = page.previous.image %}
-                        {% else %}
-                            {% assign previous_image = page.previous.image | relative_url %}
-                        {% endif %}
-
-                        <img
-                            height="30"
-                            class="mr-1"
-                            src="{{ previous_image }}"
-                            alt="">
-
-                    {% endif %}
-
-                    {{ page.previous.title | escape }}
-
-                </a>
-
-            </div>
-
+      {% if page.previous.url %}
+      <div class="col-md-6 rightborder pl-0">
+        <a class="text-dark" href="{{ page.previous.url | relative_url }}">
+          {% if page.previous.image %}
+            {% if page.previous.image contains "://" %}
+              {% assign previous_image = page.previous.image %}
+            {% else %}
+              {% assign previous_image = page.previous.image | relative_url %}
             {% endif %}
+            <img height="30" class="mr-1" src="{{ previous_image }}" alt="">
+          {% endif %}
+          {{ page.previous.title | escape }}
+        </a>
+      </div>
+      {% endif %}
 
-
-            {% if page.next.url %}
-
-            <div class="col-md-6 text-right pr-0">
-
-                <a
-                    class="text-dark"
-                    href="{{ page.next.url | relative_url }}">
-
-                    {{ page.next.title | escape }}
-
-                    {% if page.next.image %}
-
-                        {% if page.next.image contains "://" %}
-                            {% assign next_image = page.next.image %}
-                        {% else %}
-                            {% assign next_image = page.next.image | relative_url %}
-                        {% endif %}
-
-                        <img
-                            height="30"
-                            class="ml-1"
-                            src="{{ next_image }}"
-                            alt="">
-
-                    {% endif %}
-
-                </a>
-
-            </div>
-
+      {% if page.next.url %}
+      <div class="col-md-6 text-right pr-0">
+        <a class="text-dark" href="{{ page.next.url | relative_url }}">
+          {{ page.next.title | escape }}
+          {% if page.next.image %}
+            {% if page.next.image contains "://" %}
+              {% assign next_image = page.next.image %}
+            {% else %}
+              {% assign next_image = page.next.image | relative_url %}
             {% endif %}
-
-        </div>
+            <img height="30" class="ml-1" src="{{ next_image }}" alt="">
+          {% endif %}
+        </a>
+      </div>
+      {% endif %}
 
     </div>
-
+  </div>
 </div>
 
-
-<!-- =====================================================
-     BACK TO TOP BUTTON
-===================================================== -->
-
-<button
-    type="button"
-    class="back-to-top"
-    id="back-to-top"
-    aria-label="Back to top"
-    title="Back to top">
-
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="4"
-        stroke-linecap="square"
-        stroke-linejoin="miter"
-        aria-hidden="true">
-
-        <path d="M4 15 L12 7 L20 15" />
-
-    </svg>
-
+<!-- BACK TO TOP -->
+<button type="button"
+        class="back-to-top"
+        id="back-to-top"
+        aria-label="Back to top"
+        title="Back to top">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="4"
+       stroke-linecap="square"
+       stroke-linejoin="miter"
+       aria-hidden="true">
+    <path d="M4 15 L12 7 L20 15"></path>
+  </svg>
 </button>
-
-
-<!-- =====================================================
-     BACK TO TOP JAVASCRIPT
-===================================================== -->
 
 <script>
 (function () {
-    "use strict";
+  "use strict";
 
-    function initialiseBackToTop() {
-        const button = document.getElementById("back-to-top");
-        if (!button) return;
+  function initBackToTop() {
+    const button = document.getElementById("back-to-top");
+    if (!button) return;
 
-        function updateVisibility() {
-            button.classList.toggle(
-                "is-visible",
-                window.scrollY > 350
-            );
-        }
-
-        window.addEventListener(
-            "scroll",
-            updateVisibility,
-            { passive: true }
-        );
-
-        updateVisibility();
-
-        button.addEventListener("click", function () {
-            const reducedMotion = window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches;
-
-            window.scrollTo({
-                top: 0,
-                behavior: reducedMotion ? "auto" : "smooth"
-            });
-        });
+    function update() {
+      button.classList.toggle("is-visible", window.scrollY > 350);
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded",
-            initialiseBackToTop
-        );
-    } else {
-        initialiseBackToTop();
-    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+
+    button.addEventListener("click", function () {
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      window.scrollTo({
+        top: 0,
+        behavior: reduced ? "auto" : "smooth"
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBackToTop);
+  } else {
+    initBackToTop();
+  }
 })();
 </script>
 
-
-<!-- =====================================================
-     DOCUMENTATION-STYLE TOC JAVASCRIPT
-
-     - Automatic H2/H3 detection
-     - Desktop always expanded
-     - Mobile collapsed
-     - Current section highlighting
-     - Parent H2 highlighting
-     - Independent list scrolling
-     - Smooth heading navigation
-===================================================== -->
-
+<!-- TABLE OF CONTENTS SCRIPT -->
 <script>
 (function () {
-    "use strict";
+  "use strict";
 
-    function initialiseArticleToc() {
+  function initToc() {
+    const article = document.querySelector(".article-post");
+    const toc = document.getElementById("article-toc");
+    const details = document.getElementById("article-toc-details");
+    const list = document.getElementById("article-toc-links");
 
-        const article = document.querySelector(".article-post");
-        const toc = document.getElementById("article-toc");
-        const details = document.getElementById("article-toc-details");
-        const list = document.getElementById("article-toc-links");
+    if (!article || !toc || !details || !list) return;
 
-        if (!article || !toc || !details || !list) return;
+    const headings = Array.from(
+      article.querySelectorAll("h2, h3")
+    ).filter(function (heading) {
+      return heading.textContent.trim().length > 0;
+    });
 
-        const headings = Array.from(
-            article.querySelectorAll("h2, h3")
-        ).filter(function (heading) {
-            return heading.textContent.trim().length > 0;
-        });
+    if (!headings.length) return;
 
-        if (!headings.length) return;
+    const usedIds = new Set(
+      Array.from(document.querySelectorAll("[id]"))
+        .map(function (element) {
+          return element.id;
+        })
+    );
 
-        const usedIds = new Set(
-            Array.from(document.querySelectorAll("[id]"))
-                .map(function (element) {
-                    return element.id;
-                })
-        );
+    const sections = [];
+    let parentHeading = null;
 
-        const sections = [];
-        let currentParent = null;
+    /* Build links from article headings */
+    headings.forEach(function (heading, index) {
+      if (!heading.id) {
+        const base = heading.textContent
+          .trim()
+          .toLowerCase()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9\s-]/g, "")
+          .trim()
+          .replace(/\s+/g, "-") || "section-" + (index + 1);
 
-        /* =================================================
-           BUILD NAVIGATION
-        ================================================= */
+        let id = base;
+        let suffix = 2;
 
-        headings.forEach(function (heading, index) {
-
-            if (!heading.id) {
-
-                const base = heading.textContent
-                    .trim()
-                    .toLowerCase()
-                    .normalize("NFKD")
-                    .replace(/[\u0300-\u036f]/g, "")
-                    .replace(/[^a-z0-9\s-]/g, "")
-                    .trim()
-                    .replace(/\s+/g, "-") ||
-                    "section-" + (index + 1);
-
-                let candidate = base;
-                let suffix = 2;
-
-                while (usedIds.has(candidate)) {
-                    candidate = base + "-" + suffix;
-                    suffix++;
-                }
-
-                heading.id = candidate;
-                usedIds.add(candidate);
-            }
-
-            if (heading.tagName === "H2") {
-                currentParent = heading;
-            }
-
-            const link = document.createElement("a");
-
-            link.className =
-                "toc-link" +
-                (heading.tagName === "H3" ? " toc-h3" : "");
-
-            link.href = "#" + encodeURIComponent(heading.id);
-            link.textContent = heading.textContent.trim();
-
-            list.appendChild(link);
-
-            sections.push({
-                heading: heading,
-                link: link,
-                parent: heading.tagName === "H3"
-                    ? currentParent
-                    : null
-            });
-        });
-
-        toc.hidden = false;
-
-        /* =================================================
-           RESPONSIVE EXPANSION
-        ================================================= */
-
-        const desktopQuery = window.matchMedia(
-            "(min-width: 1200px)"
-        );
-
-        function updateResponsiveToc() {
-            if (desktopQuery.matches) {
-                details.open = true;
-            } else {
-                details.open = false;
-            }
+        while (usedIds.has(id)) {
+          id = base + "-" + suffix++;
         }
 
-        updateResponsiveToc();
+        heading.id = id;
+        usedIds.add(id);
+      }
 
-        if (desktopQuery.addEventListener) {
-            desktopQuery.addEventListener(
-                "change",
-                updateResponsiveToc
-            );
+      if (heading.tagName === "H2") {
+        parentHeading = heading;
+      }
+
+      const link = document.createElement("a");
+      link.className = "toc-link";
+
+      if (heading.tagName === "H3") {
+        link.classList.add("toc-h3");
+      }
+
+      link.href = "#" + encodeURIComponent(heading.id);
+      link.textContent = heading.textContent.trim();
+
+      list.appendChild(link);
+
+      sections.push({
+        heading: heading,
+        link: link,
+        parent: heading.tagName === "H3" ? parentHeading : null
+      });
+    });
+
+    toc.hidden = false;
+
+    const desktop = window.matchMedia("(min-width: 1200px)");
+
+    /* Desktop open, mobile collapsed */
+    function syncLayout() {
+      details.open = desktop.matches;
+    }
+
+    syncLayout();
+
+    if (desktop.addEventListener) {
+      desktop.addEventListener("change", syncLayout);
+    } else {
+      desktop.addListener(syncLayout);
+    }
+
+    /*
+      Do not allow the desktop details to collapse.
+      Mobile retains native details behaviour.
+    */
+    details.addEventListener("toggle", function () {
+      if (desktop.matches && !details.open) {
+        details.open = true;
+      }
+
+      if (details.open && active) {
+        requestAnimationFrame(function () {
+          keepVisible(active.link);
+        });
+      }
+    });
+
+    let active = null;
+    let scheduled = false;
+    let navigationTarget = null;
+    let navigationStart = 0;
+
+    /*
+      Scroll ONLY the internal heading list.
+      Do not call scrollIntoView on TOC links:
+      that can scroll the whole document and
+      cause the top of the sidebar to disappear.
+    */
+    function keepVisible(link) {
+      if (!details.open || !link) return;
+
+      const viewport = list.getBoundingClientRect();
+      const item = link.getBoundingClientRect();
+      const margin = 18;
+
+      if (item.top < viewport.top + margin) {
+        list.scrollTop += item.top - viewport.top - margin;
+      } else if (item.bottom > viewport.bottom - margin) {
+        list.scrollTop += item.bottom - viewport.bottom + margin;
+      }
+    }
+
+    function setActive(section) {
+      if (!section) return;
+
+      const changed = active !== section;
+      active = section;
+
+      sections.forEach(function (item) {
+        const selected = item === section;
+        const isParent = section.parent &&
+          item.heading === section.parent;
+
+        item.link.classList.toggle("toc-active", selected);
+        item.link.classList.toggle(
+          "toc-parent-active",
+          Boolean(isParent && !selected)
+        );
+
+        if (selected) {
+          item.link.setAttribute("aria-current", "location");
         } else {
-            desktopQuery.addListener(updateResponsiveToc);
+          item.link.removeAttribute("aria-current");
         }
+      });
 
-        let activeSection = null;
-        let frameRequested = false;
-        let navigating = false;
-        let navigationTimer = null;
+      if (changed) {
+        keepVisible(section.link);
+      }
+    }
 
-        /* =================================================
-           KEEP ACTIVE LINK VISIBLE
-        ================================================= */
+    function updateActive() {
+      scheduled = false;
 
-        function keepLinkVisible(link) {
+      const threshold = 125;
+      let current = sections[0];
 
-            if (!details.open || !link) return;
-
-            const container = list.getBoundingClientRect();
-            const target = link.getBoundingClientRect();
-            const padding = 24;
-
-            if (target.top < container.top + padding) {
-
-                list.scrollTop +=
-                    target.top - container.top - padding;
-
-            } else if (
-                target.bottom > container.bottom - padding
-            ) {
-
-                list.scrollTop +=
-                    target.bottom - container.bottom + padding;
-            }
+      /*
+        Detect the last heading that has passed
+        the top reading threshold.
+      */
+      for (const section of sections) {
+        if (
+          section.heading.getBoundingClientRect().top <= threshold
+        ) {
+          current = section;
+        } else {
+          break;
         }
+      }
 
-        /* =================================================
-           HIGHLIGHT ACTIVE AND PARENT HEADINGS
-        ================================================= */
+      /*
+        During smooth navigation, keep the chosen
+        section highlighted until the destination
+        is reached or navigation has timed out.
+      */
+      if (navigationTarget) {
+        const distance = Math.abs(
+          navigationTarget.heading.getBoundingClientRect().top - 110
+        );
 
-        function setActive(section) {
+        const timedOut = performance.now() - navigationStart > 1800;
 
-            if (!section) return;
-
-            const changed = activeSection !== section;
-            activeSection = section;
-
-            sections.forEach(function (item) {
-
-                const isActive = item === section;
-
-                const isParent =
-                    section.parent !== null &&
-                    item.heading === section.parent;
-
-                item.link.classList.toggle(
-                    "toc-active",
-                    isActive
-                );
-
-                item.link.classList.toggle(
-                    "toc-parent-active",
-                    isParent && !isActive
-                );
-
-                if (isActive) {
-                    item.link.setAttribute(
-                        "aria-current",
-                        "location"
-                    );
-                } else {
-                    item.link.removeAttribute("aria-current");
-                }
-            });
-
-            if (changed) {
-                keepLinkVisible(section.link);
-            }
+        if (distance < 12 || timedOut) {
+          navigationTarget = null;
+        } else {
+          setActive(navigationTarget);
+          return;
         }
+      }
 
-        /* =================================================
-           DETECT CURRENT HEADING
-        ================================================= */
+      setActive(current);
+    }
 
-        function updateActive() {
+    function requestUpdate() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(updateActive);
+    }
 
-            frameRequested = false;
+    sections.forEach(function (section) {
+      section.link.addEventListener("click", function (event) {
+        event.preventDefault();
 
-            if (navigating) return;
+        const reduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-            const threshold = 125;
-            let active = sections[0];
+        navigationTarget = reduced ? null : section;
+        navigationStart = performance.now();
 
-            for (const section of sections) {
+        setActive(section);
 
-                const top = section.heading
-                    .getBoundingClientRect().top;
-
-                if (top <= threshold) {
-                    active = section;
-                } else {
-                    break;
-                }
-            }
-
-            /* Select last heading near article end */
-            const articleBottom =
-                article.getBoundingClientRect().bottom;
-
-            if (
-                articleBottom <=
-                window.innerHeight - 20
-            ) {
-                active = sections[sections.length - 1];
-            }
-
-            setActive(active);
-        }
-
-        function requestUpdate() {
-
-            if (frameRequested) return;
-
-            frameRequested = true;
-
-            window.requestAnimationFrame(updateActive);
-        }
-
-        /* =================================================
-           LINK NAVIGATION
-        ================================================= */
-
-        sections.forEach(function (section) {
-
-            section.link.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    const reducedMotion = window.matchMedia(
-                        "(prefers-reduced-motion: reduce)"
-                    ).matches;
-
-                    navigating = true;
-
-                    if (navigationTimer) {
-                        window.clearTimeout(navigationTimer);
-                    }
-
-                    setActive(section);
-
-                    section.heading.scrollIntoView({
-                        behavior: reducedMotion
-                            ? "auto"
-                            : "smooth",
-                        block: "start"
-                    });
-
-                    history.pushState(
-                        null,
-                        "",
-                        "#" + encodeURIComponent(
-                            section.heading.id
-                        )
-                    );
-
-                    /* Close only on smaller screens */
-                    if (!desktopQuery.matches) {
-                        details.open = false;
-                    }
-
-                    navigationTimer = window.setTimeout(
-                        function () {
-                            navigating = false;
-                            requestUpdate();
-                        },
-                        reducedMotion ? 0 : 850
-                    );
-                }
-            );
+        section.heading.scrollIntoView({
+          behavior: reduced ? "auto" : "smooth",
+          block: "start"
         });
 
-        /* =================================================
-           SCROLL TRACKING
-        ================================================= */
-
-        window.addEventListener(
-            "scroll",
-            requestUpdate,
-            { passive: true }
+        history.pushState(
+          null,
+          "",
+          "#" + encodeURIComponent(section.heading.id)
         );
 
-        window.addEventListener(
-            "resize",
-            requestUpdate
-        );
-
-        window.addEventListener(
-            "hashchange",
-            requestUpdate
-        );
-
-        /* =================================================
-           WHEN MOBILE TOC OPENS
-        ================================================= */
-
-        details.addEventListener("toggle", function () {
-
-            if (!details.open) return;
-
-            window.requestAnimationFrame(function () {
-
-                if (activeSection) {
-                    keepLinkVisible(activeSection.link);
-                } else {
-                    requestUpdate();
-                }
-            });
-        });
+        if (!desktop.matches) {
+          details.open = false;
+        }
 
         requestUpdate();
-    }
+      });
+    });
 
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded",
-            initialiseArticleToc
-        );
-    } else {
-        initialiseArticleToc();
-    }
+    window.addEventListener(
+      "scroll",
+      requestUpdate,
+      { passive: true }
+    );
+
+    window.addEventListener("resize", requestUpdate);
+    window.addEventListener("hashchange", requestUpdate);
+
+    requestUpdate();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initToc);
+  } else {
+    initToc();
+  }
 })();
 </script>
