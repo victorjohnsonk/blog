@@ -79,6 +79,7 @@ layout: default
 
           <img
             class="rounded lazyload"
+            src="{{ featured_image }}"
             data-src="{{ featured_image }}"
             alt="{{ page.title | escape }}">
 
@@ -101,10 +102,6 @@ layout: default
 </div>
 
 
-<!-- =====================================================
-     STYLES
-===================================================== -->
-
 <style>
 
 /* =====================================================
@@ -116,6 +113,7 @@ layout: default
   line-height: 1.7;
   font-weight: 400;
   min-width: 0;
+  overflow-wrap: break-word;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -177,8 +175,13 @@ layout: default
 }
 
 .article-post img,
-.article-post video {
+.article-post video,
+.article-post iframe {
   max-width: 100%;
+}
+
+.article-post img,
+.article-post video {
   height: auto;
 }
 
@@ -397,15 +400,16 @@ layout: default
 /* =====================================================
    MAIN LAYOUT
 
-   Article width is never reduced by the
-   left share bar or right TOC.
-===================================================== */
+   Desktop:
+   - Share stays in the left white margin.
+   - Article keeps its left edge.
+   - Article becomes narrower from the right.
+   - TOC occupies a dedicated right column.
+   - No overlap.
 
-.article-body-container,
-.post-content-layout,
-.post-article-column {
-  min-width: 0;
-}
+   Compact:
+   - Share and TOC appear above the article.
+===================================================== */
 
 .article-body-container {
   overflow: visible;
@@ -413,20 +417,11 @@ layout: default
 
 .post-content-layout {
   position: relative;
-}
-
-/*
-  The default layout is compact.
-
-  JavaScript enables the wide layout only
-  when BOTH sidebars physically fit.
-*/
-
-.post-content-layout {
   display: flex;
   flex-direction: column;
   margin-left: -15px;
   margin-right: -15px;
+  min-width: 0;
 }
 
 .post-article-column {
@@ -435,6 +430,7 @@ layout: default
   min-width: 0;
   padding: 0 15px;
 }
+
 
 /* =====================================================
    SHARE BAR - COMPACT DEFAULT
@@ -504,7 +500,6 @@ layout: default
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 0 0 12px;
   color: #222;
   font-size: 13px;
   font-weight: 700;
@@ -593,9 +588,6 @@ layout: default
 
 /* =====================================================
    COMPACT TOC
-
-   Used on phones, tablets, smaller desktops,
-   and any screen without enough side space.
 ===================================================== */
 
 .article-toc {
@@ -640,18 +632,30 @@ layout: default
 
 
 /* =====================================================
-   WIDE LAYOUT
+   DESKTOP LAYOUT
 
-   Enabled by .post-wide-sidebars on the
-   article container after measuring the
-   available viewport space.
+   The sidebar occupies space INSIDE the
+   right side of the main container.
+
+   The article's LEFT position is unchanged.
+
+   --toc-column-width controls the space
+   reserved for the right TOC.
+
+   JS enables this layout when the article
+   still has sufficient reading width.
 ===================================================== */
 
 @media (min-width: 1200px) {
 
   .article-body-container.post-wide-sidebars
   .post-content-layout {
-    display: block;
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      var(--toc-column-width, 205px);
+    column-gap: 28px;
+    align-items: stretch;
     position: relative;
     margin-left: -15px;
     margin-right: -15px;
@@ -659,17 +663,19 @@ layout: default
 
   .article-body-container.post-wide-sidebars
   .post-article-column {
-    display: block;
+    grid-column: 1;
+    grid-row: 1;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 0;
   }
 
   /*
-    LEFT SHARE BAR
-
-    The original left-side placement is kept.
+    LEFT SHARE:
+    Positioned relative to the entire grid.
+    It does not take article width.
   */
 
   .article-body-container.post-wide-sidebars
@@ -712,24 +718,22 @@ layout: default
   }
 
   /*
-    RIGHT TOC
-
-    --toc-width is calculated by JavaScript
-    from the actual available right margin.
-
-    This prevents it from extending beyond
-    the browser's visible area.
+    RIGHT TOC:
+    Its own grid column, never overlapping
+    the article or reaching the screen edge.
   */
 
   .article-body-container.post-wide-sidebars
   .article-toc {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 18px);
-    width: var(--toc-width, 200px);
-    max-width: var(--toc-width, 200px);
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
     height: 100%;
     margin: 0;
+    padding-right: 15px;
     z-index: 10;
   }
 
@@ -1329,17 +1333,14 @@ layout: default
     toc.hidden = false;
 
     /*
-      Responsive sidebar sizing.
+      Responsive layout:
 
-      Measure the real container position,
-      not just the viewport width.
+      Keep the article's left edge unchanged.
+      Reserve 205px for the TOC plus a 28px gap.
 
-      The right TOC gets:
-      - 18px gap from the article
-      - 30px gap from the browser edge
-      - width between 165px and 220px
-
-      If that cannot fit, use the compact TOC.
+      Only enable the desktop layout if
+      the remaining article width is at least
+      620px and the left share bar has room.
     */
 
     function updateSidebarLayout() {
@@ -1347,20 +1348,21 @@ layout: default
       const viewportWidth = document.documentElement.clientWidth;
       const rect = container.getBoundingClientRect();
 
-      const rightSpace = viewportWidth - rect.right;
       const leftSpace = rect.left;
+      const containerWidth = rect.width;
 
-      const rightGap = 18;
-      const rightEdgePadding = 30;
+      const tocColumnWidth = 205;
+      const tocGap = 28;
+      const articleMinimumWidth = 620;
       const leftRequiredSpace = 105;
 
-      const availableTocWidth =
-        rightSpace - rightGap - rightEdgePadding;
+      const remainingArticleWidth =
+        containerWidth - tocColumnWidth - tocGap;
 
       const canUseWideLayout =
         viewportWidth >= 1200 &&
         leftSpace >= leftRequiredSpace &&
-        availableTocWidth >= 165;
+        remainingArticleWidth >= articleMinimumWidth;
 
       container.classList.toggle(
         "post-wide-sidebars",
@@ -1369,21 +1371,19 @@ layout: default
 
       if (canUseWideLayout) {
 
-        const tocWidth = Math.min(
-          220,
-          Math.floor(availableTocWidth)
-        );
-
         container.style.setProperty(
-          "--toc-width",
-          tocWidth + "px"
+          "--toc-column-width",
+          tocColumnWidth + "px"
         );
 
         details.open = true;
 
       } else {
 
-        container.style.removeProperty("--toc-width");
+        container.style.removeProperty(
+          "--toc-column-width"
+        );
+
         details.open = false;
 
       }
@@ -1393,7 +1393,7 @@ layout: default
     updateSidebarLayout();
 
     /*
-      Recalculate on window resizing.
+      Recalculate on resize.
     */
 
     let resizeFrame = null;
@@ -1412,7 +1412,7 @@ layout: default
     }, { passive: true });
 
     /*
-      Prevent desktop collapse.
+      Keep desktop TOC expanded.
     */
 
     details.addEventListener("toggle", function () {
@@ -1427,8 +1427,8 @@ layout: default
     });
 
     /*
-      Select only clicked TOC links.
-      No article scroll tracking.
+      Only highlight clicked links.
+      No automatic scroll tracking.
     */
 
     function selectLink(selectedLink) {
@@ -1456,8 +1456,8 @@ layout: default
     }
 
     /*
-      Navigate to a heading without moving
-      the TOC list automatically.
+      Navigate without automatically scrolling
+      the TOC list itself.
     */
 
     links.forEach(function (item) {
