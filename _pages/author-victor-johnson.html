@@ -1,28 +1,206 @@
+
 ---
-title: "Victor Johnon"
+title: "Victor Johnson"
 layout: default
 pagination:
     enabled: true
 permalink: "/author-victor-johnson"
 ---
-<div class="container">
-<div class="row justify-content-center">
-    <div class="col-md-8">        
-        <div class="row align-items-center mb-5">
-            <div class="col-md-9">
-                <h2 class="font-weight-bold">{{page.title}} <span class="small btn btn-outline-success btn-sm btn-round"><a href="{{ site.authors.admin.twitter }}">Follow</a></span></h2>
-                <p><a href="{{ site.authors.admin.site }}">{{ site.authors.admin.site }}</a></p>
-                <p class="excerpt">{{ site.authors.admin.bio }}</p>
+
+<div class="container author-profile-page">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <!-- AUTHOR PROFILE -->
+
+            <div class="row align-items-center mb-5">
+
+                <div class="col-md-9">
+
+                    <h2 class="font-weight-bold mb-3">
+                        {{ page.title }}
+                    </h2>
+
+                    <p class="excerpt">
+                        {{ site.authors.admin.bio }}
+                    </p>
+
+                    <!-- SOCIAL LINKS -->
+
+                    <div class="author-social-links mt-3">
+
+                        <!-- LinkedIn -->
+                        <a
+                            href="https://www.linkedin.com/in/victor-johnson-7a4700386/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn"
+                            title="LinkedIn">
+
+                            <i class="fab fa-linkedin-in"
+                               aria-hidden="true"></i>
+                        </a>
+
+                        <!-- Portfolio -->
+                        <a
+                            href="https://victorjohnson.online/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Portfolio"
+                            title="Portfolio">
+
+                            <i class="fas fa-globe"
+                               aria-hidden="true"></i>
+                        </a>
+
+                        <!-- GitHub -->
+                        <a
+                            href="https://github.com/victorjohnsonk"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub"
+                            title="GitHub">
+
+                            <i class="fab fa-github"
+                               aria-hidden="true"></i>
+                        </a>
+
+                        <!-- Email -->
+                        <a
+                            href="mailto:hello@victorjohnson.online"
+                            aria-label="Email"
+                            title="Email">
+
+                            <i class="fas fa-envelope"
+                               aria-hidden="true"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- AUTHOR AVATAR -->
+
+                <div class="col-md-3 text-md-right text-center mt-4 mt-md-0">
+
+                    <img
+                        alt="{{ site.authors.admin.name | escape }}"
+                        src="{{ site.authors.admin.avatar | relative_url }}"
+                        class="rounded-circle author-profile-avatar"
+                        height="100"
+                        width="100">
+
+                </div>
+
             </div>
-            <div class="col-md-3 text-right">
-                <img alt="{{ site.authors.admin.name }}" src="{{site.baseurl}}/{{ site.authors.admin.avatar }}" class="rounded-circle" height="100" width="100">
-            </div>
-        </div>
-        <h4 class="font-weight-bold spanborder"><span>Posts by {{page.title}}</span></h4>
-            {% assign posts = site.posts | where:"author","admin" %}
+
+
+            <!-- AUTHOR POSTS -->
+
+            <h4 class="font-weight-bold spanborder">
+                <span>Posts by {{ page.title }}</span>
+            </h4>
+
+            {% assign posts = site.posts | where: "author", "admin" %}
+
             {% for post in posts %}
-            {% include main-loop-card.html %}
+                {% include main-loop-card.html %}
             {% endfor %}
+
+        </div>
+
     </div>
+
 </div>
-</div>
+
+
+<style>
+
+/* AUTHOR PROFILE */
+
+.author-profile-page .excerpt {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.author-profile-avatar {
+    object-fit: cover;
+}
+
+/* SOCIAL ICONS */
+
+.author-social-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.author-social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    background: #ffffff;
+    color: #374151;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+
+    font-size: 18px;
+    text-decoration: none;
+
+    transition:
+        background-color .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.author-social-links a:hover {
+    background: #f8f9fa;
+    color: #111111;
+    border-color: #9ca3af;
+    transform: translateY(-2px);
+}
+
+.author-social-links a:focus-visible {
+    outline: 2px solid #374151;
+    outline-offset: 3px;
+}
+
+/* MOBILE */
+
+@media (max-width: 767.98px) {
+
+    .author-profile-page .excerpt {
+        font-size: 15px;
+    }
+
+    .author-social-links {
+        gap: 12px;
+    }
+
+    .author-social-links a {
+        width: 40px;
+        height: 40px;
+        font-size: 17px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .author-social-links a {
+        transition: none;
+    }
+
+}
+
+</style>
