@@ -5,7 +5,7 @@ description: "Explore how AI agent memory differs from chat history, including w
 permalink: /ai-agent-memory-types-design-and-implementation
 author: admin
 categories: [ ai, technology, agents ]
-image: assets/images/posts/2026/10-12/1781151836052.png
+image: assets/images/posts/2026/10-12/ai-agent-memory-design-mlm.webp
 title-image: AI Agent Memory Architecture - Images via Google Images
 tags: [ ai, ai-agents, agent-memory, llm, rag, vector-database, agent-architecture ]
 ai_assisted: true
