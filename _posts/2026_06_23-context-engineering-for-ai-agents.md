@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Context Engineering for AI Agents - What It Is, Why It Matters and How to Implement It
+title: "Context Engineering for AI Agents - What It Is, Why It Matters and How to Implement It"
 description: "Learn what context engineering is, why it matters for AI agents, and how to manage prompts, memory, RAG and tool outputs using practical best practices."
 permalink: /context-engineering-ai-agents-guide
 author: admin
 categories: [ ai, technology, agents ]
-image: assets/images/posts/2026/10-30/context-engineering-ai-agents.png
+image: assets/images/posts/2026/10-12/context-engineering-ai-agents.png
 title-image: Context Engineering for AI Agents - Architecture and Workflow
 tags: [ ai, ai-agents, context-engineering, llm, prompt-engineering, rag, agent-memory, agent-architecture ]
 ai_assisted: true
