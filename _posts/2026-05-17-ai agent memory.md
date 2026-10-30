@@ -5,7 +5,7 @@ description: "Explore how AI agent memory differs from chat history, including w
 permalink: /ai-agent-memory-types-design-and-implementation
 author: admin
 categories: [ ai, technology, agents ]
-image: assets/images/posts/2026/10/image1.jpg
+image: assets/images/posts/2026/10-12/1781151836052.png
 title-image: AI Agent Memory Architecture - Image 1
 tags: [ ai, ai-agents, agent-memory, llm, rag, vector-database, agent-architecture ]
 ai_assisted: true
@@ -104,10 +104,6 @@ The user asks:
 Atlas has no useful answer because the previous troubleshooting experience is no longer in its current context. This is the moment we decide to give Atlas a more deliberate memory system. But before choosing a database or a retrieval framework, we need to answer a more fundamental question. **What kind of memory does Atlas actually need?**
 
 The answer is not one memory type. It is several, each serving a different purpose.
-
-![Image 1: Conceptual illustration of an AI agent progressing from short-lived chat context to persistent memory](assets/images/posts/2026/10/image1.jpg "Image 1 - From Chat History to Agent Memory")
-
-###### Image 1: From conversation context to a persistent agent memory architecture.
 
 ---
 
@@ -494,10 +490,6 @@ At the implementation level, the team decides:
 - How to measure retrieval quality.
 
 These are storage, indexing and retrieval decisions. They should follow from the requirements rather than define the memory category.
-
-![Image 2: Diagram separating memory types from storage and retrieval technologies](assets/images/posts/2026/10/image2.jpg "Image 2 - Memory Design Versus Implementation")
-
-###### Image 2: The same memory type can be implemented using different databases, indexes and retrieval strategies.
 
 ### Example A: Episodic Memory in a Relational Database
 
@@ -940,9 +932,6 @@ Now imagine Atlas has matured into a production agent. It can investigate incide
 
 A practical architecture might look like this:
 
-![Image 3: End-to-end AI agent memory architecture with orchestration, retrieval, storage and governance](assets/images/posts/2026/10/image3.jpg "Image 3 - Production Agent Memory Architecture")
-
-###### Image 3: A production agent can combine working state, historical experiences, reusable knowledge and controlled procedures.
 
     User / Timer / Event
               |
