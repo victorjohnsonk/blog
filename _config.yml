@@ -66,10 +66,12 @@ authors:
 defaults:
   - scope:
       path: "_posts"
+      type: "posts"
     values:
       layout: "post"
       author: "admin"
       avatar: "/assets/images/avatar1.jpg"
+      image: "/assets/images/default-social.png"
 
   # All pages
   - scope:
