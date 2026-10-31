@@ -6,282 +6,463 @@ pagination:
 description: "Explore AI engineering, AI security and cybersecurity with Victor Johnson, an AI Engineer in cybersecurity, covering secure LLMs and agentic AI."
 ---
 
-
-
 <div class="container">
-    
+
 {% if page.url == "/" %}
-  
+
 <!-- Begin post excerpts, let's highlight the first 4 posts on top -->
 <div class="row remove-site-content-margin">
-    
-    <!-- latest post -->
+
+    <!-- Latest post -->
     {% assign latest_post = site.posts[0] %}
+
     <div class="col-md-6">
-    <div class="card border-0 mb-4 box-shadow">   
-    <a href="{{site.baseurl}}{{latest_post.url}}">
-   <div class="topfirstimage lazyload-bg d-none d-xl-block" 
-     data-src="{% if latest_post.image contains '://' %}{{ latest_post.image }}{% else %}{{ site.baseurl }}/{{ latest_post.image }}{% endif %}" 
-     style="height: 200px; background-size: cover; background-repeat: no-repeat;">
-    </div>
-    </a>
-    <div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
-    <h2 class="h4 font-weight-bold">
-    <a class="text-dark" href="{{site.baseurl}}{{latest_post.url}}">{{ latest_post.title }}</a>
-    </h2>
-        <div class="d-xl-none">
-        <p class="excerpt">
-        {{ latest_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
-    </p> </div>
-    <div>
-        <small class="d-block text-muted">
-            In <span class="catlist">
-                {% for category in latest_post.categories %}
-                <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories?id={{ category | downcase }}">{{ category | replace: '-', ' '  }}</a><span class="sep">, </span>
-                {% endfor %}
-                </span>                   
-        </small>
-        <small class="text-muted">
-            {{ latest_post.last_modified_at | date: '%b %d, %Y' }}
-        </small>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-    <div class="col-md-6">
-        
-        <!-- second latest post -->
-        {%- assign second_post = site.posts[1] -%}        
-        <div class="mb-3 d-flex align-items-center">                
-                {% if second_post.image %}
-                <div class="col-md-4 d-none d-xl-block">
-                <a href="{{site.baseurl}}{{second_post.url}}">
-                 <img class="w-100 lazyload" data-src="{% if second_post.image contains "://" %}{{ second_post.image }}{% else %}{{ second_post.image | absolute_url }}{% endif %}" alt="{{ second_post.title }}">
-                </a>
+        <div class="card border-0 mb-4 box-shadow">
+
+            <a href="{{ latest_post.url | relative_url }}">
+
+                {% if latest_post.image %}
+                {% capture latest_image_url %}{% if latest_post.image contains '://' %}{{ latest_post.image }}{% else %}{{ latest_post.image | relative_url }}{% endif %}{% endcapture %}
+
+                <div
+                    class="topfirstimage d-none d-xl-block"
+                    style="height: 200px;
+                           background-image: url('{{ latest_image_url | strip }}');
+                           background-size: cover;
+                           background-position: center;
+                           background-repeat: no-repeat;">
                 </div>
-                {% endif %}                
-                <div>
-                    <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
-                    <a class="text-dark" href="{{site.baseurl}}{{second_post.url}}">{{ second_post.title }}</a>
-                    </h2>
-                    <h2 class="mb-2 h4 font-weight-bold d-lg-none">
-                    <a class="text-dark" href="{{site.baseurl}}{{second_post.url}}">{{ second_post.title }}</a>
-                    </h2>
-                    <div class="d-xl-none">
+                {% endif %}
+
+            </a>
+
+            <div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
+
+                <h2 class="h4 font-weight-bold">
+                    <a class="text-dark"
+                       href="{{ latest_post.url | relative_url }}">
+                        {{ latest_post.title }}
+                    </a>
+                </h2>
+
+                <div class="d-xl-none">
                     <p class="excerpt">
-                    {{ second_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
+                        {{ latest_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
                     </p>
-                    </div>
+                </div>
+
+                <div>
                     <small class="d-block text-muted">
-                        In <span class="catlist">
+                        In
+                        <span class="catlist">
+                            {% for category in latest_post.categories %}
+                            <a class="text-capitalize text-muted smoothscroll"
+                               href="{{ site.baseurl }}/categories?id={{ category | downcase }}">
+                                {{ category | replace: '-', ' ' }}
+                            </a>
+                            <span class="sep">, </span>
+                            {% endfor %}
+                        </span>
+                    </small>
+
+                    <small class="text-muted">
+                        {{ latest_post.last_modified_at | date: '%b %d, %Y' }}
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+
+        <!-- Second latest post -->
+        {% assign second_post = site.posts[1] %}
+
+        <div class="mb-3 d-flex align-items-center">
+
+            {% if second_post.image %}
+            <div class="col-md-4 d-none d-xl-block">
+
+                <a href="{{ second_post.url | relative_url }}">
+
+                    <img
+                        class="w-100"
+                        src="{% if second_post.image contains '://' %}{{ second_post.image }}{% else %}{{ second_post.image | relative_url }}{% endif %}"
+                        alt="{{ second_post.title | escape }}"
+                        loading="lazy"
+                        decoding="async">
+
+                </a>
+
+            </div>
+            {% endif %}
+
+            <div>
+
+                <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
+                    <a class="text-dark"
+                       href="{{ second_post.url | relative_url }}">
+                        {{ second_post.title }}
+                    </a>
+                </h2>
+
+                <h2 class="mb-2 h4 font-weight-bold d-lg-none">
+                    <a class="text-dark"
+                       href="{{ second_post.url | relative_url }}">
+                        {{ second_post.title }}
+                    </a>
+                </h2>
+
+                <div class="d-xl-none">
+                    <p class="excerpt">
+                        {{ second_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
+                    </p>
+                </div>
+
+                <small class="d-block text-muted">
+                    In
+                    <span class="catlist">
                         {% for category in second_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories?id={{ category | downcase }}">{{ category | replace: '-', ' '  }}</a><span class="sep">, </span>
+                        <a class="text-capitalize text-muted smoothscroll"
+                           href="{{ site.baseurl }}/categories?id={{ category | downcase }}">
+                            {{ category | replace: '-', ' ' }}
+                        </a>
+                        <span class="sep">, </span>
                         {% endfor %}
-                        </span>                   
-                    </small>
-                    <small class="text-muted">
-                        {{ second_post.last_modified_at | date: '%b %d, %Y' }}
-                    </small>
-                </div>
-            </div>
-        
-        <!-- third latest post -->
-        {%- assign third_post = site.posts[2] -%}        
-        <div class="mb-3 d-flex align-items-center">                
-                {% if third_post.image %}
-                <div class="col-md-4 d-none d-xl-block">
-                <a href="{{site.baseurl}}{{third_post.url}}">
-                 <img class="w-100 lazyload" data-src="{% if third_post.image contains "://" %}{{ third_post.image }}{% else %}{{site.baseurl}}/{{ third_post.image }}{% endif %}" alt="{{ third_post.title }}">
-                </a>
-                </div>
-                {% endif %}                
-                <div>
-                    <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
-                    <a class="text-dark" href="{{site.baseurl}}{{third_post.url}}">{{ third_post.title }}</a>
-                    </h2>
-                    <h2 class="mb-2 h4 font-weight-bold d-lg-none">
-                        <a class="text-dark" href="{{site.baseurl}}{{third_post.url}}">{{ third_post.title }}</a>
-                    </h2>
-                    <div class="d-xl-none">
-                    <p class="excerpt">
-                    {{ third_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
-                    </p>
-                    </div>
-                    <small class="d-block text-muted">
-                        In <span class="catlist">
-                        {% for category in third_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories?id={{ category | downcase }}">{{ category | replace: '-', ' '  }}</a><span class="sep">, </span>
-                        {% endfor %}
-                        </span>                   
-                    </small>
-                    <small class="text-muted">
-                        {{ third_post.last_modified_at | date: '%b %d, %Y' }}
-                    </small>
-                </div>
-            </div>
-        
-        <!-- fourth latest post -->
-        {%- assign fourth_post = site.posts[3] -%}        
-        <div class="mb-3 d-flex align-items-center">                
-                {% if fourth_post.image %}
-                <div class="col-md-4 d-none d-xl-block">
-                <a href="{{site.baseurl}}{{fourth_post.url}}">
-                <img class="w-100 lazyload" data-src="{% if fourth_post.image contains "://" %}{{ fourth_post.image }}{% else %}{{site.baseurl}}/{{ fourth_post.image }}{% endif %}" alt="{{ fourth_post.title }}">
-                </a>
-                </div>
-                {% endif %}                
-                <div>
-                    <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
-                    <a class="text-dark" href="{{site.baseurl}}{{fourth_post.url}}">{{ fourth_post.title }}</a>
-                    </h2>
-                    <h2 class="mb-2 h4 font-weight-bold d-lg-none">
-                        <a class="text-dark" href="{{site.baseurl}}{{fourth_post.url}}">{{ fourth_post.title }}</a>
-                    </h2>
-                    <div class="d-xl-none">
-                    <p class="excerpt">
-                    {{ fourth_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
-                    </p>
-                    </div>
-                    <small class="d-block text-muted">
-                        In <span class="catlist">
-                        {% for category in fourth_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories?id={{ category | downcase }}">{{ category | replace: '-', ' '  }}</a><span class="sep">, </span>
-                        {% endfor %}
-                        </span>                   
-                    </small>
-                    <small class="text-muted">
-                        {{ fourth_post.last_modified_at | date: '%b %d, %Y' }}
-                    </small>
-                </div>
+                    </span>
+                </small>
+
+                <small class="text-muted">
+                    {{ second_post.last_modified_at | date: '%b %d, %Y' }}
+                </small>
+
             </div>
 
-<!--         {%- assign fifth_post = site.posts[4] -%}        
-        <div class="mb-3 d-flex align-items-center">                
-                {% if fifth_post.image %}
-                <div class="col-md-4 d-none d-xl-block">
-                <a href="{{site.baseurl}}{{fifth_post.url}}">
-                <img class="w-100 lazyload" data-src="{% if fifth_post.image contains "://" %}{{ fifth_post.image }}{% else %}{{site.baseurl}}/{{ fifth_post.image }}{% endif %}" alt="{{ fifth_post.title }}">
+        </div>
+
+
+        <!-- Third latest post -->
+        {% assign third_post = site.posts[2] %}
+
+        <div class="mb-3 d-flex align-items-center">
+
+            {% if third_post.image %}
+            <div class="col-md-4 d-none d-xl-block">
+
+                <a href="{{ third_post.url | relative_url }}">
+
+                    <img
+                        class="w-100"
+                        src="{% if third_post.image contains '://' %}{{ third_post.image }}{% else %}{{ third_post.image | relative_url }}{% endif %}"
+                        alt="{{ third_post.title | escape }}"
+                        loading="lazy"
+                        decoding="async">
+
                 </a>
-                </div>
-                {% endif %}                
-                <div>
-                    <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
-                    <a class="text-dark" href="{{site.baseurl}}{{fifth_post.url}}">{{ fifth_post.title }}</a>
-                    </h2>
-                    <h2 class="mb-2 h4 font-weight-bold d-lg-none">
-                        <a class="text-dark" href="{{site.baseurl}}{{fifth_post.url}}">{{ fifth_post.title }}</a>
-                    </h2>
-                    <div class="d-xl-none">
+
+            </div>
+            {% endif %}
+
+            <div>
+
+                <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
+                    <a class="text-dark"
+                       href="{{ third_post.url | relative_url }}">
+                        {{ third_post.title }}
+                    </a>
+                </h2>
+
+                <h2 class="mb-2 h4 font-weight-bold d-lg-none">
+                    <a class="text-dark"
+                       href="{{ third_post.url | relative_url }}">
+                        {{ third_post.title }}
+                    </a>
+                </h2>
+
+                <div class="d-xl-none">
                     <p class="excerpt">
-                    {{ fifth_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
+                        {{ third_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
                     </p>
-                    </div>
-                    <small class="d-block text-muted">
-                        In <span class="catlist">
-                        {% for category in fifth_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories?id={{ category | downcase }}">{{ category | replace: '-', ' '  }}</a><span class="sep">, </span>
-                        {% endfor %}
-                        </span>                   
-                    </small>
-                    <small class="text-muted">
-                        {{ fifth_post.last_modified_at | date: '%b %d, %Y' }}
-                    </small>
                 </div>
-            </div> -->
-        
+
+                <small class="d-block text-muted">
+                    In
+                    <span class="catlist">
+                        {% for category in third_post.categories %}
+                        <a class="text-capitalize text-muted smoothscroll"
+                           href="{{ site.baseurl }}/categories?id={{ category | downcase }}">
+                            {{ category | replace: '-', ' ' }}
+                        </a>
+                        <span class="sep">, </span>
+                        {% endfor %}
+                    </span>
+                </small>
+
+                <small class="text-muted">
+                    {{ third_post.last_modified_at | date: '%b %d, %Y' }}
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- Fourth latest post -->
+        {% assign fourth_post = site.posts[3] %}
+
+        <div class="mb-3 d-flex align-items-center">
+
+            {% if fourth_post.image %}
+            <div class="col-md-4 d-none d-xl-block">
+
+                <a href="{{ fourth_post.url | relative_url }}">
+
+                    <img
+                        class="w-100"
+                        src="{% if fourth_post.image contains '://' %}{{ fourth_post.image }}{% else %}{{ fourth_post.image | relative_url }}{% endif %}"
+                        alt="{{ fourth_post.title | escape }}"
+                        loading="lazy"
+                        decoding="async">
+
+                </a>
+
+            </div>
+            {% endif %}
+
+            <div>
+
+                <h2 class="mb-2 h6 font-weight-bold d-none d-lg-block">
+                    <a class="text-dark"
+                       href="{{ fourth_post.url | relative_url }}">
+                        {{ fourth_post.title }}
+                    </a>
+                </h2>
+
+                <h2 class="mb-2 h4 font-weight-bold d-lg-none">
+                    <a class="text-dark"
+                       href="{{ fourth_post.url | relative_url }}">
+                        {{ fourth_post.title }}
+                    </a>
+                </h2>
+
+                <div class="d-xl-none">
+                    <p class="excerpt">
+                        {{ fourth_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
+                    </p>
+                </div>
+
+                <small class="d-block text-muted">
+                    In
+                    <span class="catlist">
+                        {% for category in fourth_post.categories %}
+                        <a class="text-capitalize text-muted smoothscroll"
+                           href="{{ site.baseurl }}/categories?id={{ category | downcase }}">
+                            {{ category | replace: '-', ' ' }}
+                        </a>
+                        <span class="sep">, </span>
+                        {% endfor %}
+                    </span>
+                </small>
+
+                <small class="text-muted">
+                    {{ fourth_post.last_modified_at | date: '%b %d, %Y' }}
+                </small>
+
+            </div>
+
+        </div>
+
     </div>
-    
+
 </div>
-    
-<!-- Sticky - add sticky tag to the post you want to highlight here - tags: [sticky] -->
-{% for post in site.posts %} 
+
+
+<!-- Sticky posts -->
+<!-- Add the sticky tag to the post you want to highlight: tags: [sticky] -->
+
+{% for post in site.posts %}
+
 {% if post.tags contains "sticky" %}
+
 <div class="jumbotron jumbotron-fluid jumbotron-home pt-0 pb-0 mt-3 mb-2rem bg-lightblue position-relative">
+
     <div class="pl-4 pr-0 h-100 tofront">
+
         <div class="row justify-content-between">
+
             <div class="col-md-6 pt-6 pb-6 pr-lg-4 align-self-center">
-                <!-- <a href="{{site.baseurl}}{{post.url}}" class="btn btn-dark"> -->
-                <h1 class="secondfont mb-3 font-weight-bold">{{post.title}}</h1>
-                  <!--   </a> -->
+
+                <h1 class="secondfont mb-3 font-weight-bold">
+                    {{ post.title }}
+                </h1>
+
                 <p class="mb-3 lead">
                     {{ post.excerpt | strip_html | strip_newlines | truncate: 136 }}
                 </p>
-                <a href="{{site.baseurl}}{{post.url}}" aria-label="{{post.title}}" class="btn btn-dark">Read More</a>
+
+                <a href="{{ post.url | relative_url }}"
+                   aria-label="{{ post.title | escape }}"
+                   class="btn btn-dark">
+                    Read More
+                </a>
+
             </div>
-            <div class="col-md-6 d-none d-md-block pr-0" style="background-size:cover;background-image:url({{site.baseurl}}/{{ post.image }});">	
+
+            {% if post.image %}
+            <div
+                class="col-md-6 d-none d-md-block pr-0"
+                style="background-size: cover;
+                       background-position: center;
+                       background-repeat: no-repeat;
+                       background-image: url('{% if post.image contains '://' %}{{ post.image }}{% else %}{{ post.image | relative_url }}{% endif %}');">
             </div>
+            {% endif %}
+
         </div>
+
     </div>
-</div> 
+
+</div>
+
 {% endif %}
+
 {% endfor %}
 
-
-    
-
-
-{% endif %} <!--endif page url is / -->
-    
+{% endif %}
+<!-- End homepage featured posts -->
 
 
-<!-- Now the rest of the posts with the usual loop but with an offset:4 on the first page so we can skeep the first 4 posts displayed above -->
-    
+<!-- All Stories -->
+
 <div class="row mt-3">
-   
+
     <div class="col-md-8 main-loop">
-        
-        <h4 class="font-weight-bold spanborder d-none d-xl-block"><span>All Stories</span></h4>
-        
+
+        <h4 class="font-weight-bold spanborder d-none d-xl-block">
+            <span>All Stories</span>
+        </h4>
+
         {% for post in paginator.posts %}
-        
+
             {% include main-loop-card.html %}
-        
+
         {% endfor %}
-        
+
+
+        <!-- Pagination -->
+
         <div class="mt-5">
-         <!-- Pagination links -->
+
             {% if paginator.total_pages > 1 %}
-            <ul class="pagination"> 
-              {% if paginator.previous_page %}
-                <li class="page-item"><a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a></li>
-              {% else %}
-                <li class="page-item disabled"><span class="prev page-link">&laquo;</span></li>
-              {% endif %}
 
-              {% for page in (1..paginator.total_pages) %}
-                {% if page == paginator.page %}
-                <li class="page-item disabled"><span class="webjeda page-link">{{ page }}</span></li>
-                {% elsif page == 1 %}
-                <li class="page-item"><a class="page-link" href="{{site.baseurl}}/">{{ page }}</a></li>
+            <ul class="pagination">
+
+                {% if paginator.previous_page %}
+
+                <li class="page-item">
+                    <a class="page-link"
+                       href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">
+                        &laquo; Prev
+                    </a>
+                </li>
+
                 {% else %}
-                <li class="page-item"><a class="page-link" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
+
+                <li class="page-item disabled">
+                    <span class="prev page-link">
+                        &laquo; Prev
+                    </span>
+                </li>
+
                 {% endif %}
-              {% endfor %}
 
-              {% if paginator.next_page %}
-                <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a></li>
-              {% else %}
-                <li class="page-item disabled"><span class="next page-link">&raquo;</span></li>
-              {% endif %}
+
+                {% for page in (1..paginator.total_pages) %}
+
+                    {% if page == paginator.page %}
+
+                    <li class="page-item disabled">
+                        <span class="webjeda page-link">
+                            {{ page }}
+                        </span>
+                    </li>
+
+                    {% elsif page == 1 %}
+
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ '/' | relative_url }}">
+                            {{ page }}
+                        </a>
+                    </li>
+
+                    {% else %}
+
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">
+                            {{ page }}
+                        </a>
+                    </li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+                {% if paginator.next_page %}
+
+                <li class="page-item">
+                    <a class="page-link"
+                       href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">
+                        Next &raquo;
+                    </a>
+                </li>
+
+                {% else %}
+
+                <li class="page-item disabled">
+                    <span class="next page-link">
+                        Next &raquo;
+                    </span>
+                </li>
+
+                {% endif %}
+
             </ul>
-            {% endif %}      
+
+            {% endif %}
+
         </div>
-        
+
     </div>
-    
+
+
+    <!-- Sidebar -->
+
     <div class="col-md-4" style="margin-bottom: 20px;">
-        {% include sidebar-featured.html %}    
+
+        {% include sidebar-featured.html %}
+
     </div>
-    
+
 </div>
 
 </div>
+
 
 <!-- Subscribe Form -->
+
 {% if site.feedburner-list %}
+
 {% assign home = true %}
-    <div class="container">
-{% include newsletter.html %}
-    </div>
+
+<div class="container">
+
+    {% include newsletter.html %}
+
+</div>
+
 {% endif %}
