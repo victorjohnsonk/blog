@@ -7,7 +7,7 @@ author: admin
 categories: [ cybersecurity, ai, technology ]
 image: assets/images/posts/2026/10-12/october-2026-cybersecurity.jpeg
 title-image: October 2026 Cyberattacks, Data Breaches and AI Security (AI generated image)
-tags: [ cybersecurity, cyberattacks, data-breaches, october-2026, ai-security, critical-vulnerabilities, cybersecurity-awareness-month ]
+tags: [ cybersecurity, cyberattacks, data-breaches, october-2026, ai-security, critical-vulnerabilities, cybersecurity-awareness-month, sticky]
 ai_assisted: true
 last_modified_at: 2026-10-31 00:00:00 +0000
 ---
