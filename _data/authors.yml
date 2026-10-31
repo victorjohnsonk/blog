@@ -1,4 +1,14 @@
+# Authors
 admin:
   name: "Victor Johnson"
-  url: "https://www.victorjohnson.online/blog/about"
-  picture: "https://www.victorjohnson.online/vj-photo.png"
+  slugname: "victor-johnson"
+  site: "/blog/about"
+  avatar: "https://www.victorjohnson.online/vj-photo.png"
+  bio: "AI Engineer working in cybersecurity, writing about AI engineering, AI security, secure LLMs, agentic AI, and practical approaches to building secure AI systems."
+  email: "hello@victorjohnson.online"
+  github: "victorjohnsonk"
+  twitter: ""
+  facebook: ""
+  instagram: ""
+  youtube: ""
+  linkedin: "https://www.linkedin.com/in/victor-johnson-7a4700386/"
