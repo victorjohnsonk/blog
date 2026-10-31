@@ -135,7 +135,7 @@ While reading more about vulnerability management, I came across an interesting 
 
 ### What the CVE Growth Graph Tells Us
 
-![Annual CVE disclosures showing the growth in publicly reported software vulnerabilities ](blog/assets/images/posts/2026/10-12/cve-growth-graph.png)
+![Annual CVE disclosures showing the growth in publicly reported software vulnerabilities ](assets/images/posts/2026/10-12/cve-growth-graph.png)
 
 *Figure: Annual CVE disclosures. Add the original graph's source and reporting period here - Image source SonarSource.com*
 
