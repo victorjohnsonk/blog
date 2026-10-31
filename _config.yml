@@ -9,7 +9,7 @@ keywords: "AI Engineering, AI Security, Cybersecurity, Generative AI, LLM Securi
 description: "Technical articles by Victor Johnson, an AI Engineer in cybersecurity, exploring AI security, secure LLMs, agentic AI and real-world engineering."
 
 # Site URL and localisation
-url: "https://victorjohnson.online"
+url: "https://www.victorjohnson.online"
 baseurl: "/blog"
 lang: "en-GB"
 timezone: "Europe/London"
