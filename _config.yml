@@ -46,10 +46,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-last-modified-at
 
-# Seo author
-author:
-  name: "Victor Johnson"
-
 # Authors
 authors:
   admin:
