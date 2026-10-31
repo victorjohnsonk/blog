@@ -42,7 +42,7 @@ However, prompt engineering has limitations. Even a carefully written instructio
 
 ## What Is Context Engineering?
 
-**Context engineering is the practice of selecting, organising and maintaining the information an AI model needs to complete a task effectively.** Instead of concentrating mainly on how instructions are written, it considers the wider collection of information available to the model when generating a response.
+**Context engineering is the practice of selecting, organising and maintaining the information an AI model needs to complete a task effectively.** Instead of concentrating mainly on how instructions are written, it considers the wider collection of information available to the model when generating a response. [Read more about context engineering in my previous article](/blog/context-engineering-ai-agents-guide)
 
 This information can include the current user request, system instructions, relevant documents, conversation history, stored memory, retrieved knowledge and results returned by external tools.
 
