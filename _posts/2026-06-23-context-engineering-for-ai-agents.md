@@ -12,8 +12,6 @@ ai_assisted: true
 last_modified_at: 2026-10-30 00:00:00 +0000
 ---
 
-# Context Engineering for AI Agents: What It Is, Why It Matters and How to Implement It
-
 A large language model (LLM) can be capable of solving a complex problem and still produce an incorrect answer because it received the wrong information. It may miss an important document, rely on outdated instructions, forget a previous decision or become distracted by irrelevant content. This is where **context engineering** becomes important.
 
 Context engineering is the practice of designing, selecting, organising and maintaining the information an AI model receives when performing a task. It goes beyond writing a good prompt. It involves deciding which instructions, documents, memories, tool results and conversation details should be available to the model at a particular moment.
