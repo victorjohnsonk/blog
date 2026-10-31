@@ -22,7 +22,7 @@ repo: "https://github.com/victorjohnsonk/blog"
 
 # Optional integrations - add personal values when configured
 google_verify: ""
-google_analytics: ""
+google_analytics: "G-MEK4W87RJL"
 google_adsense: ""
 disqus: ""
 email: "hello@victorjohnson.online"
