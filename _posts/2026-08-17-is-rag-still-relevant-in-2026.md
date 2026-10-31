@@ -12,269 +12,101 @@ ai_assisted: true
 last_modified_at: 2026-08-19 00:40:00 +0000
 ---
 
-Remember when almost every discussion about building reliable AI applications eventually led to Retrieval-Augmented Generation (RAG)? Throughout 2025, RAG was one of the most frequently discussed approaches to connecting large language models (LLMs) with external information. Developers experimented with vector databases, embedding models, document chunking and retrieval pipelines to make AI applications more useful beyond their training data.
+Remember when almost every conversation about building reliable AI applications eventually led to Retrieval-Augmented Generation (RAG)? Throughout 2025, RAG remained one of the most discussed approaches for connecting large language models (LLMs) with external information. AI engineers experimented with vector databases, embedding models, document chunking and retrieval pipelines to build applications that could answer questions using information beyond their training data. For many developers, building a RAG pipeline became one of the first practical steps towards developing real-world generative AI applications.
 
-Fast-forward to 2026, and the conversation feels different. AI engineers are increasingly discussing autonomous agents, context engineering, long-context models, persistent memory and the Model Context Protocol (MCP). Technical discussions that once focused heavily on building RAG pipelines now cover how AI systems retrieve information, use tools, maintain state and complete tasks across multiple steps.
+Fast-forward to 2026, and the conversation feels different. AI engineers are increasingly discussing autonomous agents, context engineering, long-context models, persistent memory and the Model Context Protocol (MCP). Technical conversations that previously focused on document retrieval now examine how AI systems use tools, maintain information across tasks and make decisions during complex workflows. The emphasis has gradually shifted from helping an LLM answer a question to helping an AI system complete an entire task.
 
-Does this mean AI engineers are no longer interested in RAG? Has Retrieval-Augmented Generation become outdated, or has it simply become a familiar part of modern AI architecture?
+Does this mean AI engineers are no longer interested in RAG? Has Retrieval-Augmented Generation become outdated, or has it simply become a familiar component of modern AI architecture? The answer is more interesting than declaring RAG dead. **RAG remains important, but the problems AI engineers are trying to solve have expanded beyond traditional document retrieval.** Understanding this shift explains why RAG may receive less attention as a standalone concept while continuing to support many production AI systems.
 
-The answer is more interesting than declaring RAG dead. **RAG remains useful, but the problems AI engineers are trying to solve have expanded beyond traditional document retrieval.** Understanding this shift explains why RAG receives less attention as a standalone concept while continuing to support many production AI systems.
+{% include random-related-article.html %}
 
 ## Why Was RAG Such a Hot Topic in 2025?
 
-During 2025, developers faced a common challenge when building applications with large language models. AI models could generate convincing responses, summarise documents and answer general questions, but they could not automatically access every piece of information required for a specific task.
+During 2025, one of the most common challenges in building applications with large language models was giving them access to information they had not encountered during training. LLMs could write convincing explanations, summarise documents and answer general questions, but they could not automatically access a company's internal policies, updated technical documentation, customer records or recently published information. Even when a model understood the subject, it could produce outdated or unsupported answers because it lacked the necessary facts.
 
-A model trained on publicly available information would not necessarily know a company's latest policies, internal documentation, customer records or recently updated product information. Even when a model possessed relevant background knowledge, it could generate incorrect details or provide answers without reliable supporting evidence.
+Retrieval-Augmented Generation provided a practical solution by connecting language models to external information sources. Instead of expecting a model to answer entirely from its training data, developers could retrieve relevant documents and include them in the model's input. The model could then generate a response using the supplied evidence. This approach was particularly attractive for enterprise knowledge assistants, document search systems, customer support applications and internal question-answering tools because organisations could use existing information without retraining a language model whenever their documents changed.
 
-Retrieval-Augmented Generation offered a practical way to address these limitations. Instead of relying entirely on information learned during training, an application could retrieve relevant material from an external source and provide it to the model before generating a response.
+The growing popularity of vector databases and AI development frameworks also contributed to RAG becoming a major topic. Developers could upload PDF documents, divide them into smaller sections, generate embeddings and store those representations in a searchable database. When someone asked a question, the application would retrieve semantically related passages and send them to an LLM. This workflow made it possible to create document-based chatbots and knowledge assistants with relatively accessible tools, which encouraged experimentation across businesses, research teams and individual developer projects.
 
-This made RAG particularly attractive for enterprise knowledge assistants, document search applications, customer support systems and internal question-answering tools.
-
-### The Rise of Vector Databases and Document Chatbots
-
-One reason RAG became so popular was that developers could build useful demonstrations without training their own language models.
-
-A typical project involved uploading PDF documents, dividing the content into smaller sections, converting those sections into embeddings and storing them in a vector database. When someone asked a question, the application searched for related passages and supplied them to the language model.
-
-Suddenly, developers could create applications that answered questions about company handbooks, technical manuals, research papers and other collections of documents.
-
-Frameworks and managed services made these workflows easier to experiment with. RAG also became a common starting point for developers learning how to build applications around LLMs.
-
-However, many early demonstrations followed nearly identical patterns. Upload documents, generate embeddings, retrieve matching chunks and ask a model to produce an answer.
-
-The approach was useful, but it was not a complete solution to every information problem.
-
-{% include random-related-article.html %}
-
-### RAG Was Solving a Real Problem
-
-The popularity of RAG was not based entirely on hype. It addressed a genuine limitation of language models: their inability to reliably access information that was private, recently updated or absent from their training data.
-
-For organisations, this mattered because business information changes constantly. Product catalogues are updated, policies are revised, technical documentation evolves and new records are created.
-
-Retrieval allowed applications to access this information without repeatedly retraining or fine-tuning a model.
-
-RAG also offered a way to connect generated answers to supporting sources. When implemented carefully, applications could show which documents contributed to a response, making it easier for users to verify important details.
-
-These advantages remain relevant today.
+However, the popularity of RAG was not simply the result of developers following a trend. It addressed a genuine limitation of language models: their inability to reliably access private, frequently updated or organisation-specific knowledge. RAG also introduced a practical way to connect generated answers with supporting documents, allowing users to examine the information behind a response. Although early implementations often followed similar patterns, the underlying problem was real, and it remains relevant today.
 
 ## Why Is RAG No Longer the Biggest Talking Point in AI Engineering?
 
-RAG has not disappeared from AI engineering. What has changed is the attention given to the broader systems surrounding it.
+RAG has not disappeared from AI engineering, but its position within the wider conversation has changed. During the earlier stages of generative AI application development, creating a chatbot that could answer questions using external documents was an important achievement. By 2026, the basic retrieval-and-generation pattern had become familiar to many developers. The more challenging questions increasingly concerned how AI applications should behave when they needed to perform multiple actions, combine information from different sources or continue working as new information became available.
 
-In 2025, building an application that could answer questions using external documents was a meaningful technical achievement. By 2026, many developers had become familiar with the basic retrieval-and-generation pattern.
+This shift is closely connected to the development of AI agents. Traditional RAG applications usually follow a relatively predictable sequence: a user submits a question, the system retrieves relevant passages and the language model generates an answer. An AI agent may need to follow a more flexible process. It might inspect a document, recognise that additional evidence is required, search another source, call an external tool and reconsider its next action based on the results. Retrieval remains useful in this process, but it becomes one part of a larger workflow rather than the entire application.
 
-Meanwhile, AI applications were becoming more capable. Instead of simply answering questions, they were increasingly expected to investigate problems, interact with tools, update information and complete workflows involving several decisions.
+Consider an AI assistant investigating why an online payment failed. A traditional RAG system might retrieve documentation explaining common payment errors and provide troubleshooting suggestions. A more capable agent could examine authorised transaction logs, check the payment gateway response, inspect relevant configuration details and compare the incident with previous failures. The task requires access to several kinds of information, some of which may be better obtained through APIs or database queries than through semantic document search. This is why conversations about AI engineering increasingly focus on tool orchestration, task planning, context management and multi-step execution.
 
-As a result, the discussion shifted from **how to retrieve a document for an LLM** to **how to provide an AI system with the right information throughout an entire task**.
-
-### AI Agents Have Changed the Conversation
-
-Traditional RAG applications often follow a predictable sequence. A user asks a question, the application retrieves relevant information and the model generates an answer.
-
-AI agents can operate differently. An agent may need to inspect a document, decide that additional information is required, search another source, call an external tool and revise its approach based on the results.
-
-Consider an AI assistant investigating why an online payment failed. Retrieving documentation about payment errors may help, but the assistant might also need transaction logs, payment gateway responses, configuration details and previous incident records.
-
-The task involves more than retrieving a few relevant paragraphs.
-
-This is one reason AI engineering discussions increasingly focus on agent orchestration, tool use, context management and multi-step reasoning.
-
-RAG can still contribute to these systems, but it is no longer necessarily the central feature.
+Another important development is the growing attention given to context engineering. While RAG focuses on retrieving information to support generation, context engineering considers the broader collection of information supplied to a model throughout a task. This may include retrieved documents, conversation history, system instructions, tool responses, stored memory and application state. Developers must decide which information should be included, when it should be updated and whether older information should remain available. RAG fits naturally into this process, but context engineering addresses a wider set of requirements.
 
 {% include random-related-article.html %}
 
-### Context Engineering Has Become a Broader Discussion
+Larger context windows have also influenced architectural decisions. Modern language models can process substantially more information in a single request than earlier models, allowing some applications to work directly with complete documents instead of retrieving individual passages. For example, when comparing three short contracts, providing all three documents may be simpler than building a dedicated retrieval pipeline. Nevertheless, larger context windows do not eliminate the need for retrieval. Sending large collections of irrelevant information can increase processing costs, consume tokens and make important details harder for the model to identify. The question has therefore shifted towards selecting the most suitable information strategy for each task.
 
-Another reason RAG receives less attention as a standalone topic is the growing importance of context engineering.
-
-Context engineering focuses on selecting, organising and maintaining the information an AI model needs at different stages of a task. This can include retrieved documents, conversation history, tool responses, memory, system instructions and application state.
-
-RAG fits naturally within this approach because retrieval is one way to supply useful context.
-
-However, context engineering addresses additional questions. Which information should remain available? When should outdated content be removed? Should an agent retrieve more information or work with what it already has? How can relevant findings be preserved across long workflows?
-
-These questions become important when applications operate over multiple steps.
-
-Rather than replacing RAG, context engineering provides a wider framework for deciding how and when retrieval should be used.
-
-For a deeper explanation, see [Context Engineering vs Prompt Engineering: Key Differences, Examples and When to Use Each](/context-engineering-vs-prompt-engineering).
-
-### Larger Context Windows Have Changed Some Design Decisions
-
-Modern language models can process substantially more information in a single request than earlier generations of models.
-
-This creates an alternative to traditional RAG for certain applications.
-
-If an application needs to analyse a small collection of documents that fit comfortably within a model's context window, developers may choose to provide those documents directly rather than build a separate retrieval pipeline.
-
-For example, a user comparing three short contracts may benefit from supplying the complete documents to a long-context model. A retrieval system could introduce unnecessary complexity if the entire source material is already manageable.
-
-However, a larger context window does not automatically eliminate the need for retrieval.
-
-Supplying thousands of irrelevant pages can increase token usage, processing time and cost. Models can also struggle to identify important details buried within large amounts of information.
-
-Long-context capabilities have expanded the available options, but they have not removed the underlying need to select relevant information.
+For a closer look at this broader shift, see [Context Engineering vs Prompt Engineering: Key Differences, Examples and When to Use Each](/blog/context-engineering-vs-prompt-engineering).
 
 ## Is RAG Dead in 2026?
 
-**No. RAG is not dead in 2026. It is becoming a more established component of AI application architecture rather than the main subject of every engineering discussion.**
+**No, RAG is not dead in 2026. It is becoming a more established component of AI application architecture rather than the central topic of every engineering discussion.** There is an important difference between a technology receiving less attention and becoming less useful. Many technologies remain essential long after they stop dominating industry conversations. Databases, APIs and caching systems may not always attract the same excitement as emerging technologies, but modern software continues to depend on them. RAG appears to be moving towards a similar position within parts of the AI ecosystem.
 
-There is an important distinction between a technology becoming less fashionable and becoming less useful.
+The change is partly a reflection of how developers are approaching more complicated applications. Instead of asking how to add document retrieval to an LLM, engineering teams are considering how retrieval should interact with memory, tools, structured data and agent workflows. An application might use RAG to search technical documentation, an API to obtain current operational information and a memory component to preserve decisions across several interactions. In this architecture, retrieval remains important, but it is no longer expected to solve every problem independently.
 
-Databases, APIs and caching systems are not necessarily the most exciting topics in every software engineering discussion, yet they remain essential to countless applications. RAG may be following a similar path in parts of the AI industry.
-
-A January 2026 article in *The New Stack* examined this shift, describing how the discussion had moved towards context engineering and AI agents while retrieval remained important within those systems.
-
-The terminology is changing partly because developers are thinking about larger workflows rather than isolated retrieval operations.
-
-Research also continues to examine improvements to RAG, including hybrid search, iterative retrieval and agent-based approaches. These developments suggest that retrieval remains an active engineering problem rather than a technique that has reached the end of its usefulness.
-
-The more useful question is not whether RAG is dead, but whether a particular application actually needs it.
+This shift has also been discussed in technical publications. A January 2026 article in *The New Stack* examined how context engineering was attracting greater attention while RAG continued to serve as an important part of AI systems. Research into retrieval has also continued, including work on hybrid search, iterative retrieval, evidence selection and agent-based approaches. These developments suggest that RAG is evolving rather than disappearing. The more useful question for developers is no longer whether RAG is fashionable, but whether it provides a reliable and efficient way to solve the information problem in a particular application.
 
 ## What Problems Does RAG Still Solve in 2026?
 
-Despite improvements in language models and agent frameworks, several important problems remain difficult to solve without some form of external information retrieval.
+Despite improvements in language models, several fundamental problems remain difficult to solve without external information retrieval. A model may be capable of understanding complex instructions and reasoning through a task, but that does not mean it automatically possesses the facts required to complete it. Model capability and access to reliable information are separate concerns, and RAG continues to address this distinction.
 
-RAG continues to be useful because model intelligence and access to reliable information are separate concerns.
+### Accessing Private and Organisation-Specific Knowledge
 
-A highly capable model may reason effectively about a problem while lacking the current facts required to solve it.
+One of RAG's most valuable applications is connecting language models to information that was never included in their training data. Organisations maintain internal documents covering employee policies, operational procedures, product specifications, technical decisions and customer support processes. This information may be confidential, highly specialised or unavailable outside the organisation. An LLM cannot be expected to know these details automatically, regardless of how capable it becomes.
 
-### 1. Accessing Private and Organisation-Specific Knowledge
-
-One of RAG's most important applications is connecting language models to information that was never included in their training data.
-
-A company may maintain thousands of internal documents covering employee policies, operational procedures, product specifications and technical decisions.
-
-An LLM cannot be expected to know this information automatically.
-
-RAG allows an application to search authorised sources and supply relevant content when answering a question.
-
-For example, an employee asking about a company's reimbursement policy could receive an answer based on the latest approved policy document rather than a general explanation of how reimbursements usually work.
-
-This remains a strong use case because private organisational information cannot be replaced by general model knowledge.
-
-### 2. Working With Frequently Updated Information
-
-Language models learn information during training, but the world continues changing after that training process.
-
-Product prices, inventory records, technical documentation, company policies and regulatory requirements may be updated regularly.
-
-RAG can retrieve current information from maintained sources when the application needs it.
-
-Imagine an AI support assistant answering questions about subscription plans. If the business updates its pricing, the assistant should use the latest authorised pricing information.
-
-A retrieval-based system can access the updated records without requiring the underlying language model to be retrained.
-
-However, retrieval alone does not guarantee freshness. The application must also ensure that its indexes and connected data sources are updated appropriately.
+RAG allows an application to search authorised knowledge sources and provide relevant content when answering a question. For example, an employee asking about reimbursement rules could receive an explanation based on the company's latest approved policy rather than a generic description of reimbursement practices. The application can also identify the document supporting the response, allowing the employee to check the original information. This remains a strong use case because private organisational knowledge cannot simply be replaced by general model intelligence.
 
 {% include random-related-article.html %}
 
-### 3. Providing Evidence for Generated Answers
+### Working With Frequently Updated Information
 
-Another important benefit of RAG is the ability to associate generated responses with supporting material.
+Another important problem is the changing nature of information. Product prices, inventory records, technical documentation, subscription plans and company policies may be updated regularly. A language model's training process does not provide automatic access to these changes, which means its internal knowledge may not reflect the latest available information.
 
-This is particularly useful in applications where users need to understand where information came from.
+RAG can help by retrieving information from maintained sources when the application needs it. Imagine a customer support assistant answering questions about a company's subscription plans. If the business changes its pricing or introduces a new feature, the assistant should use the updated information rather than rely on older details. A retrieval-based system can access revised records without retraining the underlying model. However, the retrieval pipeline must also be maintained properly. If the search index contains outdated information, the model may still generate an incorrect answer despite using RAG.
 
-A research assistant might retrieve relevant papers and provide references alongside its explanation. An internal knowledge assistant could identify the policy document used to answer an employee's question.
+### Providing Evidence and Supporting References
 
-This makes it easier to investigate whether the response is supported by the available evidence.
+RAG also remains useful when users need to understand where an AI-generated answer came from. In research, enterprise knowledge management and technical support, a convincing explanation is not always sufficient. Users may need to examine the original source, confirm a particular statement or understand which document supports a recommendation.
 
-However, displaying citations does not automatically make an answer correct. Applications should verify that cited passages actually support the statements being made.
+A research assistant could retrieve relevant papers and include references alongside its explanation, while an internal knowledge assistant might identify the policy document used to answer a question. This improves traceability and makes it easier to investigate questionable responses. Nevertheless, displaying citations does not automatically guarantee correctness. A model can cite an irrelevant passage or misinterpret correctly retrieved evidence. Reliable applications should therefore evaluate whether the cited material genuinely supports the answer.
 
-RAG can improve traceability, but evidence quality and answer verification remain essential.
+### Searching Large Knowledge Bases Efficiently
 
-### 4. Searching Large Collections Without Sending Everything to the Model
+Large organisations may maintain millions of documents, records and knowledge entries. Even with improvements in context window sizes, supplying an entire enterprise knowledge base to a model for every question would be impractical. The application needs a way to identify which information is relevant before sending it to the model.
 
-A company may have millions of documents, records or knowledge entries.
+RAG addresses this by narrowing a large information collection to a smaller set of potentially useful passages. A technical support assistant might search thousands of troubleshooting articles but only need a few sections related to a particular error. Selecting these passages can reduce unnecessary context and potentially improve response efficiency. The challenge is ensuring that the retrieval system identifies the right information rather than simply returning text that appears semantically similar.
 
-Even models with large context windows cannot practically receive an entire enterprise knowledge base for every question.
+### Reducing Unsupported AI Responses
 
-Retrieval helps narrow the available information to material that is likely to be relevant.
+Language models can generate confident responses even when the information available to them is incomplete. RAG can reduce some unsupported answers by supplying external evidence that the model can use when responding. If someone asks about a company's refund conditions, retrieving the actual refund policy provides a stronger basis for the answer than relying on general assumptions about how refunds usually work.
 
-For example, a technical support assistant may search thousands of troubleshooting articles but only need a small number of passages related to a particular error.
-
-By selecting useful information before generation, a RAG system can reduce unnecessary context and potentially improve efficiency.
-
-The quality of this approach depends on how accurately the retrieval system identifies the information required.
-
-### 5. Reducing Unsupported Answers
-
-Language models can generate responses that sound convincing even when the underlying information is incomplete or incorrect.
-
-RAG can reduce some of these problems by grounding responses in external evidence.
-
-If a user asks about a specific company's refund conditions, retrieving the actual refund policy gives the model a stronger basis for answering than relying on general assumptions.
-
-However, RAG does not eliminate hallucinations.
-
-A retrieval system might return irrelevant documents, omit an important exception or supply contradictory information. The model may also misinterpret correctly retrieved evidence.
-
-Google Research's 2025 work on sufficient context highlighted an important distinction: information must not only be relevant to a question but also sufficient to support an answer.
-
-This means successful RAG depends on both retrieval quality and how the model uses the retrieved information.
+However, RAG does not eliminate hallucinations. The retrieval system may return irrelevant documents, overlook an important exception or provide conflicting information. The model may also misunderstand the evidence. Google Research's 2025 work on sufficient context highlighted the importance of distinguishing between information that appears relevant and information that is actually sufficient to answer a question. This means successful RAG depends not only on retrieving documents but also on evaluating whether those documents contain enough reliable evidence.
 
 ## What Are the Limitations of Traditional RAG?
 
-Although RAG solves important problems, traditional implementations have several weaknesses.
+Although RAG solves important problems, traditional implementations introduce limitations that become more noticeable as applications grow. One common weakness is the assumption that semantically similar text necessarily contains the correct answer. Vector search is useful for identifying related passages, but relevance does not always mean sufficiency. If a user asks why a particular software deployment failed, a retrieval system might return general documentation about deployment errors rather than the actual logs or configuration changes responsible for the incident. The retrieved information may appear useful while failing to address the specific question.
 
-These limitations help explain why AI engineers have moved beyond the simplest retrieval-and-generation architecture.
+Document chunking creates another challenge. Many RAG pipelines divide large documents into smaller sections before generating embeddings and storing them in a search index. Although this makes retrieval manageable, it can separate information that belongs together. A policy exception may appear in one section while the general rule appears elsewhere, or an explanation may lose meaning when separated from its heading and surrounding context. If the system retrieves only part of the relevant information, the generated answer may be incomplete or misleading. More advanced chunking methods and document-aware retrieval can help, but they require additional design and evaluation.
 
-### Retrieving Similar Text Does Not Always Mean Retrieving the Right Answer
+Traditional RAG can also struggle with questions that require several rounds of investigation. A user comparing a company's strategy across multiple reporting periods may need information from different documents, financial figures and supporting explanations. A single retrieval operation may not identify all the necessary evidence, particularly when the next question depends on something discovered during the first search. More adaptive approaches allow retrieval to happen repeatedly as the model identifies gaps in its understanding, but these systems introduce additional complexity.
 
-Many RAG systems use semantic similarity to identify passages related to a user's question.
+Operational requirements are another consideration. A production RAG system may need document ingestion, data cleaning, embedding generation, search infrastructure, indexing updates, access controls and monitoring. Each component introduces maintenance work and potential failure points. If an application only needs to process a small collection of documents, the infrastructure may cost more to maintain than the benefits justify. This is why RAG should be selected based on the application's information requirements rather than treated as the default architecture for every LLM project.
 
-This works well for some information retrieval tasks, but related text is not always sufficient evidence.
-
-Suppose a user asks why a particular software deployment failed. A vector search might retrieve general documentation about deployment failures rather than the specific logs and configuration changes associated with the incident.
-
-The returned content may appear relevant while failing to answer the actual question.
-
-This is why developers increasingly combine semantic retrieval with keyword search, metadata filtering, reranking and other retrieval strategies.
-
-### Document Chunking Can Remove Important Context
-
-Traditional RAG pipelines often divide documents into smaller sections before indexing them.
-
-This makes retrieval more manageable, but it can separate information that belongs together.
-
-A policy exception may appear in one section while the general rule appears in another. If the retrieval system returns only the general rule, the model may generate an incomplete answer.
-
-Similarly, splitting technical documentation without preserving headings, relationships or surrounding explanations can reduce the usefulness of retrieved passages.
-
-Better chunking strategies, document structure awareness and contextual retrieval can help address these problems.
-
-### Multi-Step Questions Can Require More Than One Retrieval
-
-Some questions cannot be answered using a single search operation.
-
-A user might ask how a company's product strategy changed between two reporting periods and what factors contributed to the change.
-
-Answering this may require retrieving multiple reports, comparing figures and examining supporting documents.
-
-A basic retrieve-once-and-generate workflow may miss important connections.
-
-More advanced systems allow retrieval to happen repeatedly as the model identifies new information requirements.
-
-This is one area where agentic retrieval approaches can offer advantages.
-
-### RAG Introduces Additional Infrastructure
-
-RAG is not free from operational complexity.
-
-A production implementation may require document ingestion, data cleaning, embedding generation, search infrastructure, indexing updates, access control and evaluation.
-
-Each component introduces potential failure points.
-
-If an application only needs to process a few short documents, maintaining this infrastructure may not be justified.
-
-Developers therefore need to compare the benefits of retrieval against its implementation and maintenance costs.
+{% include random-related-article.html %}
 
 ## Traditional RAG vs Agentic RAG: What Has Changed?
 
-One important development is the movement from fixed retrieval pipelines towards systems that can decide when and how to retrieve information.
+One of the most important developments in retrieval-based AI systems is the movement from fixed pipelines towards more adaptive approaches. Traditional RAG generally follows a predefined sequence in which the application retrieves information and then generates a response. Agentic RAG introduces an AI agent that can decide when additional information is needed, reformulate searches and use different tools as the task progresses.
 
-Traditional RAG generally follows a predefined workflow. Agentic RAG allows an AI agent to make retrieval decisions during task execution.
+Consider a software investigation assistant. A traditional RAG implementation might retrieve documentation related to a reported error and generate troubleshooting suggestions. An agentic approach could examine the initial error, search the documentation, inspect authorised logs, compare recent code changes and retrieve additional evidence when the first results are insufficient. This flexibility can be valuable for complex investigations, but it also introduces more tool calls, greater latency and additional opportunities for mistakes. The distinction is therefore not simply that agentic RAG is newer or more advanced, but that it supports a different type of workflow.
 
 | Feature | Traditional RAG | Agentic RAG |
 |---|---|---|
@@ -287,29 +119,15 @@ Traditional RAG generally follows a predefined workflow. Agentic RAG allows an A
 | Best suited for | Direct knowledge questions and document search | Complex investigations and multi-step tasks |
 | Main trade-off | Limited adaptability | Greater latency, cost and operational complexity |
 
-Consider an AI assistant helping a developer investigate a production incident.
-
-A traditional RAG system might retrieve documentation related to the reported error and generate troubleshooting suggestions.
-
-An agentic system could begin by examining the error, retrieve relevant documentation, inspect authorised logs, compare recent changes and request additional information when the initial evidence is insufficient.
-
-The second approach is more flexible, but it is also more complicated.
-
-Not every question requires an agent. A straightforward document lookup may be handled more efficiently by traditional RAG.
-
-The objective should be to use the simplest retrieval strategy that can reliably complete the task.
-
-{% include random-related-article.html %}
+Neither architecture is automatically better for every application. A straightforward question about an employee handbook may only require a reliable search and a clear answer, making traditional RAG sufficient. A complex investigation involving several information sources may benefit from agentic retrieval. Developers should evaluate whether the additional flexibility improves task completion enough to justify the extra cost and complexity.
 
 ## RAG vs Long-Context Models: Do Developers Still Need Retrieval?
 
-Long-context language models have made it possible to process larger documents directly, leading some developers to question whether dedicated retrieval pipelines remain necessary.
+The development of long-context language models has introduced another important question: if a model can process very large amounts of text, is a separate retrieval system still necessary? For some applications, the answer may be no. When the complete information collection is relatively small and fits comfortably within the model's context window, providing the documents directly can be simpler than building a retrieval pipeline. A user comparing several contracts, reviewing a technical specification or analysing a limited set of reports may benefit from this approach.
 
-The answer depends on the size, structure and changing nature of the information.
+However, the ability to accept a large context does not mean every piece of information should be supplied. Processing extensive documents can increase token usage, latency and cost, while irrelevant content may make important details harder to identify. A model may also struggle to locate specific information buried within a very large input. Retrieval remains useful when the knowledge base is too large to provide directly, changes frequently or requires searching across many independent records.
 
-If an application works with a small number of documents that rarely change, supplying the complete material may be practical.
-
-However, if an application needs to search millions of records or retrieve frequently updated information, dedicated retrieval may remain the better approach.
+The choice therefore depends on the size, structure and nature of the information rather than the context window size alone. Some applications benefit from full-document processing, while others require targeted retrieval. Hybrid approaches are also possible, where an application retrieves a relevant document and then supplies a larger section of that document to a long-context model for detailed analysis.
 
 | Consideration | RAG | Long-Context Approach |
 |---|---|---|
@@ -321,175 +139,71 @@ However, if an application needs to search millions of records or retrieve frequ
 | Source coverage | Depends on retrieval recall | Depends on the supplied documents fitting within context |
 | Best use case | Large, changing or searchable knowledge bases | Bounded document analysis |
 
-Neither approach is universally superior.
-
-Research published at EMNLP 2025 found that relatively simple retrieval methods could perform competitively against more complicated RAG pipelines on several long-context question-answering benchmarks.
-
-This reinforces an important engineering principle: adding complexity does not automatically improve performance.
-
-Developers should compare approaches using representative workloads, rather than assuming that a larger context window or a more complicated retrieval pipeline will always produce better results.
-
-## How Does RAG Fit Into Context Engineering?
-
-Context engineering provides a useful way to understand RAG's changing role.
-
-Instead of viewing retrieval as the entire architecture, context engineering treats it as one possible source of information for a model.
-
-An AI agent may receive information from documents, APIs, previous conversations, databases and tool results. The application must determine which information is relevant at each stage.
-
-RAG can supply evidence from searchable knowledge sources, while other components manage conversation memory, tool execution and task state.
-
-For example, an AI research agent may use RAG to retrieve published documents, a web tool to obtain current information and structured memory to preserve findings across several steps.
-
-These capabilities work together, but they solve different problems.
-
-A useful distinction is that **RAG helps retrieve relevant knowledge, while context engineering determines how that knowledge fits into the model's wider working context**.
-
-This explains why retrieval remains important even when the engineering conversation shifts towards context management.
-
-## When Should AI Engineers Still Use RAG?
-
-RAG remains a strong choice when an application must answer questions using a substantial collection of external information.
-
-It is particularly useful for enterprise knowledge assistants, technical documentation search, research applications and support systems that need access to maintained information sources.
-
-RAG may also be appropriate when users need references to supporting documents or when an application must work with information that changes more frequently than the underlying model.
-
-However, implementation decisions should consider the structure of the data.
-
-A vector database is not automatically the best retrieval solution for every task. Exact identifiers may be better handled by keyword search or database queries. Structured records may be accessed more reliably through SQL or authorised APIs.
-
-A good retrieval architecture should reflect the information being accessed rather than follow a fixed template.
-
-### When Is Traditional RAG Enough?
-
-Traditional RAG is often sufficient when users ask direct questions that can be answered using a small number of relevant passages.
-
-For example, a company handbook assistant may need to retrieve the appropriate policy section and explain it clearly.
-
-If the information is well organised and the questions are relatively straightforward, introducing autonomous planning and repeated tool calls may not improve the application enough to justify the additional complexity.
-
-In these situations, improving retrieval accuracy, source quality and evaluation may provide more value than building an agent.
-
-### When Should Developers Consider Agentic RAG?
-
-Agentic RAG becomes more attractive when tasks require several retrieval steps, multiple information sources or decisions about what to investigate next.
-
-An AI research assistant comparing technical approaches across many papers may need to refine its searches as new questions emerge.
-
-A software investigation agent may need to combine documentation, logs and code references before reaching a conclusion.
-
-These workflows can benefit from adaptive retrieval, provided that the system includes appropriate limits on tool use, cost and access permissions.
-
-Agentic RAG should be selected because the task requires adaptive information gathering, not simply because autonomous agents are receiving more attention.
-
-## When Should AI Engineers Avoid RAG?
-
-Not every AI application needs Retrieval-Augmented Generation.
-
-If all the information required for a task is already present in the user's input, adding a retrieval pipeline may create unnecessary complexity.
-
-For example, rewriting an email, translating a paragraph or summarising a short document generally does not require a vector database.
-
-RAG may also be unsuitable when the task requires exact transactional data that should be obtained directly from an authoritative system.
-
-An application checking a bank balance, order status or inventory count should normally use an authorised API or database query rather than rely on semantic document retrieval.
-
-Similarly, deterministic calculations should be handled by suitable computational tools when exact results are required.
-
-The important principle is to avoid treating RAG as the default solution to every AI application problem.
-
-Retrieval is valuable when relevant information must be located. It is unnecessary when the required information is already available or when another access method is more reliable.
-
-## What Should AI Engineers Focus on Instead of RAG Hype?
-
-As AI engineering matures, the most important question is becoming less about which architecture is fashionable and more about whether an application works reliably.
-
-For retrieval-based applications, this means measuring whether the correct information is found, whether the retrieved evidence is sufficient and whether the generated answer accurately reflects its sources.
-
-Engineers should also consider how quickly information becomes outdated, how permissions are enforced and how the system behaves when evidence is missing.
-
-A successful production system needs more than a working demonstration.
-
-It needs monitoring, evaluation, predictable costs and a way to investigate failures.
-
-### Retrieval Quality Matters More Than Adding More Components
-
-A complicated architecture cannot compensate for poor retrieval quality.
-
-If a system consistently returns the wrong documents, adding an agent, more prompts or additional reasoning steps may not solve the underlying problem.
-
-Engineers should first investigate whether the relevant content is indexed correctly, whether search queries are effective and whether the returned information is sufficient.
-
-Hybrid retrieval, reranking and improved document processing can be useful when they address measurable weaknesses.
-
-The goal should be better evidence, not simply more retrieved content.
+Research presented at EMNLP 2025 found that relatively simple retrieval approaches could perform competitively against more complicated RAG pipelines on several long-context question-answering benchmarks. This highlights an important engineering principle: greater architectural complexity does not automatically produce better results. Developers should compare retrieval, long-context processing and hybrid approaches using representative tasks before deciding which architecture to adopt.
 
 {% include random-related-article.html %}
 
-### Evaluation Is Becoming More Important
+## How Does RAG Fit Into Context Engineering?
 
-A RAG application can appear successful during a demonstration while performing inconsistently across real user questions.
+The growing attention given to context engineering helps explain why RAG's role is changing. Context engineering considers the wider information environment surrounding an AI model, including instructions, retrieved documents, memory, tool results and task state. Instead of treating document retrieval as the complete application, it asks how different information sources should be selected and managed throughout a workflow.
 
-Production evaluation should consider retrieval recall, answer correctness, citation accuracy, latency and failure handling.
+RAG fits naturally within this approach because retrieval is one way to provide useful knowledge. An AI research assistant might use RAG to search a collection of published papers, a web tool to obtain recent information and structured memory to preserve findings across multiple steps. The application must determine which information remains relevant, whether additional retrieval is required and how to avoid overwhelming the model with unnecessary content. These responsibilities extend beyond the traditional retrieve-and-generate pattern.
 
-It is also important to test situations where the knowledge base does not contain the answer.
+This relationship also explains why RAG and context engineering should not be viewed as competing technologies. RAG addresses the problem of locating useful external knowledge, while context engineering manages how that knowledge interacts with the model's broader working context. As AI applications become more capable, both practices can contribute to systems that are more reliable and easier to maintain.
 
-A reliable system should recognise insufficient evidence rather than confidently invent missing information.
+## When Should AI Engineers Still Use RAG?
 
-Google Research's work on sufficient context provides a useful foundation for examining whether retrieved material genuinely supports a correct response.
+RAG remains a strong architectural choice when an application must answer questions using a substantial collection of external information. Enterprise knowledge assistants, technical documentation search tools, research applications and customer support systems are common examples. These applications often depend on information that is private, frequently updated or too extensive to include directly in every model request. Retrieval provides a practical way to select relevant material while keeping the underlying model separate from the knowledge source.
 
-### Simpler Architectures Can Be Better
+Traditional RAG is often sufficient when the task involves direct questions that can be answered using a small number of passages. A company handbook assistant, for example, may only need to locate the correct policy section and explain it clearly. If the documents are well organised and the questions are predictable, introducing autonomous planning and repeated tool calls may provide little additional benefit. In such cases, improving search quality, document structure and answer evaluation may be more valuable than adding an agent.
 
-AI engineers sometimes introduce complex frameworks before establishing whether simpler approaches are sufficient.
+Agentic RAG becomes more attractive when the task requires multiple retrieval steps or information from several sources. An AI research assistant comparing technical approaches across many papers may need to refine its searches as new questions emerge. A software investigation agent may need to combine documentation, logs and code references before reaching a conclusion. These workflows can benefit from adaptive retrieval, provided the application includes appropriate limits on tool use, cost and permissions.
 
-A direct database query may solve a problem more reliably than semantic retrieval. A long-context model may handle a small document set without additional infrastructure. A basic RAG pipeline may answer common knowledge questions without an autonomous agent.
+Developers should also consider the type of information being accessed. A vector database is not automatically the best solution for every retrieval task. Exact identifiers may be better handled through keyword search, structured records may be accessed through SQL and current operational information may be obtained directly from authorised APIs. The most effective architecture uses retrieval methods that match the underlying data rather than forcing every information problem into a semantic search pipeline.
 
-Complexity should be introduced when evaluation demonstrates a meaningful benefit.
+## When Should AI Engineers Avoid RAG?
 
-This approach can reduce maintenance requirements while making systems easier to understand and debug.
+Not every AI application requires Retrieval-Augmented Generation. If all the information needed to complete a task is already present in the user's input, adding a retrieval pipeline may create unnecessary complexity. Rewriting an email, translating a paragraph, explaining a general concept or summarising a short document can often be handled through a clear prompt and the supplied content. Introducing a vector database or document indexing process would provide little benefit in these situations.
+
+RAG may also be unsuitable when an application needs exact transactional information that should come directly from an authoritative system. Checking a bank balance, confirming an order status or retrieving a current inventory count generally requires a database query or authorised API call rather than semantic document retrieval. Similarly, tasks involving deterministic calculations should use appropriate computational tools when exact results are required. Retrieval is useful for locating information, but it should not replace systems designed to provide precise operational data.
+
+Another situation where RAG may be unnecessary is when the application works with a small, stable document collection that fits comfortably within the model's context window. Directly supplying those documents may simplify development and reduce maintenance requirements. However, this decision should be based on testing because large inputs can still affect latency, cost and answer quality. The objective is not to avoid RAG, but to use it only when retrieval addresses a genuine requirement.
+
+{% include random-related-article.html %}
+
+## What Should AI Engineers Focus on Instead of RAG Hype?
+
+As AI engineering matures, the most important question is becoming less about which architecture is fashionable and more about whether an application performs reliably. A successful RAG system should retrieve the correct information, provide sufficient evidence and generate answers that accurately reflect the available sources. It should also behave appropriately when the required information is missing or contradictory. These qualities matter more in production than the number of frameworks or retrieval components included in the architecture.
+
+Retrieval quality deserves particular attention because additional model capabilities cannot always compensate for poor evidence. If a system consistently returns the wrong documents, adding more prompts, agents or reasoning steps may not solve the underlying problem. Engineers should investigate whether the content is indexed correctly, whether the search queries reflect user intent and whether the retrieved passages contain enough information to answer the question. Hybrid search, reranking and improved document processing can help when they address measurable weaknesses, but they should not be introduced simply to make an architecture appear more sophisticated.
+
+Evaluation is equally important. A RAG application may perform well during a demonstration but produce inconsistent results when users ask unexpected questions. Production testing should consider retrieval recall, answer correctness, citation accuracy, latency and failure handling. It is especially important to evaluate questions for which the knowledge base does not contain an answer. A reliable system should recognise insufficient evidence rather than confidently invent information. Monitoring these behaviours can help developers identify whether problems originate in retrieval, generation or the interaction between the two.
+
+Operational simplicity should also influence design decisions. A direct database query may be more dependable than semantic retrieval for structured information, while a long-context model may handle a small document collection without additional infrastructure. Traditional RAG may be sufficient for common knowledge questions, and agentic retrieval may be justified only when tasks genuinely require adaptive information gathering. Choosing the simplest architecture that meets the application's requirements can reduce maintenance costs and make failures easier to investigate.
 
 ## What Is the Future of RAG Beyond 2026?
 
-The future of RAG is unlikely to be defined by the original document-chatbot pattern alone.
+The future of RAG is unlikely to be defined solely by the original document-chatbot pattern. Retrieval is increasingly being combined with agent workflows, context management, structured search and methods that allow AI applications to access information more selectively. Research continues to examine hybrid retrieval, knowledge graphs, multimodal information, adaptive search and techniques for improving evidence quality. These developments extend the underlying idea of Retrieval-Augmented Generation rather than necessarily replacing it.
 
-Retrieval is increasingly being combined with agent workflows, context management, structured search and other approaches that allow AI applications to access information more selectively.
+Agentic retrieval is one direction receiving attention because it allows applications to make information-gathering decisions during execution. Instead of relying on a single search operation, an agent can break down a complex question, retrieve evidence from different sources and refine its searches when important information is missing. A 2026 survey published in the *Findings of ACL* examined these approaches and their relationship to data management and agent-based workflows. Such research reflects continuing interest in making retrieval more adaptive and useful for complex tasks.
 
-Research continues to investigate hybrid retrieval, knowledge graphs, multimodal information, adaptive search and methods for improving evidence quality.
+At the same time, the growing capabilities of long-context models and tool-based AI systems mean that retrieval will increasingly be one option among several. Some applications will benefit from direct API access, others from complete-document processing and others from traditional or agentic RAG. The direction of AI engineering is therefore towards selecting information access methods based on task requirements rather than assuming that one architecture should be used everywhere.
 
-These developments do not necessarily represent replacements for RAG. Many are extensions or variations of the same underlying principle: using external information to support model-generated responses.
-
-A 2026 survey published in the *Findings of ACL* examined agentic RAG as an approach in which AI agents can break down tasks, issue exploratory queries and refine retrieved evidence across multiple steps.
-
-This suggests that retrieval is continuing to evolve alongside agent-based AI systems.
-
-However, no single architecture is likely to suit every application.
-
-Some workloads will benefit from direct tool access. Others will use long-context processing, traditional RAG or more adaptive retrieval systems.
-
-The practical direction is towards choosing information access methods based on the requirements of the task.
+The most likely outcome is not the disappearance of RAG, but its continued development as part of broader AI systems. As applications become more capable, engineers will still need methods for locating reliable information, controlling what reaches the model and evaluating whether the available evidence supports the generated response. These problems remain important regardless of which terminology becomes popular.
 
 ## Final Thoughts: RAG Is Less of a Trend, but Still an Important Tool
 
-RAG was a major topic in AI engineering during 2025 because it offered a practical solution to one of the biggest limitations of language models: accessing external knowledge.
+RAG became a major topic in AI engineering because it addressed one of the most important limitations of language models: their inability to automatically access external knowledge. Throughout 2025, developers used retrieval pipelines to connect LLMs with private documents, updated information and searchable knowledge bases. The approach helped turn general-purpose language models into applications capable of answering questions about specific organisations, products and technical subjects.
 
-In 2026, the conversation has expanded. AI engineers are spending more time discussing autonomous agents, context engineering, memory, tool use and reliable multi-step workflows.
+By 2026, the conversation had expanded towards AI agents, context engineering, memory, tool use and multi-step workflows. This change does not mean RAG has become obsolete. Instead, retrieval is increasingly treated as one component within a larger system. It continues to help applications access private information, work with updated knowledge, locate supporting evidence and avoid sending entire knowledge bases into a model's context window.
 
-That shift does not make Retrieval-Augmented Generation obsolete.
+However, experience with production AI systems has also shown that traditional RAG is not always sufficient. Complex tasks may require adaptive retrieval and multiple tools, while simple tasks may not need retrieval at all. Long-context models and direct database access provide additional options, making architectural decisions more dependent on the actual problem being solved.
 
-**RAG is becoming less of a headline and more of a building block.**
+**RAG is becoming less of a headline and more of a building block.** Its value should be measured by how effectively it helps an AI application access the information required to complete a task, not by how frequently it appears in industry discussions.
 
-It still helps AI applications access private information, work with updated knowledge, retrieve relevant evidence and avoid sending entire knowledge bases into a model's context window.
+The most useful question for AI engineers is no longer, "How can RAG be added to this application?" It is, **"What information does this AI system need, and what is the most reliable way to provide it?"** Sometimes the answer will be RAG. Sometimes it will be an API, a database query, a long-context model or an agent using several tools. RAG has not stopped being useful. AI engineering has simply moved beyond treating it as the answer to every problem.
 
-At the same time, developers have learned that traditional RAG is not always sufficient. Complex tasks may require adaptive retrieval, while simple tasks may not require retrieval at all.
-
-The most useful question for AI engineers is no longer, "How can RAG be added to this application?"
-
-It is, **"What information does this AI system need, and what is the most reliable way to provide it?"**
-
-Sometimes the answer will be RAG. Sometimes it will be a database query, an API, a long-context model or an agent using several tools.
-
-RAG has not stopped being useful. AI engineering has simply moved beyond treating it as the answer to every problem.
+{% include random-related-article.html %}
 
 ## Frequently Asked Questions
 
@@ -537,5 +251,5 @@ The following resources provide additional research and technical perspectives o
 - [VentureBeat - The Retrieval Rebuild: Why Hybrid Retrieval Intent Tripled](https://venturebeat.com/ai/the-retrieval-rebuild-why-hybrid-retrieval-intent-tripled-as-enterprise-rag-programs-hit-the-scale-wall)
 - [Context Engineering vs Prompt Engineering: Key Differences, Examples and When to Use Each](/context-engineering-vs-prompt-engineering)
 - [Context Engineering for AI Agents: What It Is, Why It Matters and How to Implement It](/context-engineering-ai-agents-guide)
-
+  
 {% include random-related-article.html %}
