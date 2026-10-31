@@ -7,7 +7,7 @@ author: admin
 categories: [ cybersecurity, ai, technology ]
 image: assets/images/posts/2026/10-12/anthropic-ai-distillation-attacks.webp
 title-image: AI Distillation Attacks, Anthropic and Model Security (AI generated image)
-tags: [ ai-distillation, anthropic, claude-ai, model-extraction, ai-security, threat-intelligence, llm-security, cybersecurity ]
+tags: [ ai-distillation, anthropic, claude-ai, model-extraction, ai-security, threat-intelligence, llm-security, cybersecurity, featured ]
 ai_assisted: true
 last_modified_at: 2026-10-14 14:37:00 +0100
 ---
