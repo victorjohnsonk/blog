@@ -9,7 +9,7 @@ image: assets/images/posts/2026/10-12/context-engineering-ai-agents.png
 title-image: Context Engineering for AI Agents - Architecture and Workflow (via google images)
 tags: [ ai, ai-agents, context-engineering, llm, prompt-engineering, rag, agent-memory, agent-architecture ]
 ai_assisted: true
-last_modified_at: 2026-10-30 00:00:00 +0000
+last_modified_at: 2026-09-30 00:00:00 +0000
 ---
 
 A large language model (LLM) can be capable of solving a complex problem and still produce an incorrect answer because it received the wrong information. It may miss an important document, rely on outdated instructions, forget a previous decision or become distracted by irrelevant content. This is where **context engineering** becomes important.
