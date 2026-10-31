@@ -64,7 +64,6 @@ authors:
 
 # Defaults
 defaults:
-  # All posts
   - scope:
       path: "_posts"
     values:
