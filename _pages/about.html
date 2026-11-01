@@ -165,132 +165,160 @@ description: "I'm Victor Johnson, an AI Engineer working in cybersecurity. Read 
 
         <!-- AUTHOR CARDS -->
 
-        {% for author in site.authors %}
+        
+{% for author_entry in site.data.authors %}
 
-        <div class="col-lg-6 mb-4">
+{% assign author_key = author_entry[0] %}
+{% assign author = author_entry[1] %}
 
-            <div class="p-4 border rounded">
+<div class="col-lg-6 mb-4">
 
-                <div class="row">
+  <div class="p-4 border rounded">
 
-                    <div class="col-md-3 mb-4 mb-md-0">
+    <div class="row">
 
-                        <img
-                            alt="{{ author[1].name }}"
-                            src="{{ author[1].avatar | relative_url }}"
-                            class="rounded-circle"
-                            height="80"
-                            width="80">
+      <!-- AUTHOR AVATAR -->
+      <div class="col-md-3 mb-4 mb-md-0">
 
-                    </div>
+        {% if author.avatar and author.avatar != "" %}
+        <img
+          alt="{{ author.name | escape }}"
+          src="{{ author.avatar | relative_url }}"
+          class="rounded-circle"
+          height="80"
+          width="80"
+          style="object-fit: cover;">
+        {% endif %}
 
-                    <div class="col-md-9">
+      </div>
 
-                        <a href="{{ '/author-' | append: author[1].slugname | slugify | relative_url }}">
+      <!-- AUTHOR DETAILS -->
+      <div class="col-md-9">
 
-                            <h4 class="text-dark mb-0">
-                                {{ author[1].name }}
-                            </h4>
+        {% assign author_slug = author.slugname | default: author_key %}
+        {% assign author_url = '/author-' | append: author_slug | slugify | relative_url %}
 
-                            <small class="d-inline-block mt-1 mb-3 font-weight-normal">
-                                View Articles
-                            </small>
+        <a href="{{ author_url }}">
 
-                            <div class="excerpt">
-                                {{ author[1].bio }}
-                            </div>
+          <h4 class="text-dark mb-0">
+            {{ author.name | escape }}
+          </h4>
 
-                        </a>
+          <small class="d-inline-block mt-1 mb-3 font-weight-normal">
+            View Articles
+          </small>
 
+          {% if author.bio and author.bio != "" %}
+          <div class="excerpt">
+            {{ author.bio | escape }}
+          </div>
+          {% endif %}
 
-                        <!-- AUTHOR SOCIAL ICONS -->
+        </a>
 
-                        <div class="icon-block mt-3">
+        <!-- AUTHOR SOCIAL ICONS -->
+        <div class="icon-block mt-3">
 
-                            {% if author[1].twitter and author[1].twitter != "" %}
+          <!-- TWITTER / X -->
+          {% if author.twitter and author.twitter != "" %}
 
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href="{{ author[1].twitter }}"
-                                aria-label="Twitter">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ author.twitter }}"
+            aria-label="Twitter">
 
-                                <i class="fab fa-twitter text-muted"
-                                   aria-hidden="true"></i>
+            <i class="fab fa-twitter text-muted"
+               aria-hidden="true"></i>
 
-                            </a>
+          </a>
 
-                            &nbsp;
+          &nbsp;
 
-                            {% endif %}
+          {% endif %}
 
+          <!-- WEBSITE -->
+          {% if author.site and author.site != "" %}
 
-                            {% if author[1].site and author[1].site != "" %}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ author.site | relative_url }}"
+            aria-label="Website">
 
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href="{{ author[1].site }}"
-                                aria-label="Website">
+            <i class="fa fa-globe text-muted"
+               aria-hidden="true"></i>
 
-                                <i class="fa fa-globe text-muted"
-                                   aria-hidden="true"></i>
+          </a>
 
-                            </a>
+          &nbsp;
 
-                            &nbsp;
+          {% endif %}
 
-                            {% endif %}
+          <!-- LINKEDIN -->
+          {% if author.linkedin and author.linkedin != "" %}
 
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ author.linkedin }}"
+            aria-label="LinkedIn">
 
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href="https://www.linkedin.com/in/victor-johnson-7a4700386/"
-                                aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in text-muted"
+               aria-hidden="true"></i>
 
-                                <i class="fab fa-linkedin-in text-muted"
-                                   aria-hidden="true"></i>
+          </a>
 
-                            </a>
+          &nbsp;
 
-                            &nbsp;
+          {% endif %}
 
+          <!-- GITHUB -->
+          {% if author.github and author.github != "" %}
 
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href="https://github.com/victorjohnsonk"
-                                aria-label="GitHub">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/{{ author.github | escape }}"
+            aria-label="GitHub">
 
-                                <i class="fab fa-github text-muted"
-                                   aria-hidden="true"></i>
+            <i class="fab fa-github text-muted"
+               aria-hidden="true"></i>
 
-                            </a>
+          </a>
 
-                            &nbsp;
+          &nbsp;
 
+          {% endif %}
 
-                            <a
-                                href="mailto:hello@victorjohnson.online"
-                                aria-label="Email">
+          <!-- EMAIL -->
+          {% if author.email and author.email != "" %}
 
-                                <i class="fas fa-envelope text-muted"
-                                   aria-hidden="true"></i>
+          <a
+            href="mailto:{{ author.email | escape }}"
+            aria-label="Email">
 
-                            </a>
+            <i class="fas fa-envelope text-muted"
+               aria-hidden="true"></i>
 
-                        </div>
+          </a>
 
-                    </div>
+          &nbsp;
 
-                </div>
-
-            </div>
+          {% endif %}
 
         </div>
 
-        {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endfor %}
+
 
     </div>
 
