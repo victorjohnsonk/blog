@@ -9,6 +9,7 @@ image: assets/images/posts/2026/10-12/ai-cobol-banking-modernization.jpeg
 title-image: AI-Powered COBOL Migration and Legacy Banking System Modernisation (AI generated image)
 tags: [ cobol, legacy-systems, banking-technology, ai-migration, openai, anthropic, claude-code, mainframe-modernization, fintech, cybersecurity, featured ]
 ai_assisted: true
+comments: true
 last_modified_at: 2026-10-25 14:26:00 +0100
 ---
 
