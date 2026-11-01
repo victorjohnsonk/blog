@@ -9,6 +9,7 @@ image: assets/images/posts/2026/10-12/context-engineering-ai-agents.png
 title-image: Context Engineering for AI Agents - Architecture and Workflow (via google images)
 tags: [ ai, ai-agents, context-engineering, llm, prompt-engineering, rag, agent-memory, agent-architecture ]
 ai_assisted: true
+comments: true
 last_modified_at: 2026-09-30 00:00:00 +0000
 ---
 
