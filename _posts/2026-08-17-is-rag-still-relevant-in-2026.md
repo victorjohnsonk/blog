@@ -9,6 +9,7 @@ image: assets/images/posts/2026/10-12/is-rag-still-relevant-in-2026.png
 title-image: Is RAG Still Relevant in 2026 - Why AI Engineers Are Moving Beyond the Hype
 tags: [ ai, rag, retrieval-augmented-generation, ai-agents, context-engineering, llm, agentic-rag, generative-ai ]
 ai_assisted: true
+comments: true
 last_modified_at: 2026-08-19 00:40:00 +0000
 ---
 
