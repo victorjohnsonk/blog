@@ -33,39 +33,53 @@ layout: default
             {{ page.title | escape }}
           </h1>
 
-          <div class="d-flex align-items-center">
-            {% if author.avatar %}
-            <img
-              class="rounded-circle"
-              src="{{ author.avatar | relative_url }}"
-              alt="{{ author.name | escape }}"
-              width="70">
-            {% endif %}
+          
+{% assign author = site.data.authors[page.author] %}
 
-            <small class="ml-3">
-              {{ author.name }}
+<div class="d-flex align-items-center">
 
-              {% if author.site %}
-              <span>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="{{ author.site }}"
-                  class="btn btn-outline-success btn-sm btn-round ml-1">
-                  Follow
-                </a>
-              </span>
-              {% endif %}
+  {% if author and author.avatar %}
+  <img
+    class="rounded-circle"
+    src="{{ author.avatar | relative_url }}"
+    alt="{{ author.name | escape }}"
+    width="70"
+    height="70"
+    style="object-fit: cover;">
+  {% endif %}
 
-              <span class="text-muted d-block mt-1">
-                Published: {{ page.date | date: '%b %d, %Y' }}
-                {% if page.last_modified_at %}
-                · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
-                {% endif %}
-                · {% include meta-read-time.html %}
-              </span>
-            </small>
-          </div>
+  <small class="ml-3">
+
+    {% if author %}
+      {{ author.name }}
+    {% endif %}
+
+    {% if author and author.site %}
+    <span>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="{{ author.site | relative_url }}"
+        class="btn btn-outline-success btn-sm btn-round ml-1">
+        Follow
+      </a>
+    </span>
+    {% endif %}
+
+    <span class="text-muted d-block mt-1">
+      Published: {{ page.date | date: '%b %d, %Y' }}
+
+      {% if page.last_modified_at %}
+        · Updated: {{ page.last_modified_at | date: '%b %d, %Y' }}
+      {% endif %}
+
+      · {% include meta-read-time.html %}
+    </span>
+
+  </small>
+
+</div>
+
 
         </div>
 
