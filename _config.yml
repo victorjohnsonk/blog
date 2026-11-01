@@ -1,11 +1,13 @@
-
 # Site
 site: "Victor Johnson's Blog"
 sitename-primary: "Victor Johnson's"
 sitename-secondary: "Blog"
 name: "Victor Johnson's Blog"
-title: "Victor Johnson's Blog | AI Engineering, AI Security & Cybersecurity"
+title: "Victor Johnson's Blog"
+tagline: "AI Engineering, AI Security & Cybersecurity"
+
 keywords: "AI Engineering, AI Security, Cybersecurity, Generative AI, LLM Security, Agentic AI, RAG Security, Secure AI Systems, AI Agents, Prompt Injection, Machine Learning Security, Azure AI, Victor Johnson"
+
 description: "Technical articles by Victor Johnson, an AI Engineer in cybersecurity, exploring AI security, secure LLMs, agentic AI and real-world engineering."
 
 # Site URL and localisation
@@ -20,7 +22,7 @@ favicon: "assets/images/core/favicon.ico"
 # Repository
 repo: "https://github.com/victorjohnsonk/blog"
 
-# Optional integrations - add personal values when configured
+# Optional integrations
 google_verify: ""
 google_analytics: "G-MEK4W87RJL"
 google_adsense: ""
@@ -48,6 +50,7 @@ plugins:
 
 # Defaults
 defaults:
+  # Blog posts
   - scope:
       path: "_posts"
       type: "posts"
