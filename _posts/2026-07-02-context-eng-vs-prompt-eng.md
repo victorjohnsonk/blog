@@ -9,6 +9,7 @@ image: assets/images/posts/2026/10-12/context-engineering-vs-prompt-engineering.
 title-image: Context Engineering vs Prompt Engineering (via google images)
 tags: [ ai, context-engineering, prompt-engineering, llm, ai-agents, generative-ai, rag, agent-memory ]
 ai_assisted: true
+comments: true
 last_modified_at: 2026-10-17 00:00:00 +0000
 ---
 
