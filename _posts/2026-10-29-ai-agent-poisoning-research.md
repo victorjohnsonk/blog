@@ -5,7 +5,7 @@ description: "New Anthropic-linked research shows how poisoning just 0.1% of AI 
 permalink: /ai-agent-backdoors-pretraining-data-poisoning
 author: admin
 categories: [ cybersecurity, ai, technology ]
-image: assets/images/posts/2026/10-12/ai-agent-data-poisoning.jpeg
+image: assets/images/posts/2026/10-12/ai-agent-pretraining-poisoning.jpeg
 title-image: AI Agent Backdoors and Pretraining Data Poisoning Research (AI generated image)
 tags: [ ai-security, data-poisoning, anthropic, ai-agents, llm-security, backdoor-attacks, pretraining, machine-learning, cybersecurity, featured ]
 ai_assisted: true
