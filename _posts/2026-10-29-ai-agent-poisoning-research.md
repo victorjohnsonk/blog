@@ -9,6 +9,7 @@ image: assets/images/posts/2026/10-12/ai-agent-pretraining-poisoning.jpeg
 title-image: AI Agent Backdoors and Pretraining Data Poisoning Research (AI generated image)
 tags: [ ai-security, data-poisoning, anthropic, ai-agents, llm-security, backdoor-attacks, pretraining, machine-learning, cybersecurity, featured ]
 ai_assisted: true
+comments: true
 last_modified_at: 2026-10-29 15:42:00 +0000
 ---
 
