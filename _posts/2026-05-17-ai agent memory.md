@@ -9,6 +9,7 @@ image: assets/images/posts/2026/10-12/ai-agent-memory-design-mlm.webp
 title-image: AI Agent Memory Architecture - Images via Google Images
 tags: [ ai, ai-agents, agent-memory, llm, rag, vector-database, agent-architecture ]
 ai_assisted: true
+comments: true
 last_modified_at: 2026-08-27 13:03:00 +0000
 ---
 
