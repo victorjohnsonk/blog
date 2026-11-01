@@ -6,7 +6,7 @@ permalink: /php2shell-rce-vulnerabilities-ai-discovery-2026
 author: admin
 categories: [ cybersecurity, ai, technology ]
 image: assets/images/posts/2026/10-12/php2shell-ai-rce-vulnerabilities.png
-title-image: PHP2Shell Critical RCE Vulnerabilities and AI-Assisted Security Research (AI generated image)
+title-image: PHP2Shell Critical RCE Vulnerabilities and AI-Assisted Security Research (via google images)
 tags: [ php, php2shell, rce, cve-2026-109618, cve-2026-109619, ai-security, vulnerability-research, cybersecurity, google-gemini, openai, featured ]
 ai_assisted: true
 comments: true
