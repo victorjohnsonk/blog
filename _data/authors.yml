@@ -2,7 +2,7 @@
 admin:
   name: "Victor Johnson"
   slugname: "victor-johnson"
-  site: "/blog/about"
+  site: "/about"
   avatar: "https://www.victorjohnson.online/vj-photo.png"
   bio: "AI Engineer working in cybersecurity, writing about AI engineering, AI security, secure LLMs, agentic AI, and practical approaches to building secure AI systems."
   email: "hello@victorjohnson.online"
